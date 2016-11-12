@@ -1,34 +1,38 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+'use strict'
 
-var app = express();
+const express       = require('express');
+const path          = require('path');
+const favicon       = require('serve-favicon');
+const cookieParser  = require('cookie-parser');
+const bodyParser    = require('body-parser');
+
+const mongoose      = require('mongoose');
+const port = process.env.PORT || 8080;
+
+// connect to the db
+mongoose.connect('mongodb://localhost:27017/blog-prefab');
+
+// init app
+const app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname,'/dist')));
 
+// get express router
+const router = express.Router();
+
+// api routes
+require('./api/routes')(router);
+app.use('/api', router);
+
+// dist frontend
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname,'dist/index.html'));
 });
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.listen(port, function () {
+  console.log('Magic happens on port ' + port + '!');
 });
-
-if (app.get('env') == 'development') {
-  app.listen(3000, function () {
-  console.log('Example listening on port 3000!');
-  });
-} else {
-  app.listen(8080, function () {
-    console.log('Example listening on port 8080!');
-  });
-}
 
 module.exports = app;
