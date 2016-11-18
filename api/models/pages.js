@@ -8,7 +8,7 @@ var PageSchema = new Schema({
   name:         { type: String, required: true },
   description:  { type: String, required: true },
   // display
-  position:     { type: Number, min: -1 },
+  position:     { type: Number, min: -1, default: -1 },
   inNav:        { type: Boolean, default: false },
   // infos
   created:      { type: Date, default: Date.now },
