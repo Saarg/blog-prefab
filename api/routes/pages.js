@@ -1,5 +1,7 @@
 'use strict'
 
+// v1.1 added use of lambda
+
 var Page = require('./../models/pages');
 
 module.exports = (router) => {

@@ -1,5 +1,7 @@
 'use strict'
 
+// v1.0 first draft
+
 var Media = require('./../models/medias');
 
 module.exports = (router) => {
