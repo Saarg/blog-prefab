@@ -1,8 +1,8 @@
 'use strict'
 
-// v1.0 first draft
+// v1.2 moved post route to /api/articles/:page_id
 
-var Article = require('./../models/articles');
+const Article = require('./../models/articles');
 
 module.exports = function(router) {
   // articles by page api route
@@ -17,23 +17,11 @@ module.exports = function(router) {
     });
   })
 
-  // individual media api route
-  router.route('/article/:article_id')
-  .get((req, res) => {
-    article.findById(req.params.article_id, (err, article) => {
-      if (err) {
-          res.json({ success: false, message: err });
-          return;
-      }
-      res.json({ success: true, article: article });
-    });
-  })
-
   .post((req, res) => {
     let article = new Article();
     article.title = req.body.title;
     article.text = req.body.text;
-    article.page = req.body.page;
+    article.page = req.params.page_id;
     article.mimetype = req.body.mimetype ? req.body.mimetype : undefined;
     article.media = req.body.media ? req.body.media : undefined;
     article.position = typeof req.body.position === 'number' ? req.body.position : undefined;
@@ -44,6 +32,18 @@ module.exports = function(router) {
             return;
         }
         res.json({ success: true, article: article });
+    });
+  });
+
+  // individual media api route
+  router.route('/article/:article_id')
+  .get((req, res) => {
+    Article.findById(req.params.article_id, (err, article) => {
+      if (err) {
+          res.json({ success: false, message: err });
+          return;
+      }
+      res.json({ success: true, article: article });
     });
   })
 
@@ -76,5 +76,5 @@ module.exports = function(router) {
         }
         res.json({ success: true });
     });
-  })
+  });
 }

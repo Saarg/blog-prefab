@@ -1,8 +1,8 @@
 'use strict'
 
-// v1.1 added use of lambda
+// v1.3 moved post route to /api/pages
 
-var Page = require('./../models/pages');
+const Page = require('./../models/pages');
 
 module.exports = (router) => {
   // pages api route
@@ -16,23 +16,11 @@ module.exports = (router) => {
     });
   })
 
-  // individual page api route
-  router.route('/page/:page_id')
-  .get((req, res) => {
-    Profils.findById(req.params.page_id, (err, page) => {
-      if (err) {
-          res.json({ success: false, message: err });
-          return;
-      }
-      res.json({ success: true, page: page });
-    });
-  })
-
   .post((req, res) => {
     let page = new Page();
     page.name = req.body.name;
     page.description = req.body.description;
-    page.position = req.body.position ? req.body.position : undefined;
+    page.position = typeof req.body.position === 'number' ? req.body.position : undefined;
     page.inNav = req.body.inNav ? req.body.inNav : undefined;
 
     page.save((err, page) => {
@@ -41,6 +29,18 @@ module.exports = (router) => {
             return;
         }
         res.json({ success: true, page: page });
+    });
+  });
+
+  // individual page api route
+  router.route('/page/:page_id')
+  .get((req, res) => {
+    Page.findById(req.params.page_id, (err, page) => {
+      if (err) {
+          res.json({ success: false, message: err });
+          return;
+      }
+      res.json({ success: true, page: page });
     });
   })
 
@@ -71,5 +71,5 @@ module.exports = (router) => {
         }
         res.json({ success: true });
     });
-  })
+  });
 }

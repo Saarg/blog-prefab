@@ -1,6 +1,6 @@
 'use strict'
 
-// v1.0 first draft
+// v1.1 moved post route to /api/activities/:page_id
 
 const Activity = require('./../models/activities');
 
@@ -15,25 +15,13 @@ module.exports = function(router) {
       }
       res.json({ success: true, activities: activities });
     });
-  });
-
-  // individual media api route
-  router.route('/activity/:activity_id')
-  .get(function(req, res) {
-    Activity.findById(req.params.activitie_id, (err, activity) => {
-      if (err) {
-          res.json({ success: false, message: err });
-          return;
-      }
-      res.json({ success: true, activity: activity });
-    });
   })
 
   .post(function(req, res) {
     let activity = new Activity();
     activity.title = req.body.title;
     activity.text = req.body.text;
-    activity.page = req.body.page;
+    activity.page = req.params.page_id;
     activity.maxParticipants = typeof req.body.maxParticipants === 'number' ? req.body.maxParticipants : undefined;
     activity.participants = participants ? participants : undefined;
     activity.mimetype = req.body.mimetype ? req.body.mimetype : undefined;
@@ -46,6 +34,18 @@ module.exports = function(router) {
             return;
         }
         res.json({ success: true, activity: activity });
+    });
+  });
+
+  // individual media api route
+  router.route('/activity/:activity_id')
+  .get(function(req, res) {
+    Activity.findById(req.params.activitie_id, (err, activity) => {
+      if (err) {
+          res.json({ success: false, message: err });
+          return;
+      }
+      res.json({ success: true, activity: activity });
     });
   })
 
