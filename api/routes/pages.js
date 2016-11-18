@@ -1,6 +1,6 @@
 'use strict'
 
-// v1.3 moved post route to /api/pages
+// v1.4 minimize put calls
 
 const Page = require('./../models/pages');
 
@@ -20,6 +20,7 @@ module.exports = (router) => {
     let page = new Page();
     page.name = req.body.name;
     page.description = req.body.description;
+    page.type = req.body.type ? req.body.type : undefined;
     page.position = typeof req.body.position === 'number' ? req.body.position : undefined;
     page.inNav = req.body.inNav ? req.body.inNav : undefined;
 
@@ -47,8 +48,9 @@ module.exports = (router) => {
   .put((req, res) => {
     Page.findById(req.params.page_id, (err, page) => {
         if (err) res.send(err);
-        page.name = req.body.name ? req.body.name : undefined;
-        page.description = req.body.description ? req.body.description : undefined;
+        page.name = req.body.name ? req.body.name : page.name;
+        page.description = req.body.description ? req.body.description : page.description;
+        page.type = req.body.type ? req.body.type : undefined;
         page.position = req.body.position ? req.body.position : undefined;
         page.inNav = req.body.inNav ? req.body.inNav : undefined;
         page.updated = Date.now();

@@ -7,6 +7,7 @@ var PageSchema = new Schema({
   // main attributes
   name:         { type: String, required: true },
   description:  { type: String, required: true },
+  type:     { type: Number, min: 0, max: 2, default: 0 },// articles, activities, medias
   // display
   position:     { type: Number, min: -1, default: -1 },
   inNav:        { type: Boolean, default: false },

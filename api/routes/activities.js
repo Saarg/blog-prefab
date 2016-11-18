@@ -1,6 +1,6 @@
 'use strict'
 
-// v1.1 moved post route to /api/activities/:page_id
+// v1.2 minimize put calls
 
 const Activity = require('./../models/activities');
 
@@ -52,9 +52,9 @@ module.exports = function(router) {
   .put(function(req, res) {
     Activity.findById(req.params.activity_id, (err, activity) => {
         if (err) res.send(err);
-        activity.title = req.body.title ? req.body.title : undefined;
-        activity.text = req.body.text ? req.body.text : undefined;
-        activity.page = req.body.page ? req.body.text : undefined;
+        activity.title = req.body.title ? req.body.title : activity.title;
+        activity.text = req.body.text ? req.body.text : activity.text;
+        activity.page = req.body.page ? req.body.text : activity.page;
         activity.maxParticipants = typeof req.body.maxParticipants === 'number' ? req.body.maxParticipants : undefined;
         activity.participants = participants ? participants : undefined;
         activity.mimetype = req.body.mimetype ? req.body.mimetype : undefined;

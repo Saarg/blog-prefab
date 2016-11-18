@@ -1,6 +1,6 @@
 'use strict'
 
-// v1.2 moved post route to /api/medias/:page_id
+// v1.3 minimize put calls
 
 const Media = require('./../models/medias');
 
@@ -52,9 +52,9 @@ module.exports = (router) => {
         if (err) res.send(err);
         media.name = req.body.name ? req.body.name : undefined;
         media.description = req.body.description ? req.body.description : undefined;
-        media.page = req.body.page ? req.body.page : undefined;
-        media.mimetype = req.body.mimetype ? req.body.mimetype : undefined;
-        media.media = req.body.media; // TODO need to handle file upload for images
+        media.page = req.body.page ? req.body.page : media.page;
+        media.mimetype = req.body.mimetype ? req.body.mimetype : media.mimetype;
+        media.media = req.body.media ? req.body.media : media.media; // TODO need to handle file upload for images
         media.position = typeof req.body.position === 'number' ? req.body.position : undefined;
         media.updated = Date.now();
 

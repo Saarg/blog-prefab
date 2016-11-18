@@ -1,6 +1,6 @@
 'use strict'
 
-// v1.2 moved post route to /api/articles/:page_id
+// v1.3 minimize put calls
 
 const Article = require('./../models/articles');
 
@@ -50,9 +50,9 @@ module.exports = function(router) {
   .put((req, res) => {
     Article.findById(req.params.article_id, (err, article) => {
         if (err) res.send(err);
-        article.title = req.body.title ? req.body.title : undefined;
-        article.text = req.body.text ? req.body.text : undefined;
-        article.page = req.body.page ? req.body.page : undefined;
+        article.title = req.body.title ? req.body.title : article.title;
+        article.text = req.body.text ? req.body.text : article.text;
+        article.page = req.body.page ? req.body.page : article.page;
         article.mimetype = req.body.mimetype ? req.body.mimetype : undefined;
         article.media = req.body.media ? req.body.media : undefined;
         article.position = typeof req.body.position === 'number' ? req.body.position : undefined;
