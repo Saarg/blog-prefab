@@ -9,7 +9,7 @@ var MediaSchema  = new Schema({
   description:  { type: String },
   page:         { type: Schema.Types.ObjectId, required: true },
   // associated media
-  mimetype:     { type: String },
+  mimetype:     { type: String, required: true },
   media:        { type: String, required: true },
   position:     { type: Number, min: -1 },
   // infos
