@@ -19,12 +19,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname,'/dist')));
 
-// get express router
-const router = express.Router();
+// get express routers
+const publicRouter = express.Router();
+const privateRouter = express.Router();
 
 // api routes
-require('./api/routes')(router);
-app.use('/api', router);
+require('./api/routes')(privateRouter, publicRouter);
+app.use('/api/public', publicRouter);
+app.use('/api/private', privateRouter);
 
 // dist frontend
 app.get('/*', function (req, res) {

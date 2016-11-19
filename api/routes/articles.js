@@ -1,12 +1,12 @@
 'use strict'
 
-// v1.3 minimize put calls
+// v1.4 added public route (for future auth)
 
 const Article = require('./../models/articles');
 
-module.exports = function(router) {
+module.exports = (privateRouter, publicRouter) => {
   // articles by page api route
-  router.route('/articles/:page_id')
+  publicRouter.route('/articles/:page_id')
   .get((req, res) => {
     Article.find((err, articles) => {
       if (err) {
@@ -15,8 +15,9 @@ module.exports = function(router) {
       }
       res.json({ success: true, articles: articles });
     });
-  })
+  });
 
+  privateRouter.route('/articles/:page_id')
   .post((req, res) => {
     let article = new Article();
     article.title = req.body.title;
@@ -36,7 +37,7 @@ module.exports = function(router) {
   });
 
   // individual media api route
-  router.route('/article/:article_id')
+  publicRouter.route('/article/:article_id')
   .get((req, res) => {
     Article.findById(req.params.article_id, (err, article) => {
       if (err) {
@@ -47,6 +48,7 @@ module.exports = function(router) {
     });
   })
 
+  privateRouter.route('/article/:article_id')
   .put((req, res) => {
     Article.findById(req.params.article_id, (err, article) => {
         if (err) res.send(err);

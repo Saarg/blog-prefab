@@ -1,12 +1,12 @@
 'use strict'
 
-// v1.2 minimize put calls
+// v1.3 added public route (for future auth)
 
 const Activity = require('./../models/activities');
 
-module.exports = function(router) {
+module.exports = (privateRouter, publicRouter) => {
   // activities api route
-  router.route('/activities/:page_id')
+  publicRouter.route('/activities/:page_id')
   .get(function(req, res) {
     Activity.find((err, activities) => {
       if (err) {
@@ -15,8 +15,9 @@ module.exports = function(router) {
       }
       res.json({ success: true, activities: activities });
     });
-  })
+  });
 
+  privateRouter.route('/activities/:page_id')
   .post(function(req, res) {
     let activity = new Activity();
     activity.title = req.body.title;
@@ -38,7 +39,7 @@ module.exports = function(router) {
   });
 
   // individual media api route
-  router.route('/activity/:activity_id')
+  publicRouter.route('/activity/:activity_id')
   .get(function(req, res) {
     Activity.findById(req.params.activitie_id, (err, activity) => {
       if (err) {
@@ -47,8 +48,9 @@ module.exports = function(router) {
       }
       res.json({ success: true, activity: activity });
     });
-  })
+  });
 
+  privateRouter.route('/activity/:activity_id')
   .put(function(req, res) {
     Activity.findById(req.params.activity_id, (err, activity) => {
         if (err) res.send(err);

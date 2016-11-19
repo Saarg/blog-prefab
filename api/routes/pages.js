@@ -1,12 +1,12 @@
 'use strict'
 
-// v1.4 minimize put calls
+// v1.5 added public route (for future auth)
 
 const Page = require('./../models/pages');
 
-module.exports = (router) => {
+module.exports = (privateRouter, publicRouter) => {
   // pages api route
-  router.route('/pages').get((req, res) => {
+  publicRouter.route('/pages').get((req, res) => {
     Page.find((err, pages) => {
       if (err) {
         res.json({ success: false, message: err });
@@ -14,9 +14,9 @@ module.exports = (router) => {
       }
       res.json({ success: true, pages: pages });
     });
-  })
+  });
 
-  .post((req, res) => {
+  privateRouter.route('/pages').post((req, res) => {
     let page = new Page();
     page.name = req.body.name;
     page.description = req.body.description;
@@ -34,7 +34,7 @@ module.exports = (router) => {
   });
 
   // individual page api route
-  router.route('/page/:page_id')
+  publicRouter.route('/page/:page_id')
   .get((req, res) => {
     Page.findById(req.params.page_id, (err, page) => {
       if (err) {
@@ -43,8 +43,9 @@ module.exports = (router) => {
       }
       res.json({ success: true, page: page });
     });
-  })
+  });
 
+  privateRouter.route('/page/:page_id')
   .put((req, res) => {
     Page.findById(req.params.page_id, (err, page) => {
         if (err) res.send(err);

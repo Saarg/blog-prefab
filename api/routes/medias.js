@@ -1,12 +1,12 @@
 'use strict'
 
-// v1.3 minimize put calls
+// v1.4 added public route (for future auth)
 
 const Media = require('./../models/medias');
 
-module.exports = (router) => {
+module.exports = (privateRouter, publicRouter) => {
   // medias by page api route
-  router.route('/medias/:page_id')
+  publicRouter.route('/medias/:page_id')
   .get((req, res) => {
     Media.find((err, medias) => {
       if (err) {
@@ -15,9 +15,9 @@ module.exports = (router) => {
       }
       res.json({ success: true, medias: medias });
     });
-  })
+  });
 
-  .post((req, res) => {
+  privateRouter.route('/medias/:page_id').post((req, res) => {
     let media = new Media();
     media.name = req.body.name ? req.body.name : undefined;
     media.description = req.body.description ? req.body.description : undefined;
@@ -36,7 +36,7 @@ module.exports = (router) => {
   });
 
   // individual media api route
-  router.route('/media/:media_id')
+  publicRouter.route('/media/:media_id')
   .get((req, res) => {
     Media.findById(req.params.media_id, (err, media) => {
       if (err) {
@@ -45,8 +45,9 @@ module.exports = (router) => {
       }
       res.json({ success: true, media: media });
     });
-  })
+  });
 
+  privateRouter.route('/media/:media_id')
   .put((req, res) => {
     Media.findById(req.params.media_id, (err, media) => {
         if (err) res.send(err);

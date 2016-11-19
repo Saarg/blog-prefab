@@ -1,8 +1,15 @@
 'use strict'
 
-module.exports = function(router) {
-  require('./routes/pages')(router);
-  require('./routes/activities')(router);
-  require('./routes/articles')(router);
-  require('./routes/medias')(router);
+module.exports = (privateRouter, publicRouter) => {
+
+  // Middleware for non public routes
+  privateRouter.use((req, res, next) => {
+    // TODO look for autk token
+    next();
+  });
+
+  require('./routes/pages')(privateRouter, publicRouter);
+  require('./routes/activities')(privateRouter, publicRouter);
+  require('./routes/articles')(privateRouter, publicRouter);
+  require('./routes/medias')(privateRouter, publicRouter);
 }
