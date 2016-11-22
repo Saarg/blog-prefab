@@ -1,4 +1,12 @@
 <header>
+  <div *ngIf="logo && banner" class="container pl-0 pr-0">
+    <div class="col-md-4 pl-0 pr-0">
+      <img class="float-xs-let" [src]="logo"/>
+    </div>
+    <div class="col-md-8 pl-0 pr-0">
+      <img class="float-xs-right" [src]="banner"/>
+    </div>
+  </div>
   <nav class="navbar navbar-light bg-faded">
     <div class="nav navbar-nav container">
       <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>

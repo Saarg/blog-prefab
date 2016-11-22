@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { ActivityComponent } from './activity/activity.component';
 import { GalleryComponent } from './gallery/gallery.component';
 
+import { ConfigService } from './config.service';
+
 import { Routing } from './app.routing';
 
 @NgModule({
@@ -27,7 +29,7 @@ import { Routing } from './app.routing';
     HttpModule,
     Routing
   ],
-  providers: [],
+  providers: [ConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
