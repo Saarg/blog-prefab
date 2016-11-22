@@ -30,11 +30,11 @@ module.exports = (privateRouter, publicRouter) => {
     activity.position = typeof req.body.position === 'number' ? req.body.position : undefined;
 
     activity.save((err, activity) => {
-        if (err) {
-            res.json({ success: false, message: err });
-            return;
-        }
-        res.json({ success: true, activity: activity });
+      if (err) {
+        res.json({ success: false, message: err });
+        return;
+      }
+      res.json({ success: true, activity: activity });
     });
   });
 
@@ -43,8 +43,8 @@ module.exports = (privateRouter, publicRouter) => {
   .get(function(req, res) {
     Activity.findById(req.params.activitie_id, (err, activity) => {
       if (err) {
-          res.json({ success: false, message: err });
-          return;
+        res.json({ success: false, message: err });
+        return;
       }
       res.json({ success: true, activity: activity });
     });
@@ -53,34 +53,34 @@ module.exports = (privateRouter, publicRouter) => {
   privateRouter.route('/activity/:activity_id')
   .put(function(req, res) {
     Activity.findById(req.params.activity_id, (err, activity) => {
-        if (err) res.send(err);
-        activity.title = req.body.title ? req.body.title : activity.title;
-        activity.text = req.body.text ? req.body.text : activity.text;
-        activity.page = req.body.page ? req.body.text : activity.page;
-        activity.maxParticipants = typeof req.body.maxParticipants === 'number' ? req.body.maxParticipants : undefined;
-        activity.participants = participants ? participants : undefined;
-        activity.mimetype = req.body.mimetype ? req.body.mimetype : undefined;
-        activity.media = req.body.media ? req.body.media : undefined;
-        activity.position = typeof req.body.position === 'number' ? req.body.position : undefined;
-        activity.updated = Date.now();
+      if (err) res.send(err);
+      activity.title = req.body.title ? req.body.title : activity.title;
+      activity.text = req.body.text ? req.body.text : activity.text;
+      activity.page = req.body.page ? req.body.text : activity.page;
+      activity.maxParticipants = typeof req.body.maxParticipants === 'number' ? req.body.maxParticipants : undefined;
+      activity.participants = participants ? participants : undefined;
+      activity.mimetype = req.body.mimetype ? req.body.mimetype : undefined;
+      activity.media = req.body.media ? req.body.media : undefined;
+      activity.position = typeof req.body.position === 'number' ? req.body.position : undefined;
+      activity.updated = Date.now();
 
-        activity.save((err) => {
-            if (err) {
-                res.json({ success: false, message: err });
-                return;
-            }
-            res.json({ success: true, activity: activity });
-        });
+      activity.save((err) => {
+        if (err) {
+          res.json({ success: false, message: err });
+          return;
+        }
+        res.json({ success: true, activity: activity });
+      });
     });
   })
 
   .delete(function(req, res) {
     Activity.remove({_id: req.params.activity_id}, (err) => {
-        if (err) {
-            res.json({ success: false, message: err });
-            return;
-        }
-        res.json({ success: true });
+      if (err) {
+        res.json({ success: false, message: err });
+        return;
+      }
+      res.json({ success: true });
     });
   });
 }

@@ -25,11 +25,11 @@ module.exports = (privateRouter, publicRouter) => {
     page.inNav = req.body.inNav ? req.body.inNav : undefined;
 
     page.save((err, page) => {
-        if (err) {
-            res.json({ success: false, message: err });
-            return;
-        }
-        res.json({ success: true, page: page });
+      if (err) {
+        res.json({ success: false, message: err });
+        return;
+      }
+      res.json({ success: true, page: page });
     });
   });
 
@@ -38,8 +38,8 @@ module.exports = (privateRouter, publicRouter) => {
   .get((req, res) => {
     Page.findById(req.params.page_id, (err, page) => {
       if (err) {
-          res.json({ success: false, message: err });
-          return;
+        res.json({ success: false, message: err });
+        return;
       }
       res.json({ success: true, page: page });
     });
@@ -48,31 +48,31 @@ module.exports = (privateRouter, publicRouter) => {
   privateRouter.route('/page/:page_id')
   .put((req, res) => {
     Page.findById(req.params.page_id, (err, page) => {
-        if (err) res.send(err);
-        page.name = req.body.name ? req.body.name : page.name;
-        page.description = req.body.description ? req.body.description : page.description;
-        page.type = req.body.type ? req.body.type : undefined;
-        page.position = req.body.position ? req.body.position : undefined;
-        page.inNav = req.body.inNav ? req.body.inNav : undefined;
-        page.updated = Date.now();
+      if (err) res.send(err);
+      page.name = req.body.name ? req.body.name : page.name;
+      page.description = req.body.description ? req.body.description : page.description;
+      page.type = req.body.type ? req.body.type : undefined;
+      page.position = req.body.position ? req.body.position : undefined;
+      page.inNav = req.body.inNav ? req.body.inNav : undefined;
+      page.updated = Date.now();
 
-        page.save((err) => {
-            if (err) {
-                res.json({ success: false, message: err });
-                return;
-            }
-            res.json({ success: true, page: page });
-        });
+      page.save((err) => {
+        if (err) {
+          res.json({ success: false, message: err });
+          return;
+        }
+        res.json({ success: true, page: page });
+      });
     });
   })
 
   .delete((req, res) => {
     Page.remove({_id: req.params.page_id}, (err) => {
-        if (err) {
-            res.json({ success: false, message: err });
-            return;
-        }
-        res.json({ success: true });
+      if (err) {
+        res.json({ success: false, message: err });
+        return;
+      }
+      res.json({ success: true });
     });
   });
 }
