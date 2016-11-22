@@ -8,6 +8,7 @@ module.exports = (privateRouter, publicRouter) => {
     next();
   });
 
+  require('./routes/configs')(privateRouter, publicRouter);
   require('./routes/pages')(privateRouter, publicRouter);
   require('./routes/activities')(privateRouter, publicRouter);
   require('./routes/articles')(privateRouter, publicRouter);

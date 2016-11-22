@@ -28,11 +28,11 @@ module.exports = (privateRouter, publicRouter) => {
     article.position = typeof req.body.position === 'number' ? req.body.position : undefined;
 
     article.save((err, article) => {
-        if (err) {
-            res.json({ success: false, message: err });
-            return;
-        }
-        res.json({ success: true, article: article });
+      if (err) {
+        res.json({ success: false, message: err });
+        return;
+      }
+      res.json({ success: true, article: article });
     });
   });
 
@@ -41,8 +41,8 @@ module.exports = (privateRouter, publicRouter) => {
   .get((req, res) => {
     Article.findById(req.params.article_id, (err, article) => {
       if (err) {
-          res.json({ success: false, message: err });
-          return;
+        res.json({ success: false, message: err });
+        return;
       }
       res.json({ success: true, article: article });
     });
@@ -51,32 +51,32 @@ module.exports = (privateRouter, publicRouter) => {
   privateRouter.route('/article/:article_id')
   .put((req, res) => {
     Article.findById(req.params.article_id, (err, article) => {
-        if (err) res.send(err);
-        article.title = req.body.title ? req.body.title : article.title;
-        article.text = req.body.text ? req.body.text : article.text;
-        article.page = req.body.page ? req.body.page : article.page;
-        article.mimetype = req.body.mimetype ? req.body.mimetype : undefined;
-        article.media = req.body.media ? req.body.media : undefined;
-        article.position = typeof req.body.position === 'number' ? req.body.position : undefined;
-        article.updated = Date.now();
+      if (err) res.send(err);
+      article.title = req.body.title ? req.body.title : article.title;
+      article.text = req.body.text ? req.body.text : article.text;
+      article.page = req.body.page ? req.body.page : article.page;
+      article.mimetype = req.body.mimetype ? req.body.mimetype : undefined;
+      article.media = req.body.media ? req.body.media : undefined;
+      article.position = typeof req.body.position === 'number' ? req.body.position : undefined;
+      article.updated = Date.now();
 
-        article.save((err) => {
-            if (err) {
-                res.json({ success: false, message: err });
-                return;
-            }
-            res.json({ success: true, article: article });
-        });
+      article.save((err) => {
+        if (err) {
+          res.json({ success: false, message: err });
+          return;
+        }
+        res.json({ success: true, article: article });
+      });
     });
   })
 
   .delete((req, res) => {
     Article.remove({_id: req.params.article_id}, (err) => {
-        if (err) {
-            res.json({ success: false, message: err });
-            return;
-        }
-        res.json({ success: true });
+      if (err) {
+        res.json({ success: false, message: err });
+        return;
+      }
+      res.json({ success: true });
     });
   });
 }
