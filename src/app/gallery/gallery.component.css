@@ -1,0 +1,9 @@
+img{
+  height: 350px;
+  margin: 15px;
+}
+
+.galleryDiv{
+  overflow: hidden;
+  text-align: center;
+}
