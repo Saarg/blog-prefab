@@ -44,4 +44,15 @@ export class ActivityComponent implements OnInit {
   ngOnInit() {
   }
 
+  goTo(destination) {
+      // this will scroll the page up
+      window.location.hash = destination;
+
+      // after page scrolls up, scroll down to correct level
+      // https://github.com/angular/angular/issues/6595
+      setTimeout(() => {
+        document.querySelector('#'+destination).parentElement.scrollIntoView();
+      });
+    }
+
 }
