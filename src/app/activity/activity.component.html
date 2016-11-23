@@ -21,7 +21,7 @@
   <aside class="hidden-sm-down col-md-3 offset-md-1">
     <ul>
       <li *ngFor="let activity of activities; let i = index" class="list-group-item">
-        <a (click)="goTo(i)">{{activity.title}}</a>
+        <a [routerLink]="['/activity']" (click)="goTo(i)">{{activity.title}}</a>
       </li>
     </ul>
   </aside>
