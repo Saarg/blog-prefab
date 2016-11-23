@@ -1,3 +1,28 @@
-<p>
-  activity works!
-</p>
+<div class="row">
+  <div class="col-sm-12 col-md-8">
+    <article *ngFor="let activity of activities; let i = index; let e = even" class="row card" id='{{i}}activity'>
+      <h1>{{activity.title}}</h1>
+      <div>
+        <div *ngIf="activity.mimetype">
+          <div *ngIf="e">
+            <img class=rightImg src={{activity.media}}>
+          </div>
+          <div *ngIf="!e">
+            <img class=leftImg src={{activity.media}}>
+          </div>
+        </div>
+        <p style="text-indent: 1em;">
+              {{activity.text}}
+        </p>
+      </div>
+    </article>
+  </div>
+
+  <aside class="hidden-sm-down col-md-3 offset-md-1">
+    <ul>
+      <li *ngFor="let activity of activities; let i = index" class="list-group-item">
+        <a [routerLink]="activity" fragment="{{i}}activity"> {{activity.title}}</a>
+      </li>
+    </ul>
+  </aside>
+</div>
