@@ -1,7 +1,8 @@
 <div class="row">
-  <div class="col-sm-12 col-md-8">
+  <h1>Home</h1>
+  <div class="col-sm-12 col-md-9">
     <article *ngFor="let article of articles; let i = index; let e = even" class="row card" id='{{i}}home'>
-      <h1>{{article.title}}</h1>
+      <h2>{{article.title}}</h2>
       <div>
         <div *ngIf="article.mimetype">
           <div *ngIf="e">
@@ -18,9 +19,9 @@
     </article>
   </div>
 
-  <aside class="hidden-sm-down col-md-3 offset-md-1">
+  <aside class="hidden-sm-down col-md-3">
     <ul>
-      <li *ngFor="let article of articles; let i = index" class="list-group-item">
+      <li *ngFor="let article of articles; let i = index" class="list-group-item asideMenu">
         <a href="#{{i}}home"> {{article.title}}</a>
       </li>
     </ul>
