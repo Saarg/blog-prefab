@@ -19,7 +19,7 @@ module.exports = (privateRouter, publicRouter) => {
   .put((req, res) => {
     Config.findBy({ key: req.params.config_key }, (err, config) => {
       if (err) res.send(err);
-      config.key = req.body.key ? req.body.key : config.title;
+      config.key = req.body.key ? req.body.key : config.key;
       config.value = req.body.value ? req.body.value : config.value;
 
       config.save((err) => {

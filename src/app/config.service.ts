@@ -31,4 +31,11 @@ export class ConfigService {
                .catch(console.error);
   }
 
+  setValue(key, value): Promise<any> {
+    return this.http.put("/api/public/config/" + key, { value: value })
+               .toPromise()
+               .then(response => response.json())
+               .catch(console.error);
+  }
+
 }
