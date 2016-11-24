@@ -8,6 +8,8 @@ var ActivitySchema = new Schema({
   title:            { type: String, required: true },
   text:             { type: String, required: true },
   page:             { type: Schema.Types.ObjectId, required: true },
+  location:         { type: String, required: true },
+  date:             { type: Date, default: Date.now },
   maxParticipants:  { type: Number, min: -1 },
   participants:     [String],
   // associated media
