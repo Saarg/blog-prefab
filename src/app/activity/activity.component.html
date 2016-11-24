@@ -1,35 +1,30 @@
 <div class="row">
   <h1>Activities</h1>
-  <div class="col-sm-12 col-md-9">
-    <article *ngFor="let activity of activities; let i = index; let e = even" class="row card" id='{{i}}'>
-      <h2>{{activity.title}}</h2>
-      <div>
-        <div *ngIf="activity.mimetype">
-          <div *ngIf="e">
-            <img class=rightImg src={{activity.media}}>
+  <div class="col-12">
+    <ul class="panel-group" id="accordion">
+      <li *ngFor="let activity of activities; let i = index; let e = even" class="panel panel-default list-group-item">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}">{{activity.title}}</a>
+          </h4>
+        </div>
+        <div id="collapse{{i}}" class="panel-collapse collapse">
+          <div *ngIf="activity.mimetype">
+            <div *ngIf="e">
+              <img class=rightImg src={{activity.media}}>
+            </div>
+            <div *ngIf="!e">
+              <img class=leftImg src={{activity.media}}>
+            </div>
           </div>
-          <div *ngIf="!e">
-            <img class=leftImg src={{activity.media}}>
+          <div class="panel-body" style="text-indent: 1em;">{{activity.text}}</div>
+          <div class="participants container">
+            <a href="#coming{{i}}" class="btn btn-link" data-toggle="collapse">Participants</a>
+            <div id="coming{{i}}" class="collapse">
+              {{activity.participants}}
+            </div>
           </div>
         </div>
-        <p style="text-indent: 1em;">
-              {{activity.text}}
-        </p>
-      </div>
-      <div class="participants container">
-        <a href="#coming{{i}}" class="btn btn-link" data-toggle="collapse">Participants</a>
-        <div id="coming{{i}}" class="collapse">
-          {{activity.participants}}
-        </div>
-      </div>
-    </article>
-  </div>
-
-  <aside class="hidden-sm-down col-md-3">
-    <ul>
-      <li *ngFor="let activity of activities; let i = index" class="list-group-item asideMenu">
-        <a [routerLink]="['/activity']" (click)="goTo(i)">{{activity.title}}</a>
       </li>
     </ul>
-  </aside>
-</div>
+  </div>
