@@ -8,7 +8,11 @@ module.exports = (privateRouter, publicRouter) => {
   // medias by page api route
   publicRouter.route('/medias/:page_id')
   .get((req, res) => {
-    Media.find((err, medias) => {
+    Media.find({ page: req.params.page_id })
+    .sort({created: -1})
+    .skip(req.params.offset ? req.params.offset : 0)
+    .limit(req.params.limit ? req.params.limit : 5)
+    .exec((err, medias) => {
       if (err) {
         res.json({ success: false, message: err });
         return;
