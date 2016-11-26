@@ -24,7 +24,7 @@ export class MediaService {
 
   // TODO handle auth
   addMedia(media, page_id): Promise<any> {
-    return this.http.post("/api/private/medias/" + (page_id ? page_id : media.page), media)
+    return this.http.post("/api/private/medias/" + page_id ? page_id : media.page, media)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

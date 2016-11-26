@@ -10,7 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { ActivityComponent } from './activity/activity.component';
 import { GalleryComponent } from './gallery/gallery.component';
 
-import { ConfigService } from './config.service';
+import { ConfigService } from './../services/config.service';
+import { ArticleService } from './../services/article.service';
 
 import { Routing } from './app.routing';
 
@@ -29,7 +30,7 @@ import { Routing } from './app.routing';
     HttpModule,
     Routing
   ],
-  providers: [ConfigService],
+  providers: [ConfigService, ArticleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

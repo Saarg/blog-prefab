@@ -24,7 +24,7 @@ export class ActivityService {
 
   // TODO handle auth
   addActivity(activity, page_id): Promise<any> {
-    return this.http.post("/api/private/activities/" + page_id ? page_id : activity.page, activity)
+    return this.http.post("/api/private/activities/" + (page_id ? page_id : activity.page), activity)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
