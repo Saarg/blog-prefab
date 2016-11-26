@@ -24,7 +24,8 @@ export class ArticleService {
 
   // TODO handle auth
   addArticle(article, page_id): Promise<any> {
-    return this.http.post("/api/private/articles/" + page_id ? page_id : article.page, article)
+    console.log("/api/private/articles/" + (page_id ? page_id : article.page));
+    return this.http.post("/api/private/articles/" + (page_id ? page_id : article.page), article)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

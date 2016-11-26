@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { ArticleService } from './../article.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [ArticleService]
 })
 export class HomeComponent implements OnInit {
+
+  admin = false;
+  newArticle = { title: "Enter your title here", text: "Enter your article here", page: 0, position: -1, mimetype: "", media: "" };
 
   articles = [
     {
@@ -58,9 +63,26 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
+    this.getArticles();
+  }
+
+  getArticles() {
+    // using dummi pageid for now
+    this.articleService.getArticlesByPage("58397529486c1a7217a23b07").then(res => {
+      this.articles = res.articles ? res.articles : this.articles;
+      // for now display admin options if the api is on
+      this.admin = res.articles ? true : false;
+    });
+  }
+
+  submitArticle() {
+    // using dummi pageid for now
+    this.articleService.addArticle(this.newArticle, "58397529486c1a7217a23b07").then(res => {
+      console.log(res);
+    });
   }
 
 }
