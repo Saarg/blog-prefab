@@ -8,8 +8,11 @@ export class ArticleService {
 
   constructor(private http: Http) { }
 
-  getArticlesByPage(page_id): Promise<any> {
-    return this.http.get("/api/public/articles/" + page_id)
+  getArticlesByPage(page_id, page?, nbByPage?): Promise<any> {
+    let url = "/api/public/articles/" + page_id;
+    url += (page !== 'undefined' && nbByPage !== 'undefined') ? page + "/" + nbByPage : "";
+
+    return this.http.get("/api/public/articles/" + page_id )
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

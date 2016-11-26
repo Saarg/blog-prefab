@@ -12,6 +12,9 @@ export class HomeComponent implements OnInit {
   admin = false;
   newArticle = { title: "Enter your title here", text: "Enter your article here", page: 0, position: -1, mimetype: "", media: "" };
 
+  page = 0;
+  nbArticles = 5;
+
   articles = [
     {
       "title" : "Lorel et Hardi",
@@ -71,7 +74,7 @@ export class HomeComponent implements OnInit {
 
   getArticles() {
     // using dummi pageid for now
-    this.articleService.getArticlesByPage("58397529486c1a7217a23b07").then(res => {
+    this.articleService.getArticlesByPage("58397529486c1a7217a23b07", this.page, this.nbArticles).then(res => {
       if(!res) { return; }
       this.articles = res.articles ? res.articles : this.articles;
       // for now display admin options if the api is on
@@ -83,7 +86,12 @@ export class HomeComponent implements OnInit {
     // using dummi pageid for now
     this.articleService.addArticle(this.newArticle, "58397529486c1a7217a23b07").then(res => {
       if(!res) { return; }
-      console.log(res);
+      if(res.success) {
+        this.articles.unshift(res.article);
+        while (this.articles.length > this.nbArticles) {
+          this.articles.pop();
+        }
+      }
     });
   }
 
