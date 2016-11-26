@@ -72,6 +72,7 @@ export class HomeComponent implements OnInit {
   getArticles() {
     // using dummi pageid for now
     this.articleService.getArticlesByPage("58397529486c1a7217a23b07").then(res => {
+      if(!res) { return; }
       this.articles = res.articles ? res.articles : this.articles;
       // for now display admin options if the api is on
       this.admin = res.articles ? true : false;
@@ -81,6 +82,7 @@ export class HomeComponent implements OnInit {
   submitArticle() {
     // using dummi pageid for now
     this.articleService.addArticle(this.newArticle, "58397529486c1a7217a23b07").then(res => {
+      if(!res) { return; }
       console.log(res);
     });
   }
