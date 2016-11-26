@@ -6,9 +6,13 @@ const Article = require('./../models/articles');
 
 module.exports = (privateRouter, publicRouter) => {
   // articles by page api route
-  publicRouter.route('/articles/:page_id')
+  publicRouter.route('/articles/:page_id/:offset?/:limit?')
   .get((req, res) => {
-    Article.find((err, articles) => {
+    Article.find({ page: req.params.page_id })
+    .sort({created: -1})
+    .skip(req.params.offset ? req.params.offset : 0)
+    .limit(req.params.limit ? req.params.limit : 5)
+    .exec((err, articles) => {
       if (err) {
         res.json({ success: false, message: err });
         return;
