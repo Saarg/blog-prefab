@@ -63,7 +63,7 @@
           <div  *ngFor="let page of pages; let i = index; let e = even">
             <a class="nav-item nav-link float-xs-right"
             [ngClass]="{'float-xs-left': page.position===0, 'float-xs-right': page.position!==0, 'ml-1': page.position!==0}"
-            routerLink="{{ page.position!==0 ? pageTypes[page.type]+'/'+page._id : '#' }}">{{ page.name }}</a>
+            routerLink="{{ page.position!==0 ? pageTypes[page.type]+'/'+page._id : '' }}">{{ page.name }}</a>
           </div>
         </div>
       </div>
