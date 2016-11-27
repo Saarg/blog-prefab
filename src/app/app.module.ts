@@ -12,6 +12,9 @@ import { GalleryComponent } from './gallery/gallery.component';
 
 import { ConfigService } from './../services/config.service';
 import { ArticleService } from './../services/article.service';
+import { MediaService } from './../services/media.service';
+import { ActivityService } from './../services/activity.service';
+import { PageService } from './../services/page.service';
 
 import { Routing } from './app.routing';
 
@@ -30,7 +33,13 @@ import { Routing } from './app.routing';
     HttpModule,
     Routing
   ],
-  providers: [ConfigService, ArticleService],
+  providers: [
+    ConfigService,
+    ArticleService,
+    MediaService,
+    ActivityService,
+    PageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

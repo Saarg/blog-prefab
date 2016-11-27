@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleService } from './../../services/article.service';
+
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-home',
@@ -9,13 +12,15 @@ import { ArticleService } from './../../services/article.service';
 })
 export class HomeComponent implements OnInit {
 
-  admin = false;
-  newArticle = { title: "Enter your title here", text: "Enter your article here", page: 0, position: -1, mimetype: "", media: "" };
+  public admin = false;
+  public newArticle = { title: "Enter your title here", text: "Enter your article here", page: 0, position: -1, mimetype: "", media: "" };
 
-  page = 0;
-  nbArticles = 5;
+  public page = 0;
+  public nbArticles = 5;
 
-  articles = [
+  public curId = null;
+
+  public articles = [
     {
       "title" : "Lorel et Hardi",
       "text" : "Lorem ipsum dolor sit amet, sed probo adolescens te. Nec ea solet percipitur. Velit quando commodo sed ut, paulo soluta quaerendum vix ut, id aliquip constituam pri. Ex quo solet molestie. Pertinax hendrerit contentiones ei mea. Eu solet dolorem apeirian his.\
@@ -66,25 +71,35 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  constructor(private articleService: ArticleService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private articleService: ArticleService
+  ) { }
 
   ngOnInit() {
+    this.route.params.switchMap((params: Params) => this.curId = params['id']);
+    if(!this.curId) {
+      // using dummi id for homepage for now
+      this.curId = "583b1002455f394338ed152c";
+    }
+
     this.getArticles();
   }
 
   getArticles() {
     // using dummi pageid for now
-    this.articleService.getArticlesByPage("58397529486c1a7217a23b07", this.page, this.nbArticles).then(res => {
+    this.articleService.getArticlesByPage(this.curId, this.page, this.nbArticles).then(res => {
       if(!res) { return; }
+      this.admin = res.success ? true : false;
       this.articles = res.articles ? res.articles : this.articles;
       // for now display admin options if the api is on
-      this.admin = res.articles ? true : false;
     });
   }
 
   submitArticle() {
     // using dummi pageid for now
-    this.articleService.addArticle(this.newArticle, "58397529486c1a7217a23b07").then(res => {
+    this.articleService.addArticle(this.newArticle, this.curId).then(res => {
       if(!res) { return; }
       if(res.success) {
         this.articles.unshift(res.article);

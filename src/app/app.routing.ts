@@ -7,7 +7,9 @@ import { ActivityComponent } from './activity/activity.component';
 import { GalleryComponent } from './gallery/gallery.component';
 
 const appRoutes: Routes = [
+  { path: 'activity/:id', component: ActivityComponent },
   { path: 'activity', component: ActivityComponent },
+  { path: 'gallery/:id', component: GalleryComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: '', component: HomeComponent },
   { path: '**', component: HomeComponent }
