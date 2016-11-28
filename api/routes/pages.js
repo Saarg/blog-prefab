@@ -31,8 +31,8 @@ module.exports = (privateRouter, publicRouter) => {
     let page = new Page();
     page.name = req.body.name;
     page.description = req.body.description;
-    page.type = req.body.type ? req.body.type : undefined;
-    page.position = typeof req.body.position === 'number' ? req.body.position : undefined;
+    page.type = typeof req.body.type === 'number' ? req.body.type : 0;
+    page.position = typeof req.body.position === 'number' ? req.body.position : -1;
     page.inNav = req.body.inNav ? req.body.inNav : undefined;
 
     page.save((err, page) => {

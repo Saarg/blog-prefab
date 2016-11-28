@@ -66,15 +66,18 @@ export class HeaderComponent implements OnInit {
     this.pageService.addPage(this.newPage).then(res => {
       if(!res) { return; }
       if(res.success) {
-        this.pages.unshift(res.page);
+        this.pages.push(res.page);
         this.newPage = { name: "New page", description: "", type: 0, position: -1, inNav: true };
       }
     });
   }
 
   deletePage(i) {
-    console.log("deleting page " + this.pages[i].name)
-    this.pages.splice(i, 1)
+    console.log("deleting page " + this.pages[i].name);
+    this.pageService.deletePage(this.pages[i]).then(res => {
+      if(!res) { return; }
+      this.pages.splice(i, 1);
+    });
   }
 
 }

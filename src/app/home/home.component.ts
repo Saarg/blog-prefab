@@ -1,9 +1,11 @@
+import {Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleService } from './../../services/article.service';
 import { PageService } from './../../services/page.service';
 
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +14,8 @@ import 'rxjs/add/operator/switchMap';
   providers: [ArticleService, PageService]
 })
 export class HomeComponent implements OnInit {
+
+  private subscription: Subscription;
 
   public admin = false;
   public newArticle = { title: "Enter your title here", text: "Enter your article here", page: 0, position: -1, mimetype: "", media: "" };
@@ -80,7 +84,10 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.switchMap((params: Params) => this.curId = params['id']);
+    this.subscription = this.route.params.subscribe((param: any) => {
+      this.curId = param['id'];
+    });
+
     if(!this.curId) {
       this.getHomePageId();
     } else {

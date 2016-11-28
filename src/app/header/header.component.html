@@ -22,9 +22,9 @@
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a href="#" (click)="addPage(0)">Blog type</a></li>
-                  <li><a href="#" (click)="addPage(1)">Activity type</a></li>
-                  <li><a href="#" (click)="addPage(2)">Gallery type</a></li>
+                  <li><a (click)="addPage(0)">Blog type</a></li>
+                  <li><a (click)="addPage(1)">Activity type</a></li>
+                  <li><a (click)="addPage(2)">Gallery type</a></li>
                 </ul>
               </span>
             </div>
@@ -46,8 +46,8 @@
                     <li><a href="#">-></a></li>
                     <li><a href="#"><-</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">Delete</a></li>
-                    <li><a href="#">Edit</a></li>
+                    <li><a (click)="deletePage(i)">Delete</a></li>
+                    <li><a >Edit</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a routerLink="{{ page.position!==0 ? pageTypes[page.type]+'/'+page._id : '' }}">Go to</a></li>
                   </ul>
