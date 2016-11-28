@@ -53,9 +53,8 @@ export class HeaderComponent implements OnInit {
   getPages() {
     this.pageService.getPages().then(res => {
       if(!res) { return; }
+      this.admin = res.success;
       this.pages = res.pages ? res.pages : this.pages;
-      // for now display admin options if the api is on
-      this.admin = res.pages ? true : false;
     });
   }
 

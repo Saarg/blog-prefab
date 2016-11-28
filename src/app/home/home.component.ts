@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleService } from './../../services/article.service';
+import { PageService } from './../../services/page.service';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -8,7 +9,7 @@ import 'rxjs/add/operator/switchMap';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [ArticleService]
+  providers: [ArticleService, PageService]
 })
 export class HomeComponent implements OnInit {
 
@@ -74,26 +75,33 @@ export class HomeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private pageService: PageService
   ) { }
 
   ngOnInit() {
     this.route.params.switchMap((params: Params) => this.curId = params['id']);
     if(!this.curId) {
-      // using dummi id for homepage for now
-      this.curId = "583b1002455f394338ed152c";
+      this.getHomePageId();
+    } else {
+      this.getArticles();
     }
-
-    this.getArticles();
   }
 
   getArticles() {
     // using dummi pageid for now
     this.articleService.getArticlesByPage(this.curId, this.page, this.nbArticles).then(res => {
       if(!res) { return; }
-      this.admin = res.success ? true : false;
+      this.admin = res.success;
       this.articles = res.articles ? res.articles : this.articles;
-      // for now display admin options if the api is on
+    });
+  }
+
+  getHomePageId() {
+    this.pageService.getHomePage().then(res => {
+      if(!res) { return; }
+      this.curId = res.page._id;
+      this.getArticles();
     });
   }
 

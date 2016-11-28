@@ -15,6 +15,13 @@ export class PageService {
                .catch(console.error);
   }
 
+  getHomePage(): Promise<any> {
+    return this.http.get("/api/public/page/home")
+               .toPromise()
+               .then(response => response.json())
+               .catch(console.error);
+  }
+
   getPage(page_id): Promise<any> {
     return this.http.get("/api/public/page/" + page_id)
                .toPromise()

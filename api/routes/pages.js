@@ -16,6 +16,17 @@ module.exports = (privateRouter, publicRouter) => {
     });
   });
 
+  // homepage api route
+  publicRouter.route('/page/home').get((req, res) => {
+    Page.findOne({ position: 0 }, (err, page) => {
+      if (err) {
+        res.json({ success: false, message: err });
+        return;
+      }
+      res.json({ success: true, page: page });
+    });
+  });
+
   privateRouter.route('/pages').post((req, res) => {
     let page = new Page();
     page.name = req.body.name;
