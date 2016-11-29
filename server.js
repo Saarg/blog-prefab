@@ -29,7 +29,7 @@ const publicRouter = express.Router();
 const privateRouter = express.Router();
 
 // api routes
-require('./api/routes')(privateRouter, publicRouter);
+require('./api/routes')(app, privateRouter, publicRouter);
 app.use('/api/public', publicRouter);
 app.use('/api/private', privateRouter);
 

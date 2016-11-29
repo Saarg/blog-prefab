@@ -2,7 +2,7 @@
 
 const jwt = require('jsonwebtoken');
 
-module.exports = (privateRouter, publicRouter) => {
+module.exports = (app, privateRouter, publicRouter) => {
 
   // Middleware for non public routes
   privateRouter.use((req, res, next) => {
@@ -26,14 +26,14 @@ module.exports = (privateRouter, publicRouter) => {
     }
   });
 
-  privateRouter.route('*')
-  .post((req, res) => {
-    res.json({ success: true, message: "you have acces to the private api :)" });
-  });
-
   require('./routes/configs')(privateRouter, publicRouter);
   require('./routes/pages')(privateRouter, publicRouter);
   require('./routes/activities')(privateRouter, publicRouter);
   require('./routes/articles')(privateRouter, publicRouter);
   require('./routes/medias')(privateRouter, publicRouter);
+
+  privateRouter.route('*')
+  .post((req, res) => {
+    res.json({ success: true, message: "you have acces to the private api :)" });
+  });
 }

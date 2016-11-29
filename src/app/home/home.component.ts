@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   private subscription: Subscription;
 
   public token = null;
-  public newArticle = { title: "Enter your title here", text: "Enter your article here", page: 0, position: -1, mimetype: "", media: "" };
+  public newArticle = { title: "Enter your title here", text: "Enter your article here", page: 0, position: -1, mimetype: "", media: "", token: null };
 
   public page = 0;
   public nbArticles = 5;
@@ -114,8 +114,10 @@ export class HomeComponent implements OnInit {
   }
 
   submitArticle() {
+    this.newArticle.token = this.token;
     // using dummi pageid for now
     this.articleService.addArticle(this.newArticle, this.curId).then(res => {
+      console.log(res);
       if(!res) { return; }
       if(res.success) {
         this.articles.unshift(res.article);
