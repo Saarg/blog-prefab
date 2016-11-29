@@ -8,7 +8,7 @@
     </div>
   </div>
   <nav class="navbar navbar-light bg-faded">
-      <div *ngIf="admin"><!-- Admin navbar -->
+      <div *ngIf="token"><!-- Admin navbar -->
         <div class="nav navbar-nav container">
           <div class="nav-item nav-link col-xs-2 float-xs-right">
             <div class="input-group">
@@ -58,7 +58,7 @@
         </div>
       </div>
 
-      <div *ngIf="!admin"><!-- User navbar -->
+      <div *ngIf="!token"><!-- User navbar -->
         <div class="nav navbar-nav container">
           <div  *ngFor="let page of pages; let i = index; let e = even">
             <a class="nav-item nav-link float-xs-right"

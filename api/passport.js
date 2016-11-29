@@ -50,7 +50,6 @@ module.exports = (app) => {
   });
 
   app.post('/api/private/login', passport.authenticate('local'), (req, res) => {
-    // Should send token
     var token = jwt.sign(req.user, app.get('TokenSecret'), {
       expiresIn: "1d"
     });
