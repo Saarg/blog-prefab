@@ -6,6 +6,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class PageService {
 
+  private token = localStorage ? localStorage.getItem('AuthToken') : null;
+
   constructor(private http: Http) { }
 
   getPages(): Promise<any> {
@@ -29,8 +31,8 @@ export class PageService {
                .catch(console.error);
   }
 
-  // TODO handle auth
   addPage(page): Promise<any> {
+    page.token = this.token;
     return this.http.post("/api/private/pages", page)
                .toPromise()
                .then(response => response.json())
@@ -38,6 +40,7 @@ export class PageService {
   }
 
   editPage(page): Promise<any> {
+    page.token = this.token;
     return this.http.put("/api/private/page/" + page._id, page)
                .toPromise()
                .then(response => response.json())
@@ -45,6 +48,7 @@ export class PageService {
   }
 
   deletePage(page): Promise<any> {
+    page.token = this.token;
     return this.http.delete("/api/private/page/" + page._id)
                .toPromise()
                .then(response => response.json())

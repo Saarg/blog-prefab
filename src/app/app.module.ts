@@ -9,12 +9,14 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { ActivityComponent } from './activity/activity.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { LoginComponent } from './login/login.component';
 
 import { ConfigService } from './../services/config.service';
 import { ArticleService } from './../services/article.service';
 import { MediaService } from './../services/media.service';
 import { ActivityService } from './../services/activity.service';
 import { PageService } from './../services/page.service';
+import { UserService } from './../services/user.service';
 
 import { Routing } from './app.routing';
 
@@ -25,7 +27,8 @@ import { Routing } from './app.routing';
     FooterComponent,
     HomeComponent,
     ActivityComponent,
-    GalleryComponent
+    GalleryComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { Routing } from './app.routing';
     ArticleService,
     MediaService,
     ActivityService,
-    PageService
+    PageService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

@@ -10,7 +10,7 @@ import { PageService } from './../../services/page.service';
 })
 export class HeaderComponent implements OnInit {
 
-  public admin = false;
+  public token = null;
 
   public logo;
   public banner;
@@ -41,6 +41,8 @@ export class HeaderComponent implements OnInit {
   constructor(private configService: ConfigService, private pageService: PageService) { }
 
   ngOnInit() {
+    this.token = localStorage ? localStorage.getItem('AuthToken') : null;
+
     this.getLogos();
     this.getPages();
   }
@@ -53,7 +55,6 @@ export class HeaderComponent implements OnInit {
   getPages() {
     this.pageService.getPages().then(res => {
       if(!res) { return; }
-      this.admin = res.success;
       this.pages = res.pages ? res.pages : this.pages;
     });
   }

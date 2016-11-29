@@ -2,7 +2,7 @@
   <h1>Home</h1>
   <div class="col-sm-12 col-md-9">
     <!-- Admin form -->
-    <form *ngIf="admin" (ngSubmit)="submitArticle()" class="row card" id='newArticle'>
+    <form *ngIf="token" (ngSubmit)="submitArticle()" class="row card" id='newArticle'>
       <div class="form-group">
         <input type="text" class="form-control" id="title" [(ngModel)]="newArticle.title" name="title">
       </div>
