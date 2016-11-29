@@ -4,8 +4,15 @@ img{
 }
 
 .participants{
-  text-align: center;
-  margin-bottom: 20px;
+  float: right;
+}
+
+.participants p{
+  margin-right: 10px;
+}
+
+#accordion{
+  padding: 0;
 }
 
 .rightImg{float:right;}

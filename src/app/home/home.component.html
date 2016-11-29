@@ -41,11 +41,8 @@
       <h2>{{article.title}}</h2>
       <div>
         <div *ngIf="article.mimetype">
-          <div *ngIf="e">
-            <img class=rightImg src={{article.media}}>
-          </div>
-          <div *ngIf="!e">
-            <img class=leftImg src={{article.media}}>
+          <div>
+            <img [ngClass]="{'rightImg': e, 'leftImg': !e}" src={{article.media}}>
           </div>
         </div>
         <p style="text-indent: 1em;">

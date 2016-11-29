@@ -6,24 +6,20 @@
         <div class="panel-heading">
           <h4 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}">{{activity.title}}</a>
+              <div class='participants'>
+                <p style="display:inline-block">{{activity.participants.length}} participants</p>
+                <button type="button" class="btn btn-info" (click)="joinInButtonCB(i)" style="display:inline-block">S'inscrire</button>
+              </div> <!-- That's float'd to the right-->
+
           </h4>
         </div>
         <div id="collapse{{i}}" class="panel-collapse collapse">
           <div *ngIf="activity.mimetype">
-            <div *ngIf="e">
-              <img class=rightImg src={{activity.media}}>
-            </div>
-            <div *ngIf="!e">
-              <img class=leftImg src={{activity.media}}>
+            <div>
+              <img [ngClass]="{'rightImg': e, 'leftImg': !e}" src={{activity.media}}>
             </div>
           </div>
           <div class="panel-body" style="text-indent: 1em;">{{activity.text}}</div>
-          <div class="participants container">
-            <a href="#coming{{i}}" class="btn btn-link" data-toggle="collapse">Participants</a>
-            <div id="coming{{i}}" class="collapse">
-              {{activity.participants}}
-            </div>
-          </div>
         </div>
       </li>
     </ul>
