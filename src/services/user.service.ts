@@ -5,6 +5,8 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService {
+  
+  private token = localStorage ? localStorage.getItem('AuthToken') : null;
 
   constructor(private http: Http) { }
 

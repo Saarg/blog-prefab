@@ -6,6 +6,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ConfigService {
 
+  private token = localStorage ? localStorage.getItem('AuthToken') : null;
+
   constructor(private http: Http) { }
 
   getLogo(): Promise<string> {
@@ -32,7 +34,7 @@ export class ConfigService {
   }
 
   setValue(key, value): Promise<any> {
-    return this.http.put("/api/public/config/" + key, { value: value })
+    return this.http.put("/api/public/config/" + key, { token: this.token, value: value })
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

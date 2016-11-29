@@ -114,7 +114,6 @@ export class HomeComponent implements OnInit {
   }
 
   submitArticle() {
-    this.newArticle.token = this.token;
     // using dummi pageid for now
     this.articleService.addArticle(this.newArticle, this.curId).then(res => {
       console.log(res);
