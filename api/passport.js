@@ -1,17 +1,20 @@
 'use strict'
 
-
 const session       = require('express-session');
 
 const passport      = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
+const jwt           = require('jsonwebtoken');
+
 module.exports = (app) => {
-  app.use(session({ secret: 'keyboard cat' }));
+  //app.use(session({ secret: 'keyboard cat' }));
 
   // use passport for auth
   app.use(passport.initialize());
   app.use(passport.session());
+
+  app.set('TokenSecret', 'Change me, just do it damit!');
 
   passport.use(new LocalStrategy((username, password, done) => {
     if (username !== "admin") {
@@ -20,6 +23,7 @@ module.exports = (app) => {
     if (password !== "admin") {
       return done(null, false, { message: 'Incorrect password.' });
     }
+
     return done(null, {username, password});
     // User.findOne({ username: username }, (err, user) => {
     //   if (err) { return done(err); }
@@ -45,10 +49,16 @@ module.exports = (app) => {
     // });
   });
 
-  app.post('/api/private/login',
-    passport.authenticate('local', {
-      successRedirect: '/logged',
-      failureRedirect: '/failed'
-    })
-  );
+  app.post('/api/private/login', passport.authenticate('local'), (req, res) => {
+    // Should send token
+    var token = jwt.sign(req.user, app.get('TokenSecret'), {
+      expiresIn: "1d"
+    });
+
+    res.json({
+      success: true,
+      message: 'Enjoy your token!',
+      token: token
+    });
+  });
 }
