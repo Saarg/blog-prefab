@@ -91,4 +91,35 @@ module.exports = (privateRouter, publicRouter) => {
       res.json({ success: true });
     });
   });
+
+  privateRouter.route('/activity/:activity_id/participants/:email')
+  .put(function(req, res) {
+    Activity.findById(req.params.activity_id, (err, activity) => {
+      if (err) res.send(err);
+      activity.participants.push(req.params.email);
+
+      activity.save((err) => {
+        if (err) {
+          res.json({ success: false, message: err });
+          return;
+        }
+        res.json({ success: true, activity: activity });
+      });
+    });
+  })
+
+  .delete(function(req, res) {
+    Activity.findById(req.params.activity_id, (err, activity) => {
+      if (err) res.send(err);
+      activity.participants.splice(activity.participants.indexOf(req.params.email), 1);
+
+      activity.save((err) => {
+        if (err) {
+          res.json({ success: false, message: err });
+          return;
+        }
+        res.json({ success: true, activity: activity });
+      });
+    });
+  });
 }
