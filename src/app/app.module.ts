@@ -19,6 +19,7 @@ import { PageService } from './../services/page.service';
 import { UserService } from './../services/user.service';
 
 import { Routing } from './app.routing';
+import { ArticleFormComponent } from './article-form/article-form.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { Routing } from './app.routing';
     HomeComponent,
     ActivityComponent,
     GalleryComponent,
-    LoginComponent
+    LoginComponent,
+    ArticleFormComponent
   ],
   imports: [
     BrowserModule,

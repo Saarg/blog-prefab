@@ -2,39 +2,7 @@
   <h1>Home</h1>
   <div class="col-sm-12 col-md-9">
     <!-- Admin form -->
-    <form [hidden]="!token" (ngSubmit)="submitArticle()" class="row card" id='newArticle'>
-      <div class="form-group">
-        <input type="text" class="form-control" id="title" [(ngModel)]="newArticle.title" name="title">
-      </div>
-
-      <div class="form-group">
-        <textarea class="form-control" id="text" rows="3" [(ngModel)]="newArticle.text" name="text"></textarea>
-      </div>
-
-      <div class="row">
-        <div class="form-group col-xs-4">
-          <select class="custom-select" id="mimetype" [(ngModel)]="newArticle.mimetype" name="mimetype">
-            <option selected>Open this select menu</option>
-            <option value="">Select media</option>
-            <option value="image">image</option>
-            <option value="youtube">youtube</option>
-          </select>
-        </div>
-
-        <div class="form-group col-xs-5" *ngIf="newArticle.mimetype === 'image'">
-          <label class="custom-file">
-            <input type="file" id="file" class="custom-file-input" [(ngModel)]="newArticle.media" name="media">
-            <span class="custom-file-control">Click here to choose image</span>
-          </label>
-        </div>
-
-        <div class="form-group col-xs-5" *ngIf="newArticle.mimetype === 'youtube'">
-          <input type="text" class="form-control" id="youtube" [(ngModel)]="newArticle.media" name="media">
-        </div>
-
-        <button type="submit" class="btn btn-primary col-xs-2 mr-1 float-xs-right">Submit</button>
-      </div>
-    </form>
+    <article-form *ngIf="token" [pageId]="curId" (newArticleEvent)="newArticle($event)"></article-form>
 
     <!-- Articles -->
     <article *ngFor="let article of articles; let i = index; let e = even" class="row card" id='{{i}}home'>
