@@ -113,6 +113,17 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  goTo(destination) {
+    // this will scroll the page up
+    window.location.hash = destination;
+
+    // after page scrolls up, scroll down to correct level
+    // https://github.com/angular/angular/issues/6595
+    setTimeout(() => {
+      document.querySelector('#'+destination).parentElement.scrollIntoView();
+    });
+  }
+
   submitArticle() {
     // using dummi pageid for now
     this.articleService.addArticle(this.newArticle, this.curId).then(res => {
