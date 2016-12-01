@@ -1,0 +1,20 @@
+<div class="row">
+<form class="col-md-6 offset-md-3" *ngIf="token">
+  <div class="row">
+    <div class="form-group col-xs-12">
+      <label class="custom-file col-xs-12">
+        <input type="file" id="file" class="custom-file-input" multiple (change)="fileChange(input)" #input>
+        <span class="custom-file-control">Click here to choose image(s)</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div *ngFor="let file_src of file_srcs">
+      <img [attr.src]='file_src' (click)="removeFile(index)" class="img-thumbnail rounded mx-auto d-block col-xs-2" alt=""/>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary col-xs-12">Submit</button>
+</form>
+</div>

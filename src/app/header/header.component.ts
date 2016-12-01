@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
+import { MediaFormComponent } from './../media-form/media-form.component'
+
 import { ConfigService } from './../../services/config.service';
 import { PageService } from './../../services/page.service';
 
