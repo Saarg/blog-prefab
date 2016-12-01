@@ -9,7 +9,8 @@ import { ArticleService } from './../../services/article.service';
   inputs: ['article', 'pageId'],
   outputs: ['newArticleEvent'],
   templateUrl: './article-form.component.html',
-  styleUrls: ['./article-form.component.css']
+  styleUrls: ['./article-form.component.css'],
+  providers: [ArticleService]
 })
 export class ArticleFormComponent implements OnInit {
 

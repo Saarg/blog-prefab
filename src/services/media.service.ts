@@ -26,7 +26,7 @@ export class MediaService {
 
   addMedia(media, page_id): Promise<any> {
     media.token = this.token;
-    return this.http.post("/api/private/medias/" + page_id ? page_id : media.page, media)
+    return this.http.post("/api/private/medias/" + (page_id ? page_id : media.page), media)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

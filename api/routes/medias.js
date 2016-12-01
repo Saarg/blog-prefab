@@ -1,8 +1,10 @@
 'use strict'
 
-// v1.4 added public route (for future auth)
+// v1.5 added file upload first draft
 
-const Media = require('./../models/medias');
+const fs           = require('fs');
+const mongoose     = require('mongoose');
+const Media        = require('./../models/medias');
 
 module.exports = (privateRouter, publicRouter) => {
   // medias by page api route
@@ -27,8 +29,22 @@ module.exports = (privateRouter, publicRouter) => {
     media.description = req.body.description ? req.body.description : undefined;
     media.page = req.params.page_id;
     media.mimetype = req.body.mimetype;
-    media.media = req.body.media; // TODO need to handle file upload for images
     media.position = typeof req.body.position === 'number' ? req.body.position : undefined;
+
+
+    const type = req.body.media.match(/data:image\/([a-zA-Z0-9-.+]+).*,.*/)
+    if(req.body.media && type) {
+      const fileBuffer = new Buffer(req.body.media.replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
+
+      media.media = '/../data/medias/' + mongoose.Types.ObjectId() + '.' + type[1];
+
+      fs.writeFile(__dirname + media.media, fileBuffer, (err) => {
+        if(err) {
+          console.error(err);
+          //TODO handle failled writeFile
+        }
+      })
+    }
 
     media.save((err, media) => {
       if (err) {

@@ -1,9 +1,14 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
+import { MediaService } from './../../services/media.service';
 
 @Component({
   selector: 'media-form',
   templateUrl: './media-form.component.html',
-  styleUrls: ['./media-form.component.css']
+  styleUrls: ['./media-form.component.css'],
+  providers: [MediaService]
 })
 export class MediaFormComponent implements OnInit {
 
@@ -11,12 +16,23 @@ export class MediaFormComponent implements OnInit {
 
   public file_srcs: string[] = [];
 
+  private subscription: Subscription;
+
+  public curId = null;
+
   constructor(
-    private changeDetectorRef: ChangeDetectorRef
+    private route: ActivatedRoute,
+    private router: Router,
+    private changeDetectorRef: ChangeDetectorRef,
+    private mediaService: MediaService
   ) { }
 
   ngOnInit() {
     this.token = localStorage ? localStorage.getItem('AuthToken') : null;
+
+    this.subscription = this.route.params.subscribe((param: any) => {
+      this.curId = param['id'];
+    });
   }
 
   fileChange(input){
@@ -55,5 +71,11 @@ export class MediaFormComponent implements OnInit {
   removeFile(index){
     console.log(this.file_srcs);
     this.file_srcs.splice(index, 1);
+  }
+
+  submitMedias() {
+    this.mediaService.addMedia({media: this.file_srcs[0]}, this.curId).then(res => {
+      console.log(res);
+    });
   }
 }

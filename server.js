@@ -19,8 +19,8 @@ const app = express();
 app.use(morgan('dev')); // log every request to the console
 app.use(express.static(path.join(__dirname,'/dist')));
 app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 require('./api/passport')(app);
 
