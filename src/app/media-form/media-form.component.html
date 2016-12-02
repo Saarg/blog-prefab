@@ -10,8 +10,8 @@
   </div>
 
   <div class="row">
-    <div *ngFor="let file_src of file_srcs">
-      <img [attr.src]='file_src' (click)="removeFile(index)" class="img-thumbnail rounded mx-auto d-block col-xs-2" alt=""/>
+    <div *ngFor="let file_src of file_srcs; let i = index;">
+      <img [attr.src]='file_src' (click)="removeFile(i)" class="img-thumbnail rounded mx-auto d-block col-xs-2" alt=""/>
     </div>
   </div>
 

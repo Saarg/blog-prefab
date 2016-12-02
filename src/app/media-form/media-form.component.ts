@@ -74,8 +74,17 @@ export class MediaFormComponent implements OnInit {
   }
 
   submitMedias() {
-    this.mediaService.addMedia({media: this.file_srcs[0]}, this.curId).then(res => {
-      console.log(res);
+    this.file_srcs.forEach((file_src) => {
+      this.mediaService.addMedia({media: file_src}, this.curId).then(res => {
+        if(!res) { return }
+        this.file_srcs.splice(this.file_srcs.indexOf(file_src), 1);
+        if(res.success) {
+          //TODO succes feedback
+        } else {
+          // TODO display error
+          console.error(res.message);
+        }
+      });
     });
   }
 }
