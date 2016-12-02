@@ -45,7 +45,7 @@ export class ArticleFormComponent implements OnInit {
       console.log(res);
       if(!res) { return; }
       if(res.success) {
-        this.newArticleEvent.next(res.article)
+        this.newArticleEvent.next(res.article);
       }
     });
   }

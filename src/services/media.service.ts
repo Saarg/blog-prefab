@@ -11,7 +11,7 @@ export class MediaService {
   constructor(private http: Http) { }
 
   getMediasByPage(page_id): Promise<any> {
-    return this.http.get("/api/public/medias/" + page_id)
+    return this.http.get("/api/public/medias/" + page_id + "/0/16")
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

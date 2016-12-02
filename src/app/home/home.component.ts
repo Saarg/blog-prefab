@@ -127,7 +127,6 @@ export class HomeComponent implements OnInit {
   }
 
   newArticle(e) {
-    console.log(e);
     this.articles.unshift(e);
   }
 }

@@ -1,11 +1,12 @@
 import { Subscription } from 'rxjs';
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { MediaService } from './../../services/media.service';
 
 @Component({
   selector: 'media-form',
+  outputs: ['newMediaEvent'],
   templateUrl: './media-form.component.html',
   styleUrls: ['./media-form.component.css'],
   providers: [MediaService]
@@ -15,6 +16,7 @@ export class MediaFormComponent implements OnInit {
   public token = null;
 
   public file_srcs: string[] = [];
+  public newMediaEvent: EventEmitter<Object> = new EventEmitter<Object>();
 
   private subscription: Subscription;
 
@@ -79,7 +81,7 @@ export class MediaFormComponent implements OnInit {
         if(!res) { return }
         this.file_srcs.splice(this.file_srcs.indexOf(file_src), 1);
         if(res.success) {
-          //TODO succes feedback
+          this.newMediaEvent.next(res.media);
         } else {
           // TODO display error
           console.error(res.message);

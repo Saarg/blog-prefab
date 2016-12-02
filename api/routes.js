@@ -35,7 +35,7 @@ module.exports = (app, privateRouter, publicRouter) => {
 
   publicRouter.route('/:folder/:media_id/show')
   .get((req, res) => {
-    const path = Path.join(__dirname, 'data', req.params.folder, req.params.media_id + '.png')
+    const path = Path.join(__dirname, 'data', req.params.folder, req.params.media_id)
     res.sendFile(path);
   });
 
