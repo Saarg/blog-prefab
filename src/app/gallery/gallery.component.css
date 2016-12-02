@@ -1,9 +1,15 @@
-img{
-  height: 350px;
-  margin: 15px;
-}
-
 .galleryDiv{
   overflow: hidden;
-  text-align: center;
+  height: 25vh;
+  padding: 0;
+  border-radius: 0.5rem;
+}
+
+.galleryDiv img{
+  width: auto;
+  height: 100%;
+  margin: auto;
+  position: absolute;
+  left: -50%;
+  right: -50%;
 }
