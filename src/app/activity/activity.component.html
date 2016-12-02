@@ -1,26 +1,23 @@
 <div class="row">
   <h1>Activities</h1>
-  <div class="col-12">
-    <ul class="panel-group" id="accordion">
-      <li *ngFor="let activity of activities; let i = index; let e = even" class="panel panel-default list-group-item">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}">{{activity.title}}</a>
-              <div class='participants'>
-                <p style="display:inline-block">{{activity.participants.length}} participants</p>
-                <button type="button" class="btn btn-info" (click)="joinInButtonCB(i)" style="display:inline-block">S'inscrire</button>
-              </div> <!-- That's float'd to the right-->
+  <div class="panel-group">
+    <div *ngFor="let activity of activities; let i = index; let e = even" class="panel panel-default list-group-item row">
+      <div class="col-xs-8 col-sm-9 col-md-10 head" (click)="activity.show = !activity.show">
+        <h4 class='float-xs-left'><span [ngClass]="{'arrow-down': !activity.show, 'arrow-up': activity.show}" class="arrow-down"></span>{{activity.title}}</h4>
+        <span class='float-xs-right hidden-xs-down'>
+          {{activity.participants.length}} participants
+        </span>
+      </div>
+      <button type="button" class="btn btn-info col-xs-4 col-sm-3 col-md-2" (click)="joinInButtonCB(i)">S'inscrire</button>
 
-          </h4>
-        </div>
-        <div id="collapse{{i}}" class="panel-collapse collapse">
-          <div *ngIf="activity.mimetype">
-            <div>
-              <img [ngClass]="{'rightImg': e, 'leftImg': !e}" src={{activity.media}}>
-            </div>
+      <div *ngIf="activity.show" class="col-xs-12">
+        <div *ngIf="activity.mimetype">
+          <div>
+            <img [ngClass]="{'float-xs-right': e, 'float-xs-left': !e}" class="hidden-xs-down" src={{activity.media}}>
           </div>
-          <div class="panel-body" style="text-indent: 1em;">{{activity.text}}</div>
         </div>
-      </li>
-    </ul>
+        <div class="panel-body" style="text-indent: 1em;">{{activity.text}}</div>
+      </div>
+    </div>
   </div>
+</div>
