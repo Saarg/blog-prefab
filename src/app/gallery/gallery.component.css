@@ -1,4 +1,8 @@
 .galleryDiv{
+  padding: 0.1vw;
+}
+
+.thumbnail{
   overflow: hidden;
   height: 25vh;
   padding: 0;
