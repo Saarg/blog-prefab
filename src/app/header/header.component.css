@@ -1,0 +1,7 @@
+.container {
+  overflow: hidden;
+}
+
+img {
+  max-height: 20vh;
+}
