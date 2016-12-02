@@ -28,7 +28,7 @@ module.exports = (privateRouter, publicRouter) => {
     media.name = req.body.name ? req.body.name : undefined;
     media.description = req.body.description ? req.body.description : undefined;
     media.page = req.params.page_id;
-    media.mimetype = req.body.mimetype;
+    media.mimetype = req.body.media.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
     media.position = typeof req.body.position === 'number' ? req.body.position : undefined;
 
 
@@ -36,7 +36,7 @@ module.exports = (privateRouter, publicRouter) => {
     if(req.body.media && type) {
       const fileBuffer = new Buffer(req.body.media.replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
 
-      media.media = '/../data/medias/' + mongoose.Types.ObjectId() + '.' + type[1];
+      media.media = '/../data/media/' + mongoose.Types.ObjectId() + '.' + type[1];
 
       fs.writeFile(__dirname + media.media, fileBuffer, (err) => {
         if(err) {
@@ -54,6 +54,7 @@ module.exports = (privateRouter, publicRouter) => {
       res.json({ success: true, media: media });
     });
   });
+
 
   // individual media api route
   publicRouter.route('/media/:media_id')

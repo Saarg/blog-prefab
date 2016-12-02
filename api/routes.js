@@ -1,6 +1,7 @@
 'use strict'
 
-const jwt = require('jsonwebtoken');
+const jwt  = require('jsonwebtoken');
+const Path = require('path');
 
 module.exports = (app, privateRouter, publicRouter) => {
 
@@ -31,6 +32,12 @@ module.exports = (app, privateRouter, publicRouter) => {
   require('./routes/activities')(privateRouter, publicRouter);
   require('./routes/articles')(privateRouter, publicRouter);
   require('./routes/medias')(privateRouter, publicRouter);
+
+  publicRouter.route('/:folder/:media_id/show')
+  .get((req, res) => {
+    const path = Path.join(__dirname, 'data', req.params.folder, req.params.media_id + '.png')
+    res.sendFile(path);
+  });
 
   privateRouter.route('*')
   .post((req, res) => {
