@@ -1,6 +1,6 @@
 <div class="row">
   <h1>Gallery</h1>
-  <media-form *ngIf="token" (newMediaEvent)="newMedia($event)"></media-form>
+  <app-media-form *ngIf="token" (newMediaEvent)="newMedia($event)"></app-media-form>
   <div *ngFor="let image of images" class="galleryDiv col-xs-12 col-sm-6 col-md-4 col-xl-3">
     <div class="thumbnail col-xs-12">
       <img src="/api/public/media/{{image.media}}/show">

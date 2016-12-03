@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService {
-  
-  private token = localStorage ? localStorage.getItem('AuthToken') : null;
 
   constructor(private http: Http) { }
 
   login(user): Promise<any> {
-    return this.http.post("/api/private/login/", user)
+    return this.http.post('/api/private/login/', user)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

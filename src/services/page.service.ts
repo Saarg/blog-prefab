@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -11,21 +11,21 @@ export class PageService {
   constructor(private http: Http) { }
 
   getPages(): Promise<any> {
-    return this.http.get("/api/public/pages")
+    return this.http.get('/api/public/pages')
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
 
   getHomePage(): Promise<any> {
-    return this.http.get("/api/public/page/home")
+    return this.http.get('/api/public/page/home')
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
 
   getPage(page_id): Promise<any> {
-    return this.http.get("/api/public/page/" + page_id)
+    return this.http.get('/api/public/page/' + page_id)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
@@ -33,7 +33,7 @@ export class PageService {
 
   addPage(page): Promise<any> {
     page.token = this.token;
-    return this.http.post("/api/private/pages", page)
+    return this.http.post('/api/private/pages', page)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
@@ -41,7 +41,7 @@ export class PageService {
 
   editPage(page): Promise<any> {
     page.token = this.token;
-    return this.http.put("/api/private/page/" + page._id, page)
+    return this.http.put('/api/private/page/' + page._id, page)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
@@ -49,7 +49,7 @@ export class PageService {
 
   deletePage(page): Promise<any> {
     page.token = this.token;
-    return this.http.delete("/api/private/page/" + page._id)
+    return this.http.delete('/api/private/page/' + page._id)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

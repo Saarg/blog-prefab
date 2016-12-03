@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MediaFormComponent } from './../media-form/media-form.component'
-
 import { ConfigService } from './../../services/config.service';
 import { PageService } from './../../services/page.service';
 
@@ -20,26 +18,26 @@ export class HeaderComponent implements OnInit {
 
   public pages= [
     {
-      name: "Gallery",
+      name: 'Gallery',
       type: 2,
       position: 2,
       inNav: true
     },
     {
-      name: "Activities",
+      name: 'Activities',
       type: 1,
       position: 1,
       inNav: true
     },
     {
-      name: "Home",
+      name: 'Home',
       type: 0,
       position: 0,
       inNav: true
     }
   ];
-  public newPage = { name: "New page", description: "", type: 0, position: -1, inNav: true };
-  public pageTypes = ["article", "activity", "gallery"];
+  public newPage = { name: 'New page', description: '', type: 0, position: -1, inNav: true };
+  public pageTypes = ['article', 'activity', 'gallery'];
 
   constructor(private configService: ConfigService, private pageService: PageService) { }
 
@@ -57,29 +55,29 @@ export class HeaderComponent implements OnInit {
 
   getPages() {
     this.pageService.getPages().then(res => {
-      if(!res) { return; }
+      if (!res) { return; }
       this.pages = res.pages ? res.pages : this.pages;
     });
   }
 
   addPage(type) {
-    console.log("adding page " + this.newPage.name)
+    console.log('adding page ' + this.newPage.name);
 
     this.newPage.type = type;
     this.newPage.position = this.pages.length;
     this.pageService.addPage(this.newPage).then(res => {
-      if(!res) { return; }
-      if(res.success) {
+      if (!res) { return; }
+      if (res.success) {
         this.pages.push(res.page);
-        this.newPage = { name: "New page", description: "", type: 0, position: -1, inNav: true };
+        this.newPage = { name: 'New page', description: '', type: 0, position: -1, inNav: true };
       }
     });
   }
 
   deletePage(i) {
-    console.log("deleting page " + this.pages[i].name);
+    console.log('deleting page ' + this.pages[i].name);
     this.pageService.deletePage(this.pages[i]).then(res => {
-      if(!res) { return; }
+      if (!res) { return; }
       this.pages.splice(i, 1);
     });
   }

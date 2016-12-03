@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { MediaService } from './../../services/media.service';
 
@@ -20,46 +20,46 @@ export class GalleryComponent implements OnInit {
 
   public images = [
     {
-      "mimetype" : "image/png",
-      "media" : "http://lorempixel.com/640/480/"
+      'mimetype' : 'image/png',
+      'media' : 'http://lorempixel.com/640/480/'
     },
     {
-      "mimetype" : "image/png",
-      "media" : "http://lorempixel.com/500/500/"
+      'mimetype' : 'image/png',
+      'media' : 'http://lorempixel.com/500/500/'
     },
     {
-      "mimetype" : "image/png",
-      "media" : "http://lorempixel.com/1080/720/"
+      'mimetype' : 'image/png',
+      'media' : 'http://lorempixel.com/1080/720/'
     },
     {
-      "mimetype" : "image/png",
-      "media" : "http://lorempixel.com/350/200/"
+      'mimetype' : 'image/png',
+      'media' : 'http://lorempixel.com/350/200/'
     },
     {
-      "mimetype" : "image/png",
-      "media" : "http://lorempixel.com/300/300/"
+      'mimetype' : 'image/png',
+      'media' : 'http://lorempixel.com/300/300/'
     },
     {
-      "mimetype" : "image/png",
-      "media" : "http://lorempixel.com/240/120/"
+      'mimetype' : 'image/png',
+      'media' : 'http://lorempixel.com/240/120/'
     },
     {
-      "mimetype" : "image/png",
-      "media" : "http://lorempixel.com/666/666/"
+      'mimetype' : 'image/png',
+      'media' : 'http://lorempixel.com/666/666/'
     },
     {
-      "mimetype" : "image/png",
-      "media" : "http://lorempixel.com/340/340/"
+      'mimetype' : 'image/png',
+      'media' : 'http://lorempixel.com/340/340/'
     },
     {
-      "mimetype" : "image/png",
-      "media" : "http://lorempixel.com/350/100/"
+      'mimetype' : 'image/png',
+      'media' : 'http://lorempixel.com/350/100/'
     },
     {
-      "mimetype" : "image/png",
-      "media" : "http://lorempixel.com/600/300/"
+      'mimetype' : 'image/png',
+      'media' : 'http://lorempixel.com/600/300/'
     }
-  ]
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -81,9 +81,9 @@ export class GalleryComponent implements OnInit {
 
   getMedias() {
     this.mediaService.getMediasByPage(this.curId).then((res) => {
-      if(!res) { return }
-      if(res.success) {
-        //TODO succes feedback
+      if (!res) { return; }
+      if (res.success) {
+        // TODO succes feedback
         this.images = res.medias;
       } else {
         // TODO display error

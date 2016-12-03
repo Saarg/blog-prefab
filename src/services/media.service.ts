@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -11,14 +11,14 @@ export class MediaService {
   constructor(private http: Http) { }
 
   getMediasByPage(page_id): Promise<any> {
-    return this.http.get("/api/public/medias/" + page_id + "/0/16")
+    return this.http.get('/api/public/medias/' + page_id + '/0/16')
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
 
   getMedia(media_id): Promise<any> {
-    return this.http.get("/api/public/media/" + media_id)
+    return this.http.get('/api/public/media/' + media_id)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
@@ -26,7 +26,7 @@ export class MediaService {
 
   addMedia(media, page_id): Promise<any> {
     media.token = this.token;
-    return this.http.post("/api/private/medias/" + (page_id ? page_id : media.page), media)
+    return this.http.post('/api/private/medias/' + (page_id ? page_id : media.page), media)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
@@ -34,7 +34,7 @@ export class MediaService {
 
   editMedia(media): Promise<any> {
     media.token = this.token;
-    return this.http.put("/api/private/media/" + media._id, media)
+    return this.http.put('/api/private/media/' + media._id, media)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
@@ -42,7 +42,7 @@ export class MediaService {
 
   deleteMedia(media): Promise<any> {
     media.token = this.token;
-    return this.http.delete("/api/private/media/" + media._id)
+    return this.http.delete('/api/private/media/' + media._id)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

@@ -10,7 +10,7 @@ import { UserService } from './../../services/user.service';
 export class LoginComponent implements OnInit {
 
   public token = null;
-  public user = { username: "", password: "" };
+  public user = { username: '', password: '' };
 
   constructor(private userService: UserService) { }
 
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
       if (typeof(Storage) === 'function') {
         localStorage.setItem('AuthToken', res.token);
       } else {
-        console.log("no html5 localstorage support please using a recent browser");
+        console.log('no html5 localstorage support please using a recent browser');
       }
     });
   }

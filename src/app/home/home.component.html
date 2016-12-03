@@ -2,7 +2,7 @@
   <h1>Home</h1>
   <div class="col-sm-12 col-md-9">
     <!-- Admin form -->
-    <article-form *ngIf="token" [pageId]="curId" (newArticleEvent)="newArticle($event)"></article-form>
+    <app-article-form *ngIf="token" [pageId]="curId" (newArticleEvent)="newArticle($event)"></app-article-form>
 
     <!-- Articles -->
     <article *ngFor="let article of articles; let i = index; let e = even" class="row card" id='{{i}}home'>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -11,14 +11,14 @@ export class ActivityService {
   constructor(private http: Http) { }
 
   getActivitiesByPage(page_id): Promise<any> {
-    return this.http.get("/api/public/activities/" + page_id)
+    return this.http.get('/api/public/activities/' + page_id)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
 
   getActivity(activity_id): Promise<any> {
-    return this.http.get("/api/public/activity/" + activity_id)
+    return this.http.get('/api/public/activity/' + activity_id)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
@@ -26,7 +26,7 @@ export class ActivityService {
 
   addActivity(activity, page_id): Promise<any> {
     activity.token = this.token;
-    return this.http.post("/api/private/activities/" + (page_id ? page_id : activity.page), activity)
+    return this.http.post('/api/private/activities/' + (page_id ? page_id : activity.page), activity)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
@@ -34,7 +34,7 @@ export class ActivityService {
 
   editActivity(activity): Promise<any> {
     activity.token = this.token;
-    return this.http.put("/api/private/activity/" + activity._id, activity)
+    return this.http.put('/api/private/activity/' + activity._id, activity)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
@@ -42,7 +42,7 @@ export class ActivityService {
 
   deleteActivity(activity): Promise<any> {
     activity.token = this.token;
-    return this.http.delete("/api/private/activity/" + activity._id)
+    return this.http.delete('/api/private/activity/' + activity._id)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
