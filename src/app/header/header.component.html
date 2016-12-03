@@ -1,5 +1,5 @@
 <header>
-  <div *ngIf="logo && banner" class="container pl-0 pr-0">
+  <div *ngIf="logo && banner" class="logos container pl-0 pr-0">
     <div class=" hidden-sm-down col-md-4 pl-0 pr-0">
       <img class="float-xs-let" [src]="logo"/>
     </div>
@@ -8,7 +8,7 @@
     </div>
   </div>
   <nav class="navbar navbar-light bg-faded">
-      <div [hidden]="!token"><!-- Admin navbar -->
+      <div *ngIf="token"><!-- Admin navbar -->
         <div class="nav navbar-nav container">
           <div class="nav-item nav-link col-xs-2 float-xs-right">
             <div class="input-group">
@@ -58,7 +58,7 @@
         </div>
       </div>
 
-      <div [hidden]="token"><!-- User navbar -->
+      <div *ngIf="!token"><!-- User navbar -->
         <div class="nav navbar-nav container">
           <div  *ngFor="let page of pages; let i = index; let e = even">
             <a class="nav-item nav-link float-xs-right"
