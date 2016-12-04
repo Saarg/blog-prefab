@@ -25,6 +25,72 @@ export class HomeComponent implements OnInit {
 
   public curId = null;
 
+  private offset = 0;
+
+
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private articleService: ArticleService,
+    private pageService: PageService
+  ) { }
+
+  ngOnInit() {
+    this.token = localStorage ? localStorage.getItem('AuthToken') : null;
+
+    this.subscription = this.route.params.subscribe((param: any) => {
+      this.curId = param['id'];
+    });
+
+    if (!this.curId) {
+      this.getHomePageId();
+    } else {
+      this.getArticles();
+    }
+  }
+
+  getArticles() {
+    // using dummi pageid for now
+    console.log("requesting with offset " + this.offset);
+    this.articleService.getArticlesByPage(this.curId, this.offset, this.nbArticles).then(res => {
+      if (!res) { return; }
+      this.articles = res.articles ? res.articles : this.articles;
+    });
+  }
+
+  getHomePageId() {
+    this.pageService.getHomePage().then(res => {
+      if (!res) { return; }
+      this.curId = res.page._id;
+      this.getArticles();
+    });
+  }
+
+  goTo(destination) {
+    // this will scroll the page up
+    window.location.hash = destination;
+
+    // after page scrolls up, scroll down to correct level
+    // https://github.com/angular/angular/issues/6595
+    setTimeout(() => {
+      document.querySelector('#' + destination).parentElement.scrollIntoView();
+    });
+  }
+
+  newArticle(e) {
+    this.articles.unshift(e);
+  }
+
+  offsetChange(i)
+  {
+    var lastoffset = this.offset;
+    this.offset += i*this.nbArticles;
+    if(this.offset < 0) this.offset = 0;
+
+    if(lastoffset != this.offset) this.getArticles();
+  }
+
   public articles = [
     {
       'title' : 'Lorel et Hardi',
@@ -112,56 +178,4 @@ export class HomeComponent implements OnInit {
       'media' : 'http://lorempixel.com/640/480/'
     }
   ];
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private articleService: ArticleService,
-    private pageService: PageService
-  ) { }
-
-  ngOnInit() {
-    this.token = localStorage ? localStorage.getItem('AuthToken') : null;
-
-    this.subscription = this.route.params.subscribe((param: any) => {
-      this.curId = param['id'];
-    });
-
-    if (!this.curId) {
-      this.getHomePageId();
-    } else {
-      this.getArticles();
-    }
-  }
-
-  getArticles() {
-    // using dummi pageid for now
-    this.articleService.getArticlesByPage(this.curId, this.page, this.nbArticles).then(res => {
-      if (!res) { return; }
-      this.articles = res.articles ? res.articles : this.articles;
-    });
-  }
-
-  getHomePageId() {
-    this.pageService.getHomePage().then(res => {
-      if (!res) { return; }
-      this.curId = res.page._id;
-      this.getArticles();
-    });
-  }
-
-  goTo(destination) {
-    // this will scroll the page up
-    window.location.hash = destination;
-
-    // after page scrolls up, scroll down to correct level
-    // https://github.com/angular/angular/issues/6595
-    setTimeout(() => {
-      document.querySelector('#' + destination).parentElement.scrollIntoView();
-    });
-  }
-
-  newArticle(e) {
-    this.articles.unshift(e);
-  }
 }

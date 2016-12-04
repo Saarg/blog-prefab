@@ -7,6 +7,13 @@ img{
   padding-top: 0.5rem;
 }
 
+h4{
+  cursor: pointer;
+}
+h4:hover{
+  font-weight: bold;
+}
+
 .arrow-down {
   width: 0;
   height: 0;

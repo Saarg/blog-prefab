@@ -20,3 +20,11 @@ article{
 a{
   color: #820f0f;
 }
+
+.navPageDiv{
+  text-align: center;
+}
+
+.navPageDiv *{
+  display:inline-block;
+}

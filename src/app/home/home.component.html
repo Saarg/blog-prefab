@@ -26,5 +26,12 @@
         <a (click)="goTo(i+'home')"> {{article.title}}</a>
       </li>
     </ul>
+    <div>
+      <div class='navPageDiv'>
+        <button class="btn btn-primary" (click)="offsetChange(-1)"><</button>
+        <span>{{1+offset/nbArticles}}</span>
+        <button class="btn btn-primary" (click)="offsetChange(1)">></button>
+      </div>
+    </div>
   </aside>
 </div>
