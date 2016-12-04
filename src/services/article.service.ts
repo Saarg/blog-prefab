@@ -10,10 +10,10 @@ export class ArticleService {
 
   constructor(private http: Http) { }
 
-  getArticlesByPage(page_id, page?, nbByPage?): Promise<any> {
+  getArticlesByPage(page_id, offset?, nbByPage?): Promise<any> {
     let url = '/api/public/articles/' + page_id;
-    url += (page !== 'undefined' && nbByPage !== 'undefined') ? '/' + page + '/' + nbByPage : '';
-    console.log(url);
+    url += (offset !== 'undefined' && nbByPage !== 'undefined') ? '/' + offset + '/' + nbByPage : '';
+
     return this.http.get(url)
                .toPromise()
                .then(response => response.json())
