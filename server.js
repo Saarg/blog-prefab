@@ -9,10 +9,18 @@ const bodyParser    = require('body-parser');
 const morgan        = require('morgan');
 
 const mongoose      = require('mongoose');
+var MONGO_DB;
+var DOCKER_DB = process.env.DB_PORT;
+if ( DOCKER_DB ) {
+  MONGO_DB = DOCKER_DB.replace( 'tcp', 'mongodb' ) + '/blog-prefab';
+} else {
+  MONGO_DB = process.env.MONGODB || 'mongodb://localhost:27017/blog-prefab';
+}
+
 const port = process.env.PORT || 8080;
 
 // connect to the db
-mongoose.connect('mongodb://localhost:27017/blog-prefab');
+mongoose.connect(MONGO_DB);
 
 // init app
 const app = express();
