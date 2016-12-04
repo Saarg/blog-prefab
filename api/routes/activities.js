@@ -10,8 +10,8 @@ module.exports = (privateRouter, publicRouter) => {
   .get(function(req, res) {
     Activity.find({ page: req.params.page_id })
     .sort({created: -1})
-    .skip(req.params.offset ? req.params.offset : 0)
-    .limit(req.params.limit ? req.params.limit : 5)
+    .skip(parseInt(req.params.offset) ? parseInt(req.params.offset) : 0)
+    .limit(parseInt(req.params.limit) ? parseInt(req.params.limit) : 5)
     .exec((err, activities) => {
       if (err) {
         res.json({ success: false, message: err });
