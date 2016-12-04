@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   public curId = null;
 
   private offset = 0;
+  private articleCount = 23;
 
 
 
@@ -84,11 +85,29 @@ export class HomeComponent implements OnInit {
 
   offsetChange(i)
   {
-    var lastoffset = this.offset;
-    this.offset += i*this.nbArticles;
-    if(this.offset < 0) this.offset = 0;
+    var newOffset = this.offset + i * this.nbArticles;
 
-    if(lastoffset != this.offset) this.getArticles();
+    if(newOffset < 0)return;
+    if(newOffset >= this.articleCount)return;
+
+    this.offset = newOffset;
+    this.getArticles();
+  }
+
+  getListNavPage()
+  {
+    var list = [];
+    for(var i = 0; i < this.articleCount/this.nbArticles; i++)
+    {
+      list.push(i*this.nbArticles);
+    }
+    return list;
+  }
+
+  goToOffset(i)
+  {
+      this.offset = i;
+      this.getArticles();
   }
 
   public articles = [

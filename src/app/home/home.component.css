@@ -7,24 +7,44 @@ img{
 .leftImg{float:left;}
 
 article{
-  margin-top: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
-  background-color: #fdd9d9;
-}
-
-.asideMenu{
-  background-color: #fdd9d9;
+  padding: 20px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
 }
 
 a{
   color: #820f0f;
 }
 
-.navPageDiv{
+.navPageDiv, .navPageDivBottom{
   text-align: center;
+  vertical-align: middle;
+}
+
+.navPageDivBottom{
+  margin: 15px;
 }
 
 .navPageDiv *{
   display:inline-block;
+}
+
+.articleOdd{
+  background-color: #fafafa;
+}
+.articleEven{
+  background-color: #f5f5f5;
+}
+
+.navButtonLike{
+  border: 1px solid #0275d8;
+  padding-right: 5px;
+  padding-left: 5px;
+  vertical-align: middle;
+}
+
+.btnNavPageCur{
+  background-color: #0275d8;
+  color: white;
 }

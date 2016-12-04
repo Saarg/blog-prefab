@@ -5,7 +5,7 @@
     <app-article-form *ngIf="token" [pageId]="curId" (newArticleEvent)="newArticle($event)"></app-article-form>
 
     <!-- Articles -->
-    <article *ngFor="let article of articles; let i = index; let e = even" class="row card" id='{{i}}home'>
+    <article *ngFor="let article of articles; let i = index; let e = even" class="row card" [ngClass]="{'articleEven': e, 'articleOdd': !e}" id='{{i}}home'>
       <h2>{{article.title}}</h2>
       <div>
         <div *ngIf="article.mimetype">
@@ -18,19 +18,26 @@
         </p>
       </div>
     </article>
+    <div>
+      <div class='navPageDivBottom'>
+        <button class="btn btn-primary" (click)="offsetChange(-1)">Previous</button>
+        <button *ngFor="let button of getListNavPage() ; let i = index;" class="btn btn-outline-primary" [ngClass]="{'btnNavPageCur': offset === button}" (click)="goToOffset(button)">{{i+1}}</button>
+        <button class="btn btn-primary" (click)="offsetChange(1)">Next</button>
+      </div>
+    </div>
   </div>
 
   <aside class="hidden-sm-down col-md-3">
     <ul>
-      <li *ngFor="let article of articles; let i = index" class="list-group-item asideMenu">
+      <li *ngFor="let article of articles; let i = index; let e = even" class="list-group-item asideMenu" [ngClass]="{'articleEven': e, 'articleOdd': !e}">
         <a (click)="goTo(i+'home')"> {{article.title}}</a>
       </li>
     </ul>
     <div>
       <div class='navPageDiv'>
-        <button class="btn btn-primary" (click)="offsetChange(-1)"><</button>
-        <span>{{1+offset/nbArticles}}</span>
-        <button class="btn btn-primary" (click)="offsetChange(1)">></button>
+        <button class="btn btn-outline-primary btn-sm" (click)="offsetChange(-1)">←</button>
+        <span class='navButtonLike btn-sm'>{{1+offset/nbArticles}} / {{articleCount/nbArticles}}</span>
+        <button class="btn btn-outline-primary btn-sm" (click)="offsetChange(1)">→</button>
       </div>
     </div>
   </aside>
