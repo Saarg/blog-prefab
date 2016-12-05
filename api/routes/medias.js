@@ -2,8 +2,7 @@
 
 // v1.5 added file upload first draft
 
-const fs           = require('fs');
-const mongoose     = require('mongoose');
+const fileSaver    = require('./../utils/fileSaver');
 const Media        = require('./../models/medias');
 
 module.exports = (privateRouter, publicRouter) => {
@@ -31,20 +30,7 @@ module.exports = (privateRouter, publicRouter) => {
     media.mimetype = req.body.media.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
     media.position = typeof req.body.position === 'number' ? req.body.position : undefined;
 
-
-    const type = req.body.media.match(/data:image\/([a-zA-Z0-9-.+]+).*,.*/)[1];
-    if(req.body.media && type) {
-      const fileBuffer = new Buffer(req.body.media.replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
-
-      media.media = mongoose.Types.ObjectId() + '.' + type;
-
-      fs.writeFile(__dirname + '/../data/media/' + media.media, fileBuffer, (err) => {
-        if(err) {
-          console.error(err);
-          //TODO handle failled writeFile
-        }
-      })
-    }
+    media.media = fileSaver('media', req.body.media);
 
     media.save((err, media) => {
       if (err) {
