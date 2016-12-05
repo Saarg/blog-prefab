@@ -12,7 +12,7 @@ module.exports = (privateRouter, publicRouter) => {
     Media.find({ page: req.params.page_id })
     .sort({created: -1})
     .skip(parseInt(req.params.offset) ? parseInt(req.params.offset) : 0)
-    .limit(parseInt(req.params.limit) ? parseInt(req.params.limit) : 5)
+    .limit(parseInt(req.params.limit) ? parseInt(req.params.limit) : 16)
     .exec((err, medias) => {
       if (err) {
         res.json({ success: false, message: err });

@@ -2,6 +2,7 @@
 
 // v1.4 added public route (for future auth)
 
+const fileSaver    = require('./../utils/fileSaver');
 const Article = require('./../models/articles');
 
 module.exports = (privateRouter, publicRouter) => {
@@ -30,6 +31,11 @@ module.exports = (privateRouter, publicRouter) => {
     article.mimetype = req.body.mimetype ? req.body.mimetype : undefined;
     article.media = req.body.media ? req.body.media : undefined;
     article.position = typeof req.body.position === 'number' ? req.body.position : undefined;
+
+    if(req.body.media && req.body.mimetype === 'image') {
+      article.mimetype = req.body.media.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
+      article.media = fileSaver('media', req.body.media);
+    }
 
     article.save((err, article) => {
       if (err) {
