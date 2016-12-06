@@ -28,7 +28,9 @@ export class HomeComponent implements OnInit {
   public curId = null;
 
   private offset = 0;
-  private articleCount = 23;
+  private articleCount;
+
+  private displayFormPopup = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -107,11 +109,20 @@ export class HomeComponent implements OnInit {
     for (let i = 0; i < this.articleCount / this.nbArticles; i++) {
       list.push(i * this.nbArticles);
     }
+    console.log(list.length);
     return list;
   }
 
   goToOffset(i) {
       this.offset = i;
       this.getArticles();
+  }
+
+  showFormPopup() {
+    this.displayFormPopup = true;
+  }
+
+  formPopupOnClose() {
+    this.displayFormPopup = false;
   }
 }

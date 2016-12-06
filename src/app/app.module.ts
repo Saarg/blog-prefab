@@ -22,6 +22,7 @@ import { UserService } from './../services/user.service';
 import { Routing } from './app.routing';
 import { ArticleFormComponent } from './article-form/article-form.component';
 import { MediaFormComponent } from './media-form/media-form.component';
+import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MediaFormComponent } from './media-form/media-form.component';
     GalleryComponent,
     LoginComponent,
     ArticleFormComponent,
-    MediaFormComponent
+    MediaFormComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,

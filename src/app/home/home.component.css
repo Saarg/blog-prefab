@@ -3,14 +3,17 @@ img{
   margin:10px;
 }
 
+h2{
+  color: #003c6f;
+}
+
 .rightImg{float:right;}
 .leftImg{float:left;}
 
 article{
   padding: 20px;
-  margin: 0;
   border: 0;
-  border-radius: 0;
+  border-radius: 15px;
 }
 
 article p{
@@ -51,4 +54,8 @@ a{
 .btnNavPageCur{
   background-color: #0275d8;
   color: white;
+}
+
+.popupContainer{
+  text-align: center;
 }

@@ -2,7 +2,13 @@
   <h1>Home</h1>
   <div class="col-sm-12 col-md-9">
     <!-- Admin form -->
-    <app-article-form *ngIf="token" [pageId]="curId" (newArticleEvent)="newArticle($event)"></app-article-form>
+
+    <div class=popupContainer  *ngIf="token">
+      <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">import media</button>
+      <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'Add new Article'" (onClose)="formPopupOnClose()">
+        <app-article-form [pageId]="curId" (newArticleEvent)="newArticle($event)" ></app-article-form>
+      </app-popup>
+    </div>
 
     <!-- Articles -->
     <article *ngFor="let article of articles; let i = index; let e = even" class="row card" [ngClass]="{'articleEven': e, 'articleOdd': !e}" id='{{i}}home'>
@@ -18,7 +24,7 @@
         </p>
       </div>
     </article>
-    <div>
+    <div  *ngIf="getListNavPage().length > 1">
       <div class='navPageDivBottom'>
         <button class="btn btn-primary" (click)="offsetChange(-1)">Previous</button>
         <button *ngFor="let button of getListNavPage() ; let i = index;" class="btn btn-outline-primary" [ngClass]="{'btnNavPageCur': offset === button}" (click)="goToOffset(button)">{{i+1}}</button>
@@ -34,7 +40,7 @@
       </li>
     </ul>
     <div>
-      <div class='navPageDiv'>
+      <div class='navPageDiv' *ngIf="getListNavPage().length > 1">
         <button class="btn btn-outline-primary btn-sm" (click)="offsetChange(-1)">←</button>
         <span class='navButtonLike btn-sm'>{{1+offset/nbArticles}} / {{pageCount}}</span>
         <button class="btn btn-outline-primary btn-sm" (click)="offsetChange(1)">→</button>
