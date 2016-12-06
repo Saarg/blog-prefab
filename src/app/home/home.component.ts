@@ -29,6 +29,8 @@ export class HomeComponent implements OnInit {
   private offset = 0;
   private articleCount;
 
+  private displayFormPopup = false;
+
 
 
   constructor(
@@ -119,6 +121,16 @@ export class HomeComponent implements OnInit {
   {
       this.offset = i;
       this.getArticles();
+  }
+
+  showFormPopup()
+  {
+    this.displayFormPopup = true;
+  }
+
+  formPopupOnClose()
+  {
+    this.displayFormPopup = false;
   }
 
   public articles = [

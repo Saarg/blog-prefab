@@ -2,7 +2,13 @@
   <h1>Home</h1>
   <div class="col-sm-12 col-md-9">
     <!-- Admin form -->
-    <app-article-form *ngIf="token" [pageId]="curId" (newArticleEvent)="newArticle($event)"></app-article-form>
+
+    <div class=popupContainer  *ngIf="token">
+      <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">import media</button>
+      <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'Add new Article'" (onClose)="formPopupOnClose()">
+        <app-article-form [pageId]="curId" (newArticleEvent)="newArticle($event)" ></app-article-form>
+      </app-popup>
+    </div>
 
     <!-- Articles -->
     <article *ngFor="let article of articles; let i = index; let e = even" class="row card" [ngClass]="{'articleEven': e, 'articleOdd': !e}" id='{{i}}home'>
