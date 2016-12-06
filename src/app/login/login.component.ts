@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from './../../services/user.service';
 
 @Component({
@@ -12,7 +13,10 @@ export class LoginComponent implements OnInit {
   public token = null;
   public user = { username: '', password: '' };
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
     this.token = localStorage ? localStorage.getItem('AuthToken') : null;
@@ -22,14 +26,16 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.user).then(res => {
       if (typeof(Storage) === 'function') {
         localStorage.setItem('AuthToken', res.token);
+        this.router.navigate(['/']);
       } else {
-        console.log('no html5 localstorage support please using a recent browser');
+        console.log('no html5 localstorage support please use a recent browser');
       }
     });
   }
 
   logout() {
     localStorage.clear();
+    this.router.navigate(['/']);
   }
 
 }
