@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+
+import { HttpClient } from './httpClient.service';
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ActivityService {
 
-  private token = localStorage ? localStorage.getItem('AuthToken') : null;
-
-  constructor(private http: Http) { }
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
   countActivitiesByPage(page_id): Promise<any> {
-    return this.http.get('/api/public/activities/' + page_id + '/count')
+    return this.httpClient.get('/api/public/activities/' + page_id + '/count')
                .toPromise()
                .then(response => response.json().count)
                .catch(console.error);
@@ -21,38 +22,35 @@ export class ActivityService {
     let url = '/api/public/activities/' + page_id;
     url += (offset !== 'undefined' && nbByPage !== 'undefined') ? '/' + offset + '/' + nbByPage : '';
 
-    return this.http.get(url)
+    return this.httpClient.get(url)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
 
   getActivity(activity_id): Promise<any> {
-    return this.http.get('/api/public/activity/' + activity_id)
+    return this.httpClient.get('/api/public/activity/' + activity_id)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
 
   addActivity(activity, page_id): Promise<any> {
-    activity.token = this.token;
-    return this.http.post('/api/private/activities/' + (page_id ? page_id : activity.page), activity)
+    return this.httpClient.post('/api/private/activities/' + (page_id ? page_id : activity.page), activity)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
 
   editActivity(activity): Promise<any> {
-    activity.token = this.token;
-    return this.http.put('/api/private/activity/' + activity._id, activity)
+    return this.httpClient.put('/api/private/activity/' + activity._id, activity)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
 
   deleteActivity(activity): Promise<any> {
-    activity.token = this.token;
-    return this.http.delete('/api/private/activity/' + activity._id)
+    return this.httpClient.delete('/api/private/activity/' + activity._id)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

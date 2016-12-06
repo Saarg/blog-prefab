@@ -16,6 +16,10 @@ article{
   border-radius: 15px;
 }
 
+article p{
+  white-space: pre-line;
+}
+
 a{
   color: #820f0f;
 }

@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from './httpClient.service';
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService {
 
-  constructor(private http: Http) { }
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
   login(user): Promise<any> {
-    return this.http.post('/api/private/login/', user)
+    return this.httpClient.post('/api/private/login/', user)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
-
 }

@@ -50,7 +50,7 @@ module.exports = (app) => {
   });
 
   app.post('/api/private/login', passport.authenticate('local'), (req, res) => {
-    var token = jwt.sign(req.user, app.get('TokenSecret'), {
+    var token = jwt.sign({ username: req.user.username, message: 'why are you reading this hu?' }, app.get('TokenSecret'), {
       expiresIn: "1d"
     });
 
