@@ -85,12 +85,12 @@ export class HeaderComponent implements OnInit {
   }
 
   verifyToken() {
-    if(this.token) {
-      var base64Url = this.token.split('.')[1];
-      var base64 = base64Url.replace('-', '+').replace('_', '/');
-      var decoded = JSON.parse(window.atob(base64));
+    if (this.token) {
+      const base64Url = this.token.split('.')[1];
+      const base64 = base64Url.replace('-', '+').replace('_', '/');
+      const decoded = JSON.parse(window.atob(base64));
 
-      if(decoded["exp"] < new Date().getTime()/1000) {
+      if (decoded['exp'] < new Date().getTime() / 1000) {
         this.token = null;
         localStorage.clear();
       }

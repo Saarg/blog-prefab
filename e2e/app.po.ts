@@ -1,11 +1,19 @@
 import { browser, element, by } from 'protractor';
 
 export class BlogPrefabPage {
-  navigateTo() {
+  navigateToHome() {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  navigateToGallery() {
+    return browser.get('/#/gallery');
+  }
+
+  navigateToActivity() {
+    return browser.get('/#/activity');
+  }
+
+  getTitle() {
+    return element(by.css('app-root div h1')).getText();
   }
 }

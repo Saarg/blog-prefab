@@ -25,6 +25,20 @@ export class PageService {
                .catch(console.error);
   }
 
+  getDefaultGallery(): Promise<any> {
+    return this.httpClient.get('/api/public/page/gallery')
+               .toPromise()
+               .then(response => response.json())
+               .catch(console.error);
+  }
+
+  getDefaultActivity(): Promise<any> {
+    return this.httpClient.get('/api/public/page/activity')
+               .toPromise()
+               .then(response => response.json())
+               .catch(console.error);
+  }
+
   getPage(page_id): Promise<any> {
     return this.httpClient.get('/api/public/page/' + page_id)
                .toPromise()

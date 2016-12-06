@@ -27,6 +27,26 @@ module.exports = (privateRouter, publicRouter) => {
     });
   });
 
+  publicRouter.route('/page/activity').get((req, res) => {
+    Page.findOne({ type: 1 }, (err, page) => {
+      if (err) {
+        res.json({ success: false, message: err });
+        return;
+      }
+      res.json({ success: true, page: page });
+    });
+  });
+
+  publicRouter.route('/page/gallery').get((req, res) => {
+    Page.findOne({ type: 2 }, (err, page) => {
+      if (err) {
+        res.json({ success: false, message: err });
+        return;
+      }
+      res.json({ success: true, page: page });
+    });
+  });
+
   privateRouter.route('/pages').post((req, res) => {
     let page = new Page();
     page.name = req.body.name;

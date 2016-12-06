@@ -7,8 +7,18 @@ describe('blog-prefab App', function() {
     page = new BlogPrefabPage();
   });
 
-  it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+  it('should display Homepage', () => {
+    page.navigateToHome();
+    expect(page.getTitle()).toEqual('Home');
+  });
+
+  it('should display Gallery', () => {
+    page.navigateToGallery();
+    expect(page.getTitle()).toEqual('Gallery');
+  });
+
+  it('should display Activity', () => {
+    page.navigateToActivity();
+    expect(page.getTitle()).toEqual('Activities');
   });
 });

@@ -3,12 +3,14 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { MediaService } from './../../services/media.service';
+import { PageService } from './../../services/page.service';
+
 
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.css'],
-  providers: [MediaService]
+  providers: [MediaService, PageService]
 })
 export class GalleryComponent implements OnInit {
 
@@ -24,7 +26,8 @@ export class GalleryComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
-    private mediaService: MediaService
+    private mediaService: MediaService,
+    private pageService: PageService
   ) { }
 
   ngOnInit() {
@@ -32,11 +35,14 @@ export class GalleryComponent implements OnInit {
 
     this.subscription = this.route.params.subscribe((param: any) => {
       this.curId = param['id'];
-      
-      this.getMedias();
+
+      if (!this.curId) {
+        this.getDefaultId();
+      } else {
+        this.getMedias();
+      }
     });
   }
-
 
   getMedias() {
     this.mediaService.getMediasByPage(this.curId).then((res) => {
@@ -48,6 +54,14 @@ export class GalleryComponent implements OnInit {
         // TODO display error
         console.error(res.message);
       }
+    });
+  }
+
+  getDefaultId() {
+    this.pageService.getDefaultGallery().then(res => {
+      if (!res) { return; }
+      this.curId = res.page._id;
+      this.getMedias();
     });
   }
 
