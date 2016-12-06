@@ -44,6 +44,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.token = localStorage ? localStorage.getItem('AuthToken') : null;
 
+    this.verifyToken();
+
     this.getLogos();
     this.getPages();
   }
@@ -80,6 +82,21 @@ export class HeaderComponent implements OnInit {
       if (!res) { return; }
       this.pages.splice(i, 1);
     });
+  }
+
+  verifyToken() {
+    if(this.token) {
+      var base64Url = this.token.split('.')[1];
+      var base64 = base64Url.replace('-', '+').replace('_', '/');
+      var decoded = JSON.parse(window.atob(base64));
+      console.log(decoded["exp"]);
+      console.log(new Date().getTime()/1000);
+
+      if(decoded["exp"] < new Date().getTime()/1000) {
+        localStorage.clear();
+      }
+
+    }
   }
 
 }

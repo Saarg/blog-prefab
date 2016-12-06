@@ -14,5 +14,4 @@ export class UserService {
                .then(response => response.json())
                .catch(console.error);
   }
-
 }
