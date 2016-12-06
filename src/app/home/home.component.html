@@ -18,7 +18,7 @@
         </p>
       </div>
     </article>
-    <div>
+    <div  *ngIf="getListNavPage().length > 1">
       <div class='navPageDivBottom'>
         <button class="btn btn-primary" (click)="offsetChange(-1)">Previous</button>
         <button *ngFor="let button of getListNavPage() ; let i = index;" class="btn btn-outline-primary" [ngClass]="{'btnNavPageCur': offset === button}" (click)="goToOffset(button)">{{i+1}}</button>
@@ -34,7 +34,7 @@
       </li>
     </ul>
     <div>
-      <div class='navPageDiv'>
+      <div class='navPageDiv' *ngIf="getListNavPage().length > 1">
         <button class="btn btn-outline-primary btn-sm" (click)="offsetChange(-1)">←</button>
         <span class='navButtonLike btn-sm'>{{1+offset/nbArticles}} / {{pageCount}}</span>
         <button class="btn btn-outline-primary btn-sm" (click)="offsetChange(1)">→</button>

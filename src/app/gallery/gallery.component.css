@@ -17,3 +17,18 @@
   left: -50%;
   right: -50%;
 }
+
+.galleryDivContainer{
+  border-radius: 15px;
+  background-color: #f5f5f5;
+  padding : 30px;
+}
+
+.popupContainer{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.popup img{
+    height: 80vh;
+}

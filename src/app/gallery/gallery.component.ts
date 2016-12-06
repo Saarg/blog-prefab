@@ -20,6 +20,9 @@ export class GalleryComponent implements OnInit {
 
   public images = [];
 
+  private popupMedia = null;
+  private displayFormPopup = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -32,7 +35,7 @@ export class GalleryComponent implements OnInit {
 
     this.subscription = this.route.params.subscribe((param: any) => {
       this.curId = param['id'];
-      
+
       this.getMedias();
     });
   }
@@ -54,4 +57,41 @@ export class GalleryComponent implements OnInit {
   newMedia(e) {
     this.images.unshift(e);
   }
+
+  displayMedia(image)
+  {
+    this.popupMedia = image;
+  }
+
+  onDisplayMediaClose()
+  {
+    this.popupMedia = null;
+  }
+
+  showFormPopup()
+  {
+    this.displayFormPopup = true;
+  }
+
+  formPopupOnClose()
+  {
+    this.displayFormPopup = false;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

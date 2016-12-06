@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   public curId = null;
 
   private offset = 0;
-  private articleCount = 23;
+  private articleCount;
 
 
 
@@ -111,6 +111,7 @@ export class HomeComponent implements OnInit {
     {
       list.push(i*this.nbArticles);
     }
+    console.log(list.length);
     return list;
   }
 

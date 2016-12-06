@@ -1,0 +1,24 @@
+
+<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">{{popupTitle}}</button>-->
+
+<!-- Modal -->
+<div id="myModal" class="popupBack">
+  <div class=verticalHelper>
+    <div class="modal-dialog centered">
+
+      <!-- Modal content-->
+      <div class="modal-content popupContent">
+        <div class="modal-header">
+          <h4 class="modal-title">{{popupTitle}}</h4>
+        </div>
+        <div class="modal-body">
+          <ng-content></ng-content>
+        </div>
+        <div class=popupFooter>
+          <button type="button" class="btn btn-default" (click)="launchEvent()">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

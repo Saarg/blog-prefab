@@ -1,0 +1,31 @@
+.verticalHelper{
+    text-align: center;
+    display:table;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
+}
+
+.centered{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.popupContent{
+    width: 90vw;
+    margin: auto;
+}
+
+.popupFooter{
+  margin-bottom: 15px;
+}
+
+.popupBack{
+  z-index: 9998;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
