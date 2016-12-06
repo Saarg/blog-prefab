@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+
+import { HttpClient } from './httpClient.service';
+
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ConfigService {
 
-  private token = localStorage ? localStorage.getItem('AuthToken') : null;
-
-  constructor(private http: Http) { }
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
   getLogo(): Promise<string> {
-    /*return this.http.get('/api/public/config/logo')
+    /*return this.httpClient.get('/api/public/config/logo')
                .toPromise()
                .then(response => response.arrayBuffer() as ArrayBuffer)
                .catch(console.error);*/
@@ -19,7 +21,7 @@ export class ConfigService {
   }
 
   getBanner(): Promise<string> {
-    /*return this.http.get('/api/public/config/banner')
+    /*return this.httpClient.get('/api/public/config/banner')
                .toPromise()
                .then(response => response.arrayBuffer() as ArrayBuffer)
                .catch(console.error);*/
@@ -27,14 +29,14 @@ export class ConfigService {
   }
 
   getValue(key): Promise<any> {
-    return this.http.get('/api/public/config/' + key)
+    return this.httpClient.get('/api/public/config/' + key)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
 
   setValue(key, value): Promise<any> {
-    return this.http.put('/api/public/config/' + key, { token: this.token, value: value })
+    return this.httpClient.put('/api/public/config/' + key, { value: value })
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

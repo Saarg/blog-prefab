@@ -11,6 +11,7 @@ import { ActivityComponent } from './activity/activity.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { LoginComponent } from './login/login.component';
 
+import { HttpClient } from './../services/httpClient.service';
 import { ConfigService } from './../services/config.service';
 import { ArticleService } from './../services/article.service';
 import { MediaService } from './../services/media.service';
@@ -41,6 +42,7 @@ import { MediaFormComponent } from './media-form/media-form.component';
     Routing
   ],
   providers: [
+    HttpClient,
     ConfigService,
     ArticleService,
     MediaService,
