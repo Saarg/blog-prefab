@@ -46,6 +46,7 @@ export class ArticleFormComponent implements OnInit {
   }
 
   submitArticle() {
+    //this.newArticle.text = this.newArticle.text.replace(/\n/g, "<"+"br/>");
     // using dummi pageid for now
     this.articleService.addArticle(this.newArticle, this.pageId).then(res => {
       console.log(res);

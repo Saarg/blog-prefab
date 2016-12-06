@@ -13,6 +13,10 @@ article{
   border-radius: 0;
 }
 
+article p{
+  white-space: pre-line;
+}
+
 a{
   color: #820f0f;
 }
