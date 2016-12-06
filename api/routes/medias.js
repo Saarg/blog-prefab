@@ -1,11 +1,24 @@
 'use strict'
 
-// v1.5 added file upload first draft
+// v1.6 added count
 
 const fileSaver    = require('./../utils/fileSaver');
 const Media        = require('./../models/medias');
 
 module.exports = (privateRouter, publicRouter) => {
+  // activities count route
+  publicRouter.route('/medias/:page_id/count')
+  .get((req, res) => {
+    Media.count({ page: req.params.page_id })
+    .exec((err, count) => {
+      if (err) {
+        res.json({ success: false, message: err });
+        return;
+      }
+      res.json({ success: true, count: count });
+    });
+  });
+
   // medias by page api route
   publicRouter.route('/medias/:page_id/:offset?/:limit?')
   .get((req, res) => {

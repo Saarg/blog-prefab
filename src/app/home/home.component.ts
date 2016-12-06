@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   public token = null;
 
   public page = 0;
+  public pageCount = 0;
   public nbArticles = 5;
 
   public curId = null;
@@ -52,11 +53,20 @@ export class HomeComponent implements OnInit {
   }
 
   getArticles() {
-    // using dummi pageid for now
     console.log("requesting with offset " + this.offset);
     this.articleService.getArticlesByPage(this.curId, this.offset, this.nbArticles).then(res => {
       if (!res) { return; }
       this.articles = res.articles ? res.articles : this.articles;
+    });
+
+    this.getArticlesCount();
+  }
+
+  getArticlesCount() {
+    this.articleService.countArticlesByPage(this.curId).then(res => {
+      if (!res) { return; }
+      this.articleCount = res ? res : this.articleCount;
+      this.pageCount = Math.round(0.5+this.articleCount / this.nbArticles);
     });
   }
 

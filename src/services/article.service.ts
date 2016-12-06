@@ -10,6 +10,13 @@ export class ArticleService {
 
   constructor(private http: Http) { }
 
+  countArticlesByPage(page_id): Promise<any> {
+    return this.http.get('/api/public/articles/' + page_id + '/count')
+               .toPromise()
+               .then(response => response.json().count)
+               .catch(console.error);
+  }
+
   getArticlesByPage(page_id, offset?, nbByPage?): Promise<any> {
     let url = '/api/public/articles/' + page_id;
     url += (offset !== 'undefined' && nbByPage !== 'undefined') ? '/' + offset + '/' + nbByPage : '';

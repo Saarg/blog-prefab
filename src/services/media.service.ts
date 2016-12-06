@@ -10,6 +10,13 @@ export class MediaService {
 
   constructor(private http: Http) { }
 
+  countMediasByPage(page_id): Promise<any> {
+    return this.http.get('/api/public/medias/' + page_id + '/count')
+               .toPromise()
+               .then(response => response.json().count)
+               .catch(console.error);
+  }
+
   getMediasByPage(page_id, offset?, nbByPage?): Promise<any> {
     let url = '/api/public/medias/' + page_id;
     url += (offset !== 'undefined' && nbByPage !== 'undefined') ? '/' + offset + '/' + nbByPage : '';

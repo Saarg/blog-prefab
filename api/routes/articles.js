@@ -1,11 +1,24 @@
 'use strict'
 
-// v1.4 added public route (for future auth)
+// v1.5 addedarticles count
 
 const fileSaver    = require('./../utils/fileSaver');
 const Article = require('./../models/articles');
 
 module.exports = (privateRouter, publicRouter) => {
+  // articles by page api route
+  publicRouter.route('/articles/:page_id/count')
+  .get((req, res) => {
+    Article.count({ page: req.params.page_id })
+    .exec((err, count) => {
+      if (err) {
+        res.json({ success: false, message: err });
+        return;
+      }
+      res.json({ success: true, count: count });
+    });
+  });
+
   // articles by page api route
   publicRouter.route('/articles/:page_id/:offset?/:limit?')
   .get((req, res) => {

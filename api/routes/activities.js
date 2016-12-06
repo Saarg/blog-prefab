@@ -1,13 +1,26 @@
 'use strict'
 
-// v1.3 added public route (for future auth)
+// v1.4 added count
 
 const Activity = require('./../models/activities');
 
 module.exports = (privateRouter, publicRouter) => {
+  // activities count route
+  publicRouter.route('/activities/:page_id/count')
+  .get((req, res) => {
+    Activity.count({ page: req.params.page_id })
+    .exec((err, count) => {
+      if (err) {
+        res.json({ success: false, message: err });
+        return;
+      }
+      res.json({ success: true, count: count });
+    });
+  });
+
   // activities api route
   publicRouter.route('/activities/:page_id/:offset?/:limit?')
-  .get(function(req, res) {
+  .get((req, res) => {
     Activity.find({ page: req.params.page_id })
     .sort({created: -1})
     .skip(parseInt(req.params.offset) ? parseInt(req.params.offset) : 0)
@@ -22,7 +35,7 @@ module.exports = (privateRouter, publicRouter) => {
   });
 
   privateRouter.route('/activities/:page_id')
-  .post(function(req, res) {
+  .post((req, res) => {
     let activity = new Activity();
     activity.title = req.body.title;
     activity.text = req.body.text;
@@ -46,7 +59,7 @@ module.exports = (privateRouter, publicRouter) => {
 
   // individual media api route
   publicRouter.route('/activity/:activity_id')
-  .get(function(req, res) {
+  .get((req, res) => {
     Activity.findById(req.params.activitie_id, (err, activity) => {
       if (err) {
         res.json({ success: false, message: err });
@@ -57,7 +70,7 @@ module.exports = (privateRouter, publicRouter) => {
   });
 
   privateRouter.route('/activity/:activity_id')
-  .put(function(req, res) {
+  .put((req, res) => {
     Activity.findById(req.params.activity_id, (err, activity) => {
       if (err) res.send(err);
       activity.title = req.body.title ? req.body.title : activity.title;
@@ -82,7 +95,7 @@ module.exports = (privateRouter, publicRouter) => {
     });
   })
 
-  .delete(function(req, res) {
+  .delete((req, res) => {
     Activity.remove({_id: req.params.activity_id}, (err) => {
       if (err) {
         res.json({ success: false, message: err });
@@ -93,7 +106,7 @@ module.exports = (privateRouter, publicRouter) => {
   });
 
   privateRouter.route('/activity/:activity_id/participants/:email')
-  .put(function(req, res) {
+  .put((req, res) => {
     Activity.findById(req.params.activity_id, (err, activity) => {
       if (err) res.send(err);
       activity.participants.push(req.params.email);
@@ -108,7 +121,7 @@ module.exports = (privateRouter, publicRouter) => {
     });
   })
 
-  .delete(function(req, res) {
+  .delete((req, res) => {
     Activity.findById(req.params.activity_id, (err, activity) => {
       if (err) res.send(err);
       activity.participants.splice(activity.participants.indexOf(req.params.email), 1);
