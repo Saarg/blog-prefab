@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -51,8 +51,12 @@ export class MediaService {
   }
 
   deleteMedia(media): Promise<any> {
-    media.token = this.token;
-    return this.http.delete('/api/private/media/' + media._id)
+    let headers = new Headers({ 'Accept': 'application/json' });
+    headers.append('x-access-token', `${this.token}`);
+
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.delete('/api/private/media/' + media._id, options)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
