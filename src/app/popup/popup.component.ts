@@ -1,14 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-popup',
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.css']
 })
-export class PopupComponent implements OnInit {
+export class PopupComponent implements OnInit, OnChanges {
 
-      @Input() popupTitle : string;
-      @Output() onClose : EventEmitter = new EventEmitter();
+      @Input() popupTitle: String;
+      @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
@@ -19,8 +19,7 @@ export class PopupComponent implements OnInit {
     console.log(this.popupTitle);
   }
 
-  launchEvent()
-  {
+  launchEvent() {
     this.onClose.next();
   }
 

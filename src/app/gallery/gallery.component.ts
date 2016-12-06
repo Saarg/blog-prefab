@@ -72,23 +72,19 @@ export class GalleryComponent implements OnInit {
     this.images.unshift(e);
   }
 
-  displayMedia(image)
-  {
+  displayMedia(image) {
     this.popupMedia = image;
   }
 
-  onDisplayMediaClose()
-  {
+  onDisplayMediaClose() {
     this.popupMedia = null;
   }
 
-  showFormPopup()
-  {
+  showFormPopup() {
     this.displayFormPopup = true;
   }
 
-  formPopupOnClose()
-  {
+  formPopupOnClose() {
     this.displayFormPopup = false;
   }
 }
