@@ -7,15 +7,14 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./youtube-embended.component.css']
 })
 export class YoutubeEmbendedComponent implements OnChanges {
-  @Input('url') inputUrl;
-  public url;
+  @Input() url;
+  public embendedUrl;
 
   constructor(private sanitizer: DomSanitizer) {
-    this.url = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/zbTEozCiv-I");
+    this.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/zbTEozCiv-I');
   }
 
   ngOnChanges() {
-    console.log(this.inputUrl);
-    this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.inputUrl.replace("watch?v=", "embed/"));
+    this.embendedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.url.replace('watch?v=', 'embed/'));
   }
 }
