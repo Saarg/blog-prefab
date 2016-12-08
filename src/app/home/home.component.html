@@ -16,7 +16,7 @@
       <div>
         <div *ngIf="article.mimetype">
           <div>
-            <img [ngClass]="{'rightImg': e, 'leftImg': !e}" src={{article.media}}>
+            <img [ngClass]="{'rightImg': e, 'leftImg': !e}" src="/api/public/media/{{article.media}}/show">
           </div>
         </div>
         <p style="text-indent: 1em;">

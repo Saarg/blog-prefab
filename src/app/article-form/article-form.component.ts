@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ArticleService } from './../../services/article.service';
@@ -34,6 +34,7 @@ export class ArticleFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private changeDetectorRef: ChangeDetectorRef,
     private articleService: ArticleService
   ) { }
 
@@ -43,6 +44,29 @@ export class ArticleFormComponent implements OnInit {
     this.subscription = this.route.params.subscribe((param: any) => {
       this.curId = param['id'];
     });
+  }
+
+  fileChange(input) {
+    this.readFile(input.files);
+  }
+
+  readFile(file) {
+    // Create the file reader
+    let reader = new FileReader();
+
+    // If there is a file
+    if (file[0]) {
+      // Start reading this file
+      reader.onload = () => {
+        // After the callback fires do:
+        this.newArticle.media = reader.result;
+      };
+
+      reader.readAsDataURL(file[0]);
+    } else {
+      // When all files are done This forces a change detection
+      this.changeDetectorRef.detectChanges();
+    }
   }
 
   submitArticle() {

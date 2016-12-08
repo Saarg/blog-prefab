@@ -17,11 +17,15 @@
       </select>
     </div>
 
-    <div class="form-group col-xs-5" *ngIf="newArticle.mimetype === 'image'">
+    <div class="form-group col-xs-5" *ngIf="newArticle.mimetype === 'image' && !newArticle.media">
       <label class="custom-file">
-        <input type="file" id="file" class="custom-file-input" [(ngModel)]="newArticle.media" name="media">
+        <input type="file" id="file" class="custom-file-input" (change)="fileChange(input)" #input>
         <span class="custom-file-control">Click here to choose image</span>
       </label>
+    </div>
+
+    <div class="form-group col-xs-5" *ngIf="newArticle.media && newArticle.mimetype === 'image'">
+      <img [attr.src]='newArticle.media' (click)="removeFile(i)" class="img-thumbnail rounded mx-auto d-block" alt=""/>
     </div>
 
     <div class="form-group col-xs-5" *ngIf="newArticle.mimetype === 'youtube'">
