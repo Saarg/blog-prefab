@@ -48,6 +48,9 @@ module.exports = (privateRouter, publicRouter) => {
     if(req.body.media && req.body.mimetype === 'image') {
       article.mimetype = req.body.media.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
       article.media = fileSaver('media', req.body.media);
+    } else if (req.body.media && req.body.mimetype === 'youtube') {
+      article.mimetype = "youtube";
+      article.media = req.body.media.replace("watch?v=", "embed/");
     }
 
     article.save((err, article) => {
@@ -82,6 +85,14 @@ module.exports = (privateRouter, publicRouter) => {
       article.media = req.body.media ? req.body.media : undefined;
       article.position = typeof req.body.position === 'number' ? req.body.position : undefined;
       article.updated = Date.now();
+
+      if(req.body.media && req.body.mimetype === 'image') {
+        article.mimetype = req.body.media.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
+        article.media = fileSaver('media', req.body.media);
+      } else if (req.body.media && req.body.mimetype === 'youtube') {
+        article.mimetype = "youtube";
+        article.media = req.body.media.replace("watch?v=", "embed/");
+      }
 
       article.save((err) => {
         if (err) {

@@ -23,6 +23,7 @@ import { Routing } from './app.routing';
 import { ArticleFormComponent } from './article-form/article-form.component';
 import { MediaFormComponent } from './media-form/media-form.component';
 import { PopupComponent } from './popup/popup.component';
+import { YoutubeEmbendedComponent } from './youtube-embended/youtube-embended.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PopupComponent } from './popup/popup.component';
     LoginComponent,
     ArticleFormComponent,
     MediaFormComponent,
-    PopupComponent
+    PopupComponent,
+    YoutubeEmbendedComponent
   ],
   imports: [
     BrowserModule,
