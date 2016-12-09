@@ -3,7 +3,7 @@
 
   <div class=popupContainer  *ngIf="token">
     <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">add media(s)</button>
-    <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'import media'" (onClose)="formPopupOnClose()">
+    <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'import media'" [popupWidth]="5" (onClose)="formPopupOnClose()">
       <app-media-form (newMediaEvent)="newMedia($event)" ></app-media-form>
     </app-popup>
   </div>
@@ -15,7 +15,7 @@
   </div>
 
 
-  <app-popup *ngIf="popupMedia != null" class=popup [popupTitle]="'Closer Look'" (onClose)="onDisplayMediaClose()">
+  <app-popup *ngIf="popupMedia != null" class=popup [popupTitle]="'Closer Look'" [popupWidth]="8" (onClose)="onDisplayMediaClose()">
     <img src="/api/public/media/{{popupMedia.media}}/show">
   </app-popup>
 

@@ -7,8 +7,9 @@ import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angu
 })
 export class PopupComponent implements OnInit, OnChanges {
 
-      @Input() popupTitle: String;
-      @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
+  @Input() popupTitle: String;
+  @Input() popupWidth;
+  @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
@@ -16,7 +17,8 @@ export class PopupComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log(this.popupTitle);
+    this.popupWidth = this.popupWidth > 9 ? 9 : this.popupWidth;
+    this.popupWidth = this.popupWidth < 5 ? 5 : this.popupWidth;
   }
 
   launchEvent() {

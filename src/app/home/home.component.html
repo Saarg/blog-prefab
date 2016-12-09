@@ -5,8 +5,10 @@
 
     <div class=popupContainer  *ngIf="token">
       <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">add article</button>
-      <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'Add new Article'" (onClose)="formPopupOnClose()">
-        <app-article-form [pageId]="curId" (newArticleEvent)="newArticle($event)" ></app-article-form>
+      <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'Add new Article'" [popupWidth]="5" (onClose)="formPopupOnClose()">
+        <div>
+          <app-article-form [pageId]="curId" (newArticleEvent)="newArticle($event)" ></app-article-form>
+        </div>
       </app-popup>
     </div>
 

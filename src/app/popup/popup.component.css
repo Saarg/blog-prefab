@@ -11,8 +11,28 @@
     vertical-align: middle;
 }
 
-.popupContent{
+.popupContent-9{
     width: 90vw;
+    margin: auto;
+}
+
+.popupContent-8{
+    width: 80vw;
+    margin: auto;
+}
+
+.popupContent-7{
+    width: 70vw;
+    margin: auto;
+}
+
+.popupContent-6{
+    width: 60vw;
+    margin: auto;
+}
+
+.popupContent-5{
+    width: 50vw;
     margin: auto;
 }
 
