@@ -24,6 +24,7 @@ import { ArticleFormComponent } from './article-form/article-form.component';
 import { MediaFormComponent } from './media-form/media-form.component';
 import { PopupComponent } from './popup/popup.component';
 import { YoutubeEmbendedComponent } from './youtube-embended/youtube-embended.component';
+import { ActivityFormComponent } from './activity-form/activity-form.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { YoutubeEmbendedComponent } from './youtube-embended/youtube-embended.co
     ArticleFormComponent,
     MediaFormComponent,
     PopupComponent,
-    YoutubeEmbendedComponent
+    YoutubeEmbendedComponent,
+    ActivityFormComponent
   ],
   imports: [
     BrowserModule,

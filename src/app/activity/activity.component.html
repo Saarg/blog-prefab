@@ -1,5 +1,14 @@
 <div class="row">
   <h1>Activities</h1>
+
+  <div class=popupContainer  *ngIf="token">
+    <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">add activity</button>
+
+    <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'Create new Activity'" [popupWidth]="5" (onClose)="formPopupOnClose()">
+      <app-activity-form [pageId]="curId" (newActivityEvent)="newActivity($event)" ></app-activity-form>
+    </app-popup>
+  </div>
+
   <div class="panel-group">
     <div *ngFor="let activity of activities; let i = index; let e = even" class="panel panel-default list-group-item row">
       <div class="col-xs-8 col-sm-9 col-md-10 head" (click)="activity.show = !activity.show">
@@ -16,7 +25,8 @@
             <img [ngClass]="{'float-xs-right': e, 'float-xs-left': !e}" class="hidden-xs-down" src={{activity.media}}>
           </div>
         </div>
-        <div class="panel-body" style="text-indent: 1em;">{{activity.text}}</div>
+        <div class="panel-body activityText">{{activity.text}}</div>
+        <div class="locationDiv">Location : {{activity.location}}</div>
       </div>
     </div>
   </div>

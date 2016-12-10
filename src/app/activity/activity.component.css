@@ -39,3 +39,16 @@ h4:hover{
   bottom: 40%;
   left: -2.5px;
 }
+.activityText{
+  text-indent: 1em;
+}
+
+.popupContainer{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.locationDiv{
+  font-style: italic;
+  color: #003c6f;
+}
