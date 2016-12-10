@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
     this.articleService.countArticlesByPage(this.curId).then(res => {
       if (!res) { return; }
       this.articleCount = res ? res : this.articleCount;
-      this.pageCount = Math.round(0.5 + this.articleCount / this.nbArticles);
+      this.pageCount = Math.round(0.4 + this.articleCount / this.nbArticles);
     });
   }
 
