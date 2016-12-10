@@ -29,6 +29,11 @@
         <p style="text-indent: 1em;">
               {{article.text}}
         </p>
+        <div class="articleFooter">
+          <span> Created : {{getPrettyDate(article.created)}}</span>
+          <br>
+          <span *ngIf="article.created!=article.updated"> Last Update : {{getPrettyDate(article.updated)}}</span>
+        </div>
       </div>
     </article>
     <div  *ngIf="getListNavPage().length > 1">

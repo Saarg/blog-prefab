@@ -125,4 +125,24 @@ export class HomeComponent implements OnInit {
   formPopupOnClose() {
     this.displayFormPopup = false;
   }
+
+/* FROM '2016-12-06T16:38:25.003Z'
+* TO '2016-12-06 at 16h38'
+*/
+  getPrettyDate(uglyDate)
+  {
+    /*Extracting the first part*/
+    var prettyDate = uglyDate.split('T');
+    var dayPart = prettyDate[0];
+
+    /*Getting rid of the last part*/
+    var hourPart = prettyDate[1].split('.')[0];
+
+    /*Prettier display of the hour*/
+    var hourParts = hourPart.split(':');
+    hourPart = hourParts[0] + "h" + hourParts[1];
+
+    return dayPart + " at " + hourPart + "\n";
+  }
+
 }

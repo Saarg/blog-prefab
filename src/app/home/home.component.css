@@ -59,3 +59,9 @@ a{
 .popupContainer{
   text-align: center;
 }
+
+.articleFooter span{
+  font-style: italic;
+  font-weight: lighter;
+  color: #003c6f;
+}
