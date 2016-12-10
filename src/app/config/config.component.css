@@ -1,0 +1,20 @@
+hr {
+  margin-bottom: 0;
+}
+
+.form-list {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  list-style: none;
+}
+.form-list ul{
+  list-style: none;
+}
+
+form {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}

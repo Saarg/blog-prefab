@@ -5,9 +5,11 @@ import { HomeComponent } from './home/home.component';
 import { ActivityComponent } from './activity/activity.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { LoginComponent } from './login/login.component';
+import { ConfigComponent } from './config/config.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'admin', component: ConfigComponent },
   { path: 'article/:id', component: HomeComponent },
   { path: 'article', component: HomeComponent },
   { path: 'activity/:id', component: ActivityComponent },

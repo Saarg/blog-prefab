@@ -25,6 +25,7 @@ import { MediaFormComponent } from './media-form/media-form.component';
 import { PopupComponent } from './popup/popup.component';
 import { YoutubeEmbendedComponent } from './youtube-embended/youtube-embended.component';
 import { ActivityFormComponent } from './activity-form/activity-form.component';
+import { ConfigComponent } from './config/config.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ActivityFormComponent } from './activity-form/activity-form.component';
     MediaFormComponent,
     PopupComponent,
     YoutubeEmbendedComponent,
-    ActivityFormComponent
+    ActivityFormComponent,
+    ConfigComponent
   ],
   imports: [
     BrowserModule,

@@ -82,9 +82,9 @@ module.exports = (privateRouter, publicRouter) => {
       if (err) res.send(err);
       page.name = req.body.name ? req.body.name : page.name;
       page.description = req.body.description ? req.body.description : page.description;
-      page.type = req.body.type ? req.body.type : undefined;
-      page.position = req.body.position ? req.body.position : undefined;
-      page.inNav = req.body.inNav ? req.body.inNav : undefined;
+      page.type = req.body.type ? req.body.type : page.type;
+      page.position = req.body.position ? req.body.position : page.position;
+      page.inNav = req.body.inNav ? req.body.inNav : page.inNav;
       page.updated = Date.now();
 
       page.save((err) => {

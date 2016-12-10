@@ -25,6 +25,7 @@ export class ActivityComponent implements OnInit {
   private nbActivities = 20;
   private activitiesCount;
   private pageCount = 0;
+  public activities = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -104,39 +105,4 @@ export class ActivityComponent implements OnInit {
   formPopupOnClose() {
     this.displayFormPopup = false;
   }
-
-  activities = [
-    {
-      'title' : 'Booling',
-      'text' : 'Lorem booling dolor sit amet, sed probo adolescens te. Nec ea \
-      solet percipitur. Velit quando commodo sed ut, paulo soluta quaerendum \
-      vix ut, id aliquip constituam pri. Ex quo solet molestie. Pertinax \
-      hendrerit contentiones ei mea. Eu solet dolorem apeirian his.\
-      \
-      Ei per porro harum, expetenda cotidieque has at. Error omnes sea an, in \
-      nec erat iracundia, eligendi efficiendi pri et. Nam mutat consequat in, \
-      sed diam luptatum ad. Id usu novum sonet argumentum. Forensibus \
-      quaerendum eam no, erat prima ea mel, id habeo essent graecis nam.',
-      'participants' : ['Roger', 'Benoit', 'Un débile', 'Jean']
-    },
-    {
-      'title' : 'Lancer de nain',
-      'text' : 'Lorem nain dolor sit amet, sed probo adolescens te. Nec ea \
-      solet percipitur. Velit quando commodo sed ut, paulo soluta quaerendum \
-      vix ut, id aliquip constituam pri. Ex quo solet molestie. Pertinax \
-      hendrerit contentiones ei mea. Eu solet dolorem apeirian his.',
-      'participants' : ['Aragorn', 'Legolas', 'Gimli'],
-      'mimetype' : 'image/png',
-      'media' : 'http://lorempixel.com/1080/720/'
-    },
-    {
-      'title' : 'Calcul d\'intégrale',
-      'text' : 'Lorem intégrale dolor sit amet, sed probo adolescens te. Nec \
-      ea solet percipitur. Velit quando commodo sed ut, paulo soluta \
-      quaerendum vix ut, id aliquip constituam pri. Ex quo solet molestie. \
-      Pertinax hendrerit contentiones ei mea. Eu solet dolorem apeirian his.',
-      'participants' : ['Un Matheux', 'Un autre Matheux']
-    }
-  ];
-
 }

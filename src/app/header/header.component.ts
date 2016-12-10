@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 import { ConfigService } from './../../services/config.service';
 import { PageService } from './../../services/page.service';
+import { UserService } from './../../services/user.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  providers: [ConfigService, PageService]
+  providers: [ConfigService, PageService, UserService]
 })
 export class HeaderComponent implements OnInit {
 
@@ -16,35 +17,20 @@ export class HeaderComponent implements OnInit {
   public logo;
   public banner;
 
-  public pages= [
-    {
-      name: 'Gallery',
-      type: 2,
-      position: 2,
-      inNav: true
-    },
-    {
-      name: 'Activities',
-      type: 1,
-      position: 1,
-      inNav: true
-    },
-    {
-      name: 'Home',
-      type: 0,
-      position: 0,
-      inNav: true
-    }
-  ];
+  public pages= [];
   public newPage = { name: 'New page', description: '', type: 0, position: -1, inNav: true };
   public pageTypes = ['article', 'activity', 'gallery'];
 
-  constructor(private configService: ConfigService, private pageService: PageService) { }
+  constructor(
+    private configService: ConfigService,
+    private userService: UserService,
+    private pageService: PageService
+  ) { }
 
   ngOnInit() {
     this.token = localStorage ? localStorage.getItem('AuthToken') : null;
 
-    this.verifyToken();
+    this.token = this.userService.verifyToken(this.token) ? this.token : null;
 
     this.getLogos();
     this.getPages();
@@ -83,19 +69,4 @@ export class HeaderComponent implements OnInit {
       this.pages.splice(i, 1);
     });
   }
-
-  verifyToken() {
-    if (this.token) {
-      const base64Url = this.token.split('.')[1];
-      const base64 = base64Url.replace('-', '+').replace('_', '/');
-      const decoded = JSON.parse(window.atob(base64));
-
-      if (decoded['exp'] < new Date().getTime() / 1000) {
-        this.token = null;
-        localStorage.clear();
-      }
-
-    }
-  }
-
 }
