@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ArticleService } from './../../services/article.service';
@@ -10,7 +10,7 @@ import { ArticleService } from './../../services/article.service';
   styleUrls: ['./article-form.component.css'],
   providers: [ArticleService]
 })
-export class ArticleFormComponent implements OnInit {
+export class ArticleFormComponent implements OnInit, OnChanges {
 
   @Input() article;
   @Input() pageId: String;
@@ -26,7 +26,7 @@ export class ArticleFormComponent implements OnInit {
     position: -1,
     mimetype: '',
     media: '',
-    token: null
+    newArticle: true
   };
 
   public curId = null;
@@ -40,10 +40,15 @@ export class ArticleFormComponent implements OnInit {
 
   ngOnInit() {
     this.token = localStorage ? localStorage.getItem('AuthToken') : null;
+    this.article = this.article ? this.article : this.newArticle;
 
     this.subscription = this.route.params.subscribe((param: any) => {
       this.curId = param['id'];
     });
+  }
+
+  ngOnChanges() {
+    this.article = this.article ? this.article : this.newArticle;
   }
 
   fileChange(input) {
@@ -59,7 +64,7 @@ export class ArticleFormComponent implements OnInit {
       // Start reading this file
       reader.onload = () => {
         // After the callback fires do:
-        this.newArticle.media = reader.result;
+        this.article.media = reader.result;
       };
 
       reader.readAsDataURL(file[0]);
@@ -69,10 +74,19 @@ export class ArticleFormComponent implements OnInit {
     }
   }
 
+  editArticle() {
+    this.articleService.editArticle(this.article).then(res => {
+      console.log(res);
+      if (!res) { return; }
+      if (res.success) {
+        this.newArticleEvent.next(res.article);
+      }
+    });
+  }
+
   submitArticle() {
-    // this.newArticle.text = this.newArticle.text.replace(/\n/g, "<"+"br/>");
     // using dummi pageid for now
-    this.articleService.addArticle(this.newArticle, this.pageId).then(res => {
+    this.articleService.addArticle(this.article, this.pageId).then(res => {
       console.log(res);
       if (!res) { return; }
       if (res.success) {

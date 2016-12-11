@@ -15,25 +15,28 @@
 
     <!-- Articles -->
     <article *ngFor="let article of articles; let i = index; let e = even" class="row card" [ngClass]="{'articleEven': e, 'articleOdd': !e}" id='{{i}}home'>
-      <h2>{{article.title}}</h2>
-      <div>
-        <div *ngIf="article.mimetype && article.mimetype !== 'youtube'">
-          <div>
-            <img [ngClass]="{'rightImg': e, 'leftImg': !e}" src="/api/public/media/{{article.media}}/show">
+      <app-article-form *ngIf="article.editing" [pageId]="curId" [article]="article" (newArticleEvent)="article.editing = !article.editing"></app-article-form>
+      <div *ngIf="!article.editing" (click)="article.editing = !article.editing">
+        <h2>{{article.title}}</h2>
+        <div>
+          <div *ngIf="article.mimetype && article.mimetype !== 'youtube'">
+            <div>
+              <img [ngClass]="{'rightImg': e, 'leftImg': !e}" src="/api/public/media/{{article.media}}/show">
+            </div>
           </div>
-        </div>
-        <div *ngIf="article.mimetype === 'youtube'">
-          <div [ngClass]="{'rightImg': e, 'leftImg': !e}">
-              <app-youtube-embended [url]="article.media"></app-youtube-embended>
+          <div *ngIf="article.mimetype === 'youtube'">
+            <div [ngClass]="{'rightImg': e, 'leftImg': !e}">
+                <app-youtube-embended [url]="article.media"></app-youtube-embended>
+            </div>
           </div>
-        </div>
-        <p style="text-indent: 1em;">
-              {{article.text}}
-        </p>
-        <div class="articleFooter">
-          <span> Created : {{getPrettyDate(article.created)}}</span>
-          <br>
-          <span *ngIf="article.created!=article.updated"> Last Update : {{getPrettyDate(article.updated)}}</span>
+          <p style="text-indent: 1em;">
+                {{article.text}}
+          </p>
+          <div class="articleFooter">
+            <span> Created : {{getPrettyDate(article.created)}}</span>
+            <br>
+            <span *ngIf="article.created!=article.updated"> Last Update : {{getPrettyDate(article.updated)}}</span>
+          </div>
         </div>
       </div>
     </article>
