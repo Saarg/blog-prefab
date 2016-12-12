@@ -53,7 +53,7 @@ export class GalleryComponent implements OnInit {
   }
 
   getMedias() {
-    this.mediaService.getMediasByPage(this.curId,0,this.mediaShown).then((res) => {
+    this.mediaService.getMediasByPage(this.curId, 0, this.mediaShown).then((res) => {
       if (!res) { return; }
       if (res.success) {
         // TODO succes feedback
@@ -67,14 +67,15 @@ export class GalleryComponent implements OnInit {
     this.getMediasCount();
   }
 
-  getMediasCount()
-  {
+  getMediasCount() {
     this.mediaService.countMediasByPage(this.curId).then(res => {
       if (!res) { return; }
       this.mediaCount = res ? res : this.mediaCount;
     });
 
-    if(this.mediaShown > this.mediaCount)this.gimmeMoreShow = false;
+    if (this.mediaShown > this.mediaCount) {
+      this.gimmeMoreShow = false;
+    }
   }
 
   getDefaultId() {
@@ -105,17 +106,17 @@ export class GalleryComponent implements OnInit {
     this.displayFormPopup = false;
   }
 
-  showMoreMedias()
-  {
+  showMoreMedias() {
     this.mediaShown += this.IMG_BASE_NUMBER;
     this.getMedias();
-    if(this.mediaShown > this.mediaCount)this.gimmeMoreShow = false;
+    if (this.mediaShown > this.mediaCount) {
+      this.gimmeMoreShow = false;
+    };
   }
 
-  deleteMedia(media)
-  {
+  deleteMedia(media) {
     this.mediaService.deleteMedia(media).then(res => {
-      if(!res){return;}
+      if (!res) { return; }
     });
     this.onDisplayMediaClose();
     this.getMedias();
