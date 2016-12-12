@@ -20,6 +20,10 @@
 
   <app-popup *ngIf="popupMedia != null" class=popup [popupTitle]="'Closer Look'" [popupWidth]="8" (onClose)="onDisplayMediaClose()">
     <img src="/api/public/media/{{popupMedia.media}}/show">
+    <div *ngIf="token" class="mediaDeleteButtonContainer">
+      <button class="btn btn-danger deleteButton" (click)="deleteMedia(popupMedia)">Delete</button>
+    </div>
+
   </app-popup>
 
 </div>

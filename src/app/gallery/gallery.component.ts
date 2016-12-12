@@ -111,4 +111,13 @@ export class GalleryComponent implements OnInit {
     this.getMedias();
     if(this.mediaShown > this.mediaCount)this.gimmeMoreShow = false;
   }
+
+  deleteMedia(media)
+  {
+    this.mediaService.deleteMedia(media).then(res => {
+      if(!res){return;}
+    });
+    this.onDisplayMediaClose();
+    this.getMedias();
+  }
 }
