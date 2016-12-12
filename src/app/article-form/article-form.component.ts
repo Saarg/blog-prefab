@@ -15,6 +15,7 @@ export class ArticleFormComponent implements OnInit, OnChanges {
   @Input() article;
   @Input() pageId: String;
   @Output() newArticleEvent: EventEmitter<Object> = new EventEmitter<Object>();
+  @Output() deletedArticleEvent: EventEmitter<Object> = new EventEmitter<Object>();
 
   private subscription: Subscription;
 
@@ -80,6 +81,16 @@ export class ArticleFormComponent implements OnInit, OnChanges {
       if (!res) { return; }
       if (res.success) {
         this.newArticleEvent.next(res.article);
+      }
+    });
+  }
+
+  deleteArticle() {
+    this.articleService.deleteArticle(this.article).then(res => {
+      console.log(res);
+      if (!res) { return; }
+      if (res.success) {
+        this.deletedArticleEvent.next(this.article);
       }
     });
   }

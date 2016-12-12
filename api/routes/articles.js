@@ -3,7 +3,8 @@
 // v1.5 addedarticles count
 
 const fileSaver    = require('./../utils/fileSaver');
-const Article = require('./../models/articles');
+const Article      = require('./../models/articles');
+const fs           = require('fs');
 
 module.exports = (privateRouter, publicRouter) => {
   // articles by page api route
@@ -105,12 +106,29 @@ module.exports = (privateRouter, publicRouter) => {
   })
 
   .delete((req, res) => {
-    Article.remove({_id: req.params.article_id}, (err) => {
+    Article.findById(req.params.article_id, (err, article) => {
       if (err) {
         res.json({ success: false, message: err });
         return;
       }
-      res.json({ success: true });
+
+      console.log(article.mimetype.slice(0, 5) === 'image');
+      if (article.mimetype.slice(0, 5) === 'image' && article.media) {
+        console.log(__dirname + '/../data/media/' + article.media);
+        fs.unlink(__dirname + '/../data/media/' + article.media, (err) => {
+          if(err) {
+            res.json({ success: false, message: err });
+          }
+        });
+      }
+
+      Article.remove({_id: article._id}, (err) => {
+        if (err) {
+          res.json({ success: false, message: err });
+          return;
+        }
+        res.json({ success: true });
+      });
     });
   });
 }

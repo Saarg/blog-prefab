@@ -31,6 +31,9 @@
       <input type="text" class="form-control" id="youtube" [(ngModel)]="article.media" name="media">
     </div>
 
-    <button type="submit" class="btn btn-primary col-xs-2 mr-1 float-xs-right">{{article.newArticle ? 'Submit' : 'Edit'}}</button>
+    <div class="form-group col-xs-12">
+      <input (click)="deleteArticle()" *ngIf="!article.newArticle" class="btn btn-danger col-xs-2 mr-1 float-xs-left" value="Delete">
+      <button type="submit" class="btn btn-primary col-xs-2 mr-1 float-xs-right">{{article.newArticle ? 'Submit' : 'Edit'}}</button>
+    </div>
   </div>
 </form>

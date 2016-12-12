@@ -94,6 +94,10 @@ export class HomeComponent implements OnInit {
     this.articles.unshift(e);
   }
 
+  deleteArticle(e) {
+    this.articles.splice(this.articles.indexOf(e), 1);
+  }
+
   offsetChange(i) {
     let newOffset = this.offset + i * this.nbArticles;
 
