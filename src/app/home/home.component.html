@@ -6,7 +6,7 @@
 
     <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'Add new Article'" [popupWidth]="5" (onClose)="formPopupOnClose()">
       <div>
-        <app-article-form [pageId]="curId" (newArticleEvent)="newArticle($event)"></app-article-form>
+        <app-article-form [pageId]="curId" (newArticleEvent)="newArticle($event) || formPopupOnClose()"></app-article-form>
       </div>
     </app-popup>
   </div>

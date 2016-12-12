@@ -85,7 +85,7 @@ module.exports = (privateRouter, publicRouter) => {
       article.position = typeof req.body.position === 'number' ? req.body.position : undefined;
       article.updated = Date.now();
 
-      if (article.mimetype.slice(0, 5) === 'image' && article.media != req.body.media) {
+      if (article.mimetype && article.mimetype.slice(0, 5) === 'image' && article.media != req.body.media) {
         fs.unlink(__dirname + '/../data/media/' + article.media, (err) => {
           if(err) {
             res.json({ success: false, message: err });
@@ -118,7 +118,7 @@ module.exports = (privateRouter, publicRouter) => {
         return;
       }
 
-      if (article.mimetype.slice(0, 5) === 'image' && article.media) {
+      if (article.mimetype && article.mimetype.slice(0, 5) === 'image' && article.media) {
         fs.unlink(__dirname + '/../data/media/' + article.media, (err) => {
           if(err) {
             res.json({ success: false, message: err });

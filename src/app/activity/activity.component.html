@@ -5,7 +5,7 @@
     <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">add activity</button>
 
     <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'Create new Activity'" [popupWidth]="5" (onClose)="formPopupOnClose()">
-      <app-activity-form [pageId]="curId" (newActivityEvent)="newActivity($event)" ></app-activity-form>
+      <app-activity-form [pageId]="curId" (newActivityEvent)="newActivity($event) || formPopupOnClose()" ></app-activity-form>
     </app-popup>
   </div>
 
