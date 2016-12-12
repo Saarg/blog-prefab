@@ -112,9 +112,7 @@ module.exports = (privateRouter, publicRouter) => {
         return;
       }
 
-      console.log(article.mimetype.slice(0, 5) === 'image');
       if (article.mimetype.slice(0, 5) === 'image' && article.media) {
-        console.log(__dirname + '/../data/media/' + article.media);
         fs.unlink(__dirname + '/../data/media/' + article.media, (err) => {
           if(err) {
             res.json({ success: false, message: err });

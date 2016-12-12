@@ -4,6 +4,7 @@
 
 const fileSaver    = require('./../utils/fileSaver');
 const Media        = require('./../models/medias');
+const fs           = require('fs');
 
 module.exports = (privateRouter, publicRouter) => {
   // activities count route
@@ -90,12 +91,27 @@ module.exports = (privateRouter, publicRouter) => {
   })
 
   .delete((req, res) => {
-    Media.remove({_id: req.params.media_id}, (err) => {
+    Media.findById(req.params.media_id, (err, media) => {
       if (err) {
         res.json({ success: false, message: err });
         return;
       }
-      res.json({ success: true });
+
+      if (media.mimetype.slice(0, 5) === 'image' && media.media) {
+        fs.unlink(__dirname + '/../data/media/' + media.media, (err) => {
+          if(err) {
+            res.json({ success: false, message: err });
+          }
+        });
+      }
+
+      Media.remove({_id: media._id}, (err) => {
+        if (err) {
+          res.json({ success: false, message: err });
+          return;
+        }
+        res.json({ success: true });
+      });
     });
   });
 }
