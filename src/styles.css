@@ -17,3 +17,10 @@ a{
 a:hover{
   font-weight: bold;
 }
+
+
+/***Media Popup addons**/
+
+.mediaDeleteButtonContainer{
+  text-align: right;
+}
