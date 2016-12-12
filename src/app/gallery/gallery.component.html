@@ -15,6 +15,9 @@
   </div>
 
 
+  <button *ngIf="gimmeMoreShow" type="button" class="btn btn-info btnGimmeMore" (click)="showMoreMedias()">Load me more !</button>
+
+
   <app-popup *ngIf="popupMedia != null" class=popup [popupTitle]="'Closer Look'" [popupWidth]="8" (onClose)="onDisplayMediaClose()">
     <img src="/api/public/media/{{popupMedia.media}}/show">
   </app-popup>

@@ -19,17 +19,21 @@
 }
 
 .galleryDivContainer{
+  text-align: center;
   border-radius: 15px;
   background-color: #f5f5f5;
   padding : 30px;
 }
 
 .popupContainer{
-  text-align: center;
   margin-bottom: 20px;
 }
 
 .popup img{
     max-width: 100%;
     max-height: 80vh;
+}
+
+.btnGimmeMore{
+  margin-top: 20px;
 }

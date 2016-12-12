@@ -25,6 +25,11 @@ export class GalleryComponent implements OnInit {
   private popupMedia = null;
   private displayFormPopup = false;
 
+  private IMG_BASE_NUMBER = 12;
+  private mediaShown = 12;
+  private mediaCount;
+  private gimmeMoreShow = true;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -48,7 +53,7 @@ export class GalleryComponent implements OnInit {
   }
 
   getMedias() {
-    this.mediaService.getMediasByPage(this.curId).then((res) => {
+    this.mediaService.getMediasByPage(this.curId,0,this.mediaShown).then((res) => {
       if (!res) { return; }
       if (res.success) {
         // TODO succes feedback
@@ -58,6 +63,18 @@ export class GalleryComponent implements OnInit {
         console.error(res.message);
       }
     });
+
+    this.getMediasCount();
+  }
+
+  getMediasCount()
+  {
+    this.mediaService.countMediasByPage(this.curId).then(res => {
+      if (!res) { return; }
+      this.mediaCount = res ? res : this.mediaCount;
+    });
+
+    if(this.mediaShown > this.mediaCount)this.gimmeMoreShow = false;
   }
 
   getDefaultId() {
@@ -86,5 +103,12 @@ export class GalleryComponent implements OnInit {
 
   formPopupOnClose() {
     this.displayFormPopup = false;
+  }
+
+  showMoreMedias()
+  {
+    this.mediaShown += this.IMG_BASE_NUMBER;
+    this.getMedias();
+    if(this.mediaShown > this.mediaCount)this.gimmeMoreShow = false;
   }
 }
