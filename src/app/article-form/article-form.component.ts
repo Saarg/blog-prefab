@@ -50,6 +50,7 @@ export class ArticleFormComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.article = this.article ? this.article : this.newArticle;
+    this.article.mimetype = this.article.mimetype.slice(0, 5) === 'image' ? 'image' : this.article.mimetype;
   }
 
   fileChange(input) {

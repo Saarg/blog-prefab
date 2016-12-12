@@ -94,6 +94,10 @@ export class HomeComponent implements OnInit {
     this.articles.unshift(e);
   }
 
+  editArticle(e, article) {
+    this.articles[this.articles.indexOf(article)] = e;
+  }
+
   deleteArticle(e) {
     this.articles.splice(this.articles.indexOf(e), 1);
   }

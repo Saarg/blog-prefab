@@ -82,13 +82,19 @@ module.exports = (privateRouter, publicRouter) => {
       article.title = req.body.title ? req.body.title : article.title;
       article.text = req.body.text ? req.body.text : article.text;
       article.page = req.body.page ? req.body.page : article.page;
-      article.mimetype = req.body.mimetype ? req.body.mimetype : undefined;
-      article.media = req.body.media ? req.body.media : undefined;
       article.position = typeof req.body.position === 'number' ? req.body.position : undefined;
       article.updated = Date.now();
 
+      if (article.mimetype.slice(0, 5) === 'image' && article.media != req.body.media) {
+        fs.unlink(__dirname + '/../data/media/' + article.media, (err) => {
+          if(err) {
+            res.json({ success: false, message: err });
+          }
+        });
+      }
+
       if(req.body.media && req.body.mimetype === 'image') {
-        article.mimetype = req.body.media.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
+                article.mimetype = req.body.media.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
         article.media = fileSaver('media', req.body.media);
       } else if (req.body.media && req.body.mimetype === 'youtube') {
         article.mimetype = "youtube";
