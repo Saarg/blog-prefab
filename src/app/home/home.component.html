@@ -31,9 +31,9 @@
                 {{article.text}}
           </p>
           <div class="articleFooter">
-            <span> Created : {{getPrettyDate(article.created)}}</span>
+            <span *ngIf="article.created===article.updated"> Created : {{getPrettyDate(article.created)}}</span>
             <br>
-            <span *ngIf="article.created!=article.updated"> Last Update : {{getPrettyDate(article.updated)}}</span>
+            <span *ngIf="article.created!==article.updated"> Last Update : {{getPrettyDate(article.updated)}}</span>
           </div>
         </div>
       </div>
