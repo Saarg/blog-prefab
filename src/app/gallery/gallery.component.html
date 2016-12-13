@@ -4,7 +4,7 @@
   <div class=popupContainer  *ngIf="token">
     <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">add media(s)</button>
     <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'import media'" [popupWidth]="5" (onClose)="formPopupOnClose()">
-      <app-media-form (newMediaEvent)="newMedia($event) || formPopupOnClose()" ></app-media-form>
+      <app-media-form (newMediaEvent)="newMedia($event)" ></app-media-form>
     </app-popup>
   </div>
 
