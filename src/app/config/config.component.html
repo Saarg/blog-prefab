@@ -1,4 +1,24 @@
 <h1>Admin</h1>
+
+<div class="card row">
+  <h2>Logos</h2>
+  <hr/>
+  <div class="col-md-3">
+    <img [attr.src]='logo' class="img-thumbnail rounded mx-auto d-block" alt=""/>
+    <label class="custom-file col-xs-12">
+      <input type="file" id="file" class="custom-file-input" (change)="logoChange(logoInput)" #logoInput>
+      <span class="custom-file-control">Click here to choose logo</span>
+    </label>
+  </div>
+  <div class="col-md-9">
+    <img [attr.src]='banner' class="img-thumbnail rounded mx-auto d-block" alt=""/>
+    <label class="custom-file col-xs-12">
+      <input type="file" id="file" class="custom-file-input" (change)="bannerChange(bannerInput)" #bannerInput>
+      <span class="custom-file-control">Click here to choose banner</span>
+    </label>
+  </div>
+</div>
+
 <app-form-list title="Pages" [newItem]="newPage" [items]="pages" (selectedItem)="selectPage($event)">
   <form (ngSubmit)="curPage._id ? editPage() : addPage()" class="col-xs-10">
     <div class="form-group col-xs-10 pl-0">

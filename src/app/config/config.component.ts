@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ConfigService } from './../../services/config.service';
@@ -20,8 +20,12 @@ export class ConfigComponent implements OnInit {
 
   public curPage = { name: 'New page', description: '', type: 0, position: -1, inNav: true };
 
+  public logo;
+  public banner;
+
   constructor(
     private router: Router,
+    private changeDetectorRef: ChangeDetectorRef,
     private configService: ConfigService,
     private userService: UserService,
     private pageService: PageService
@@ -35,6 +39,37 @@ export class ConfigComponent implements OnInit {
     }
 
     this.getPages();
+  }
+
+  logoChange(input) {
+    console.log(input.files);
+    const file = input.files;
+    let reader = new FileReader();
+    if (file[0]) {
+      reader.onload = () => {
+        this.logo = reader.result;
+        console.log(this.logo);
+      };
+
+      reader.readAsDataURL(file[0]);
+    } else {
+      this.changeDetectorRef.detectChanges();
+    }
+  }
+
+  bannerChange(input) {
+    const file = input.files;
+    let reader = new FileReader();
+    if (file[0]) {
+      reader.onload = () => {
+        this.banner = reader.result;
+        console.log(this.banner);
+      };
+
+      reader.readAsDataURL(file[0]);
+    } else {
+      this.changeDetectorRef.detectChanges();
+    }
   }
 
   getPages() {
