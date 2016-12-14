@@ -1,13 +1,5 @@
 <h1>Admin</h1>
-<div class="card row">
-  <h2>Pages</h2>
-  <hr/>
-  <div class="form-list col-xs-2">
-    <ul>
-      <li *ngFor="let page of pages" (click)="curPage = page;">{{page.name}}</li>
-      <li (click)="curPage = newPage;">New page</li>
-    </ul>
-  </div>
+<app-form-list title="Pages" [newItem]="newPage" [items]="pages" (selectedItem)="selectPage($event)">
   <form (ngSubmit)="curPage._id ? editPage() : addPage()" class="col-xs-10">
     <div class="form-group col-xs-10 pl-0">
       <input type="text" class="form-control" id="title" [(ngModel)]="curPage.name" name="name">
@@ -29,4 +21,4 @@
       <button type="submit" class="btn btn-primary col-xs-2 float-xs-right">Submit</button>
     </div>
   </form>
-</div>
+</app-form-list>

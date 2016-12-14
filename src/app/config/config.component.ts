@@ -45,6 +45,10 @@ export class ConfigComponent implements OnInit {
     });
   }
 
+  selectPage(page) {
+    this.curPage = page;
+  }
+
   addPage() {
     console.log('adding page ' + this.curPage.name);
 
