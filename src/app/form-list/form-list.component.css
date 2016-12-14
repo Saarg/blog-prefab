@@ -10,11 +10,15 @@ hr {
   list-style: none;
 }
 .form-list ul{
+  padding-left: 0;
+  padding-right: 0;
   list-style: none;
 }
 
-form {
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.form-list li:hover{
+  background-color: #f7f7f9;
+}
+
+.form-list .active{
+  background-color: #e7e7e9;
 }
