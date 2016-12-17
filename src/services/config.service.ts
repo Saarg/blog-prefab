@@ -12,31 +12,31 @@ export class ConfigService {
     private httpClient: HttpClient
   ) { }
 
-  getLogo(): Promise<string> {
-    /*return this.httpClient.get('/api/public/config/logo')
+  getLogo(): Promise<any> {
+    return this.httpClient.get('/api/public/configs/logo')
                .toPromise()
-               .then(response => response.arrayBuffer() as ArrayBuffer)
-               .catch(console.error);*/
-    return Promise.resolve('http://lorempixel.com/200/200/');
+               .then(response => response.json().config[0])
+               .catch(console.error);
+    // return Promise.resolve('http://lorempixel.com/200/200/');
   }
 
-  getBanner(): Promise<string> {
-    /*return this.httpClient.get('/api/public/config/banner')
+  getBanner(): Promise<any> {
+    return this.httpClient.get('/api/public/configs/banner')
                .toPromise()
-               .then(response => response.arrayBuffer() as ArrayBuffer)
-               .catch(console.error);*/
-    return Promise.resolve('http://lorempixel.com/800/200/');
+               .then(response => response.json().config[0])
+               .catch(console.error);
+    // return Promise.resolve('http://lorempixel.com/800/200/');
   }
 
   getValue(key): Promise<any> {
-    return this.httpClient.get('/api/public/config/' + key)
+    return this.httpClient.get('/api/public/configs/' + key)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
 
   setValue(key, value): Promise<any> {
-    return this.httpClient.put('/api/public/config/' + key, { value: value })
+    return this.httpClient.put('/api/private/configs/' + key, { value: value })
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

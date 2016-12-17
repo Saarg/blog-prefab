@@ -7,27 +7,30 @@ const Config = require('./../models/configs');
 module.exports = (privateRouter, publicRouter) => {
   publicRouter.route('/configs/:config_key')
   .get((req, res) => {
-    Config.findBy({ key: req.params.config_key }, (err, config) => {
+    Config.find({ key: req.params.config_key }, (err, config) => {
       if (err) {
         res.json({ success: false, message: err });
         return;
       }
       res.json({ success: true, config: config });
     });
-  })
+  });
 
+  privateRouter.route('/configs/:config_key')
   .put((req, res) => {
-    Config.findBy({ key: req.params.config_key }, (err, config) => {
+    Config.findOne({ 'key': req.params.config_key }, (err, config) => {
       if (err) res.send(err);
-      config.key = req.body.key ? req.body.key : config.key;
-      config.value = req.body.value ? req.body.value : config.value;
+      config = !config ? new Config() : config;
+
+      config.key = config.key ? config.key : req.params.config_key;
+      config.value = req.body.value;
 
       config.save((err) => {
         if (err) {
           res.json({ success: false, message: err });
           return;
         }
-        res.json({ success: true, article: article });
+        res.json({ success: true, config: config });
       });
     });
   });

@@ -72,6 +72,13 @@ export class ConfigComponent implements OnInit {
     }
   }
 
+  editConfig(key, value) {
+    this.configService.setValue(key, value).then(res => {
+      if (!res || !res.config) { return; }
+      this[res.config.key] = null;
+    })
+  }
+
   getPages() {
     this.pageService.getPages().then(res => {
       if (!res) { return; }

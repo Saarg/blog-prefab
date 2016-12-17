@@ -1,10 +1,10 @@
 <header>
   <div *ngIf="logo && banner" class="logos container pl-0 pr-0">
     <div class=" hidden-sm-down col-md-4 pl-0 pr-0">
-      <img class="float-xs-let" [src]="logo"/>
+      <img class="float-xs-let" [attr.src]='logo.value'/>
     </div>
     <div class="col-sm-12 col-md-8 pl-0 pr-0">
-      <img class="float-xs-right" [src]="banner"/>
+      <img class="float-xs-right" [attr.src]='banner.value'/>
     </div>
   </div>
   <nav class="navbar navbar-light bg-faded">

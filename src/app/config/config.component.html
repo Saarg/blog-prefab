@@ -1,22 +1,25 @@
 <h1>Admin</h1>
 
 <div class="card row">
-  <h2>Logos</h2>
+  <h2>Header</h2>
   <hr/>
   <div class="col-md-3">
-    <img [attr.src]='logo' class="img-thumbnail rounded mx-auto d-block" alt=""/>
-    <label class="custom-file col-xs-12">
+    <img *ngIf="logo" [attr.src]='logo' class="img-thumbnail rounded mx-auto d-block" alt=""/>
+    <label class="custom-file" [ngClass]="{'col-xs-10': logo, 'col-xs-12': !logo}">
       <input type="file" id="file" class="custom-file-input" (change)="logoChange(logoInput)" #logoInput>
-      <span class="custom-file-control">Click here to choose logo</span>
+      <span class="custom-file-control">Click to choose logo</span>
     </label>
+    <a type="button" *ngIf="logo" class="btn btn-success col-xs-2" (click)="editConfig('logo', logo)">V</a>
   </div>
-  <div class="col-md-9">
-    <img [attr.src]='banner' class="img-thumbnail rounded mx-auto d-block" alt=""/>
-    <label class="custom-file col-xs-12">
+  <div class="col-md-7">
+    <img *ngIf="banner" [attr.src]='banner' class="img-thumbnail rounded mx-auto d-block" alt=""/>
+    <label class="custom-file"  [ngClass]="{'col-xs-10': banner, 'col-xs-12': !banner}">
       <input type="file" id="file" class="custom-file-input" (change)="bannerChange(bannerInput)" #bannerInput>
       <span class="custom-file-control">Click here to choose banner</span>
     </label>
+    <a type="button" *ngIf="banner" class="btn btn-success col-xs-2" (click)="editConfig('banner', banner)">Submit</a>
   </div>
+  <a type="button" class="btn btn-danger col-xs-2" (click)="editConfig('logo', null); editConfig('banner', null)">Supprimer les logos</a>
 </div>
 
 <app-form-list title="Pages" [newItem]="newPage" [items]="pages" (selectedItem)="selectPage($event)">

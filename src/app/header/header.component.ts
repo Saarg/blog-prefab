@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
     this.getPages();
   }
 
-  getLogos(): void {
+  getLogos(){
     this.configService.getLogo().then(logo => this.logo = logo);
     this.configService.getBanner().then(banner => this.banner = banner);
   }
