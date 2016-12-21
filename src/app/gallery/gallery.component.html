@@ -1,29 +1,31 @@
-<div class="row galleryDivContainer">
-  <h1 *ngIf="pageInfo">{{pageInfo.name}}</h1>
+<div class="container pt-1 pb-1">
+  <div class="row galleryDivContainer">
+    <h1 *ngIf="pageInfo">{{pageInfo.name}}</h1>
 
-  <div class=popupContainer  *ngIf="token">
-    <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">add media(s)</button>
-    <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'import media'" [popupWidth]="5" (onClose)="formPopupOnClose()">
-      <app-media-form (newMediaEvent)="newMedia($event)" ></app-media-form>
+    <div class=popupContainer  *ngIf="token">
+      <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">add media(s)</button>
+      <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'import media'" [popupWidth]="5" (onClose)="formPopupOnClose()">
+        <app-media-form (newMediaEvent)="newMedia($event)" ></app-media-form>
+      </app-popup>
+    </div>
+
+    <div *ngFor="let image of images" class="galleryDiv col-xs-12 col-sm-6 col-md-4 col-xl-3">
+      <div class="thumbnail col-xs-12" (click)="displayMedia(image)">
+        <img src="/api/public/media/{{image.media}}/show">
+      </div>
+    </div>
+
+
+    <button *ngIf="gimmeMoreShow" type="button" class="btn btn-info btnGimmeMore" (click)="showMoreMedias()">Load me more !</button>
+
+
+    <app-popup *ngIf="popupMedia != null" class=popup [popupTitle]="'Closer Look'" [popupWidth]="8" (onClose)="onDisplayMediaClose()">
+      <img src="/api/public/media/{{popupMedia.media}}/show">
+      <div *ngIf="token" class="mediaDeleteButtonContainer">
+        <button class="btn btn-danger deleteButton" (click)="deleteMedia(popupMedia)">Delete</button>
+      </div>
+
     </app-popup>
+
   </div>
-
-  <div *ngFor="let image of images" class="galleryDiv col-xs-12 col-sm-6 col-md-4 col-xl-3">
-    <div class="thumbnail col-xs-12" (click)="displayMedia(image)">
-      <img src="/api/public/media/{{image.media}}/show">
-    </div>
-  </div>
-
-
-  <button *ngIf="gimmeMoreShow" type="button" class="btn btn-info btnGimmeMore" (click)="showMoreMedias()">Load me more !</button>
-
-
-  <app-popup *ngIf="popupMedia != null" class=popup [popupTitle]="'Closer Look'" [popupWidth]="8" (onClose)="onDisplayMediaClose()">
-    <img src="/api/public/media/{{popupMedia.media}}/show">
-    <div *ngIf="token" class="mediaDeleteButtonContainer">
-      <button class="btn btn-danger deleteButton" (click)="deleteMedia(popupMedia)">Delete</button>
-    </div>
-
-  </app-popup>
-
 </div>

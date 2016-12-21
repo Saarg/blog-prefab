@@ -1,32 +1,34 @@
-<div class="row">
-  <h1 *ngIf="pageInfo">{{pageInfo.name}}</h1>
+<div class="container">
+  <div class="row">
+    <h1 *ngIf="pageInfo">{{pageInfo.name}}</h1>
 
-  <div class=popupContainer  *ngIf="token">
-    <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">add activity</button>
+    <div class=popupContainer  *ngIf="token">
+      <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">add activity</button>
 
-    <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'Create new Activity'" [popupWidth]="5" (onClose)="formPopupOnClose()">
-      <app-activity-form [pageId]="curId" (newActivityEvent)="newActivity($event) || formPopupOnClose()" ></app-activity-form>
-    </app-popup>
-  </div>
+      <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'Create new Activity'" [popupWidth]="5" (onClose)="formPopupOnClose()">
+        <app-activity-form [pageId]="curId" (newActivityEvent)="newActivity($event) || formPopupOnClose()" ></app-activity-form>
+      </app-popup>
+    </div>
 
-  <div class="panel-group">
-    <div *ngFor="let activity of activities; let i = index; let e = even" class="panel panel-default list-group-item row">
-      <div class="col-xs-8 col-sm-9 col-md-10 head" (click)="activity.show = !activity.show">
-        <h4 class='float-xs-left'><span [ngClass]="{'arrow-down': !activity.show, 'arrow-up': activity.show}" class="arrow-down"></span>{{activity.title}}</h4>
-        <span class='float-xs-right hidden-xs-down'>
-          {{activity.participants.length}} participants
-        </span>
-      </div>
-      <button type="button" class="btn btn-info col-xs-4 col-sm-3 col-md-2" (click)="joinInButtonCB(i)">S'inscrire</button>
-
-      <div *ngIf="activity.show" class="col-xs-12">
-        <div *ngIf="activity.mimetype">
-          <div>
-            <img [ngClass]="{'float-xs-right': e, 'float-xs-left': !e}" class="hidden-xs-down" src={{activity.media}}>
-          </div>
+    <div class="panel-group">
+      <div *ngFor="let activity of activities; let i = index; let e = even" class="panel panel-default list-group-item row">
+        <div class="col-xs-8 col-sm-9 col-md-10 head" (click)="activity.show = !activity.show">
+          <h4 class='float-xs-left'><span [ngClass]="{'arrow-down': !activity.show, 'arrow-up': activity.show}" class="arrow-down"></span>{{activity.title}}</h4>
+          <span class='float-xs-right hidden-xs-down'>
+            {{activity.participants.length}} participants
+          </span>
         </div>
-        <div class="panel-body activityText">{{activity.text}}</div>
-        <div class="locationDiv">Location : {{activity.location}}</div>
+        <button type="button" class="btn btn-info col-xs-4 col-sm-3 col-md-2" (click)="joinInButtonCB(i)">S'inscrire</button>
+
+        <div *ngIf="activity.show" class="col-xs-12">
+          <div *ngIf="activity.mimetype">
+            <div>
+              <img [ngClass]="{'float-xs-right': e, 'float-xs-left': !e}" class="hidden-xs-down" src={{activity.media}}>
+            </div>
+          </div>
+          <div class="panel-body activityText">{{activity.text}}</div>
+          <div class="locationDiv">Location : {{activity.location}}</div>
+        </div>
       </div>
     </div>
   </div>

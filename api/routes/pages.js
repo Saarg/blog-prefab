@@ -81,7 +81,7 @@ module.exports = (privateRouter, publicRouter) => {
     Page.findById(req.params.page_id, (err, page) => {
       if (err) res.send(err);
       page.name = req.body.name ? req.body.name : page.name;
-      page.description = req.body.description ? req.body.description : page.description;
+      page.description = req.body.description;
       page.type = req.body.type ? req.body.type : page.type;
       page.position = req.body.position ? req.body.position : page.position;
       page.inNav = req.body.inNav ? req.body.inNav : page.inNav;
