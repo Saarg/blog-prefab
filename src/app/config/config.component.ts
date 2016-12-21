@@ -82,8 +82,8 @@ export class ConfigComponent implements OnInit {
   getPages() {
     this.pageService.getPages().then(res => {
       if (!res) { return; }
-      this.pages = res.pages ? res.pages : this.pages;
-      this.curPage = this.pages ? this.pages[0] : this.newPage;
+      this.pages = res.pages.length ? res.pages : this.pages;
+      this.curPage = this.pages.length ? this.pages[0] : this.newPage;
     });
   }
 
