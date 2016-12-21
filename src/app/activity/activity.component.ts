@@ -16,6 +16,7 @@ export class ActivityComponent implements OnInit {
   public token = null;
 
   public curId = null;
+  public pageInfo = null;
 
   private subscription: Subscription;
 
@@ -41,11 +42,7 @@ export class ActivityComponent implements OnInit {
     this.subscription = this.route.params.subscribe((param: any) => {
       this.curId = param['id'];
 
-      if (!this.curId) {
-        this.getDefaultId();
-      } else {
-        this.getActivities();
-      }
+      this.getPageInfos();
     });
   }
 
@@ -71,11 +68,19 @@ export class ActivityComponent implements OnInit {
     });
   }
 
-  getDefaultId() {
-    this.pageService.getDefaultActivity().then(res => {
-      if (!res) { return; }
-      this.curId = res.page._id;
-      this.getActivities();
+  getPageInfos() {
+    this.pageService.getPage(this.curId).then(res => {
+      if (res.success === "false") {
+        this.pageService.getDefaultActivity().then(res => {
+          if (!res) { return; }
+          this.curId = res.page._id;
+          this.pageInfo = res.page;
+          this.getActivities();
+        });
+      } else {
+        this.pageInfo = res.page;
+        this.getActivities();
+      }
     });
   }
 

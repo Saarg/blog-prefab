@@ -1,5 +1,5 @@
 <div class="row galleryDivContainer">
-  <h1>Gallery</h1>
+  <h1 *ngIf="pageInfo">{{pageInfo.name}}</h1>
 
   <div class=popupContainer  *ngIf="token">
     <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">add media(s)</button>

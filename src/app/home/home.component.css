@@ -4,7 +4,7 @@ img{
 }
 
 h2{
-  color: #003c6f;
+  color: #323E55;
 }
 
 .rightImg{float:right;}
@@ -38,10 +38,10 @@ a{
 }
 
 .articleOdd{
-  background-color: #fafafa;
+  background-color: #D7E5EC;
 }
 .articleEven{
-  background-color: #f5f5f5;
+  background-color: #DDEBF4;
 }
 
 .navButtonLike{

@@ -19,6 +19,7 @@ export class GalleryComponent implements OnInit {
   private subscription: Subscription;
 
   public curId = null;
+  public pageInfo = null;
 
   public images = [];
 
@@ -44,11 +45,7 @@ export class GalleryComponent implements OnInit {
     this.subscription = this.route.params.subscribe((param: any) => {
       this.curId = param['id'];
 
-      if (!this.curId) {
-        this.getDefaultId();
-      } else {
-        this.getMedias();
-      }
+      this.getPageInfos();
     });
   }
 
@@ -78,11 +75,19 @@ export class GalleryComponent implements OnInit {
     }
   }
 
-  getDefaultId() {
-    this.pageService.getDefaultGallery().then(res => {
-      if (!res) { return; }
-      this.curId = res.page._id;
-      this.getMedias();
+  getPageInfos() {
+    this.pageService.getPage(this.curId).then(res => {
+      if (res.success === "false") {
+        this.pageService.getDefaultGallery().then(res => {
+          if (!res) { return; }
+          this.curId = res.page._id;
+          this.pageInfo = res.page;
+          this.getMedias();
+        });
+      } else {
+        this.pageInfo = res.page;
+        this.getMedias();
+      }
     });
   }
 
