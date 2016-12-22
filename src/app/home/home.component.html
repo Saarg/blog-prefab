@@ -19,7 +19,9 @@
   <div class="col-md-12 col-lg-12">
     <!-- Articles -->
     <article *ngFor="let article of articles; let i = index; let e = even" class="row card" [ngClass]="{'articleEven': e, 'articleOdd': !e}" id='{{i}}home'>
-      <app-article-form *ngIf="article.editing" [pageId]="curId" [article]="article" (newArticleEvent)="editArticle($event, article)" (deletedArticleEvent)="deleteArticle($event)"></app-article-form>
+      <div class="container" *ngIf="article.editing" >
+        <app-article-form [pageId]="curId" [article]="article" (newArticleEvent)="editArticle($event, article)" (deletedArticleEvent)="deleteArticle($event)"></app-article-form>
+      </div>
       <div *ngIf="!article.editing" (click)="article.editing = token ? !article.editing : false" class="container">
         <h2>{{article.title}}</h2>
         <div>
