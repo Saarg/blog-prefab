@@ -93,10 +93,10 @@ module.exports = (privateRouter, publicRouter) => {
         });
       }
 
-      if(req.body.media && req.body.mimetype === 'image') {
-                article.mimetype = req.body.media.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
+      if(req.body.media !== article.media && req.body.mimetype === 'image') {
+        article.mimetype = req.body.media.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
         article.media = fileSaver('media', req.body.media);
-      } else if (req.body.media && req.body.mimetype === 'youtube') {
+      } else if (req.body.media !== article.media && req.body.mimetype === 'youtube') {
         article.mimetype = "youtube";
         article.media = req.body.media.replace("watch?v=", "embed/");
       }
