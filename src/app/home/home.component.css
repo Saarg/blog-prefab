@@ -4,15 +4,20 @@
 
 img{
   width: 100%;
-  margin:10px;
 }
 
 h2{
   color: #323E55;
 }
 
-.rightImg{float:right;}
-.leftImg{float:left;}
+.rightImg{
+  float:right;
+  padding-right: 0px;
+}
+.leftImg{
+  float:left;
+  padding-left: 0px;
+}
 
 article{
   padding: 20px;

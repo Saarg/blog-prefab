@@ -24,8 +24,8 @@
         <h2>{{article.title}}</h2>
         <div>
           <div *ngIf="article.mimetype && article.mimetype !== 'youtube'">
-            <div class="col-md-4 col-sm-12">
-              <img [ngClass]="{'rightImg': e, 'leftImg': !e}" src="/api/public/media/{{article.media}}/show">
+            <div class="col-md-4 col-sm-12" [ngClass]="{'rightImg': e, 'leftImg': !e}">
+              <img src="/api/public/media/{{article.media}}/show">
             </div>
           </div>
           <div *ngIf="article.mimetype === 'youtube'">
