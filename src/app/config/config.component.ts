@@ -126,27 +126,49 @@ export class ConfigComponent implements OnInit {
   }
 
   movePageUp() {
-    let tmp = this.curPage.position;
-    this.curPage.position = this.pages[this.pages.indexOf(this.curPage)].position;
-    this.pages[this.pages.indexOf(this.curPage) - 1].position = tmp
+    let page1 = this.pages[this.pages.indexOf(this.curPage)];
+    let page2 = this.pages[this.pages.indexOf(this.curPage) - 1];
+    let i = this.pages.indexOf(this.curPage);
+
+    let pos1 = page1.position;
+    page1.position = page2.position;
+    this.pageService.editPage(page1).then(res => {
+      if (!res) { return; }
+      if (res.success) {
+        this.pages[i - 1] = page1;
+      }
+    });
+
+    page2.position = pos1;
+    this.pageService.editPage(page2).then(res => {
+      if (!res) { return; }
+      if (res.success) {
+        this.pages[i] = page2;
+      }
+    });
   }
 
   movePageDown() {
-    let tmp = this.curPage.position;
-    let page = this.curPage;
-    this.curPage.position = this.pages[this.pages.indexOf(this.curPage) + 1].position;
+    let page1 = this.pages[this.pages.indexOf(this.curPage)];
+    let page2 = this.pages[this.pages.indexOf(this.curPage) + 1];
+    let i = this.pages.indexOf(this.curPage);
 
-    //editPage();
+    let pos1 = page1.position;
+    page1.position = page2.position;
+    this.pageService.editPage(page1).then(res => {
+      if (!res) { return; }
+      if (res.success) {
+        this.pages[i + 1] = page1;
+      }
+    });
 
-    this.curPage = this.pages[this.pages.indexOf(this.curPage) + 1];
-    this.curPage.position = tmp;
-
-    //editPage();
-
-    this.pages[this.pages.indexOf(this.curPage) - 1] = this.curPage;
-    this.pages[this.pages.indexOf(this.curPage)] = page;
-
-    console.log(this.pages);
+    page2.position = pos1;
+    this.pageService.editPage(page2).then(res => {
+      if (!res) { return; }
+      if (res.success) {
+        this.pages[i] = page2;
+      }
+    });
   }
 
 }

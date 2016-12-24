@@ -7,7 +7,9 @@ const Page = require('./../models/pages');
 module.exports = (privateRouter, publicRouter) => {
   // pages api route
   publicRouter.route('/pages').get((req, res) => {
-    Page.find((err, pages) => {
+    Page.find()
+    .sort({position: 1})
+    .exec((err, pages) => {
       if (err) {
         res.json({ success: false, message: err });
         return;
@@ -83,7 +85,7 @@ module.exports = (privateRouter, publicRouter) => {
       page.name = req.body.name ? req.body.name : page.name;
       page.description = req.body.description;
       page.type = req.body.type ? req.body.type : page.type;
-      page.position = req.body.position ? req.body.position : page.position;
+      page.position = req.body.position;
       page.inNav = req.body.inNav ? req.body.inNav : page.inNav;
       page.updated = Date.now();
 
