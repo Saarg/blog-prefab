@@ -18,11 +18,13 @@ export class FormListComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.curItem = this.newItem;
+    this.selectedItem.next(this.curItem);
   }
 
   ngOnChanges() {
-    this.curItem = this.newItem;
+    this.curItem = this.items[0];
     console.log(this.items);
+    this.selectedItem.next(this.curItem);
   }
 
   selectItem(item) {

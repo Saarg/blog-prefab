@@ -28,12 +28,17 @@
       <div class="form-group col-xs-10 pl-0">
         <input type="text" class="form-control" id="title" [(ngModel)]="curPage.name" name="name">
       </div>
-      <div class="form-group col-xs-2 pr-0">
+      <div class="form-group col-xs-2 pr-0" *ngIf="!curPage._id">
         <select class="custom-select" id="mimetype" [(ngModel)]="curPage.type" name="type">
           <option selected value="0">Blog type</option>
           <option value="1">Activity type</option>
           <option value="2">Gallery type</option>
         </select>
+      </div>
+
+      <div class="form-group col-xs-2" *ngIf="curPage._id">
+        <a type="button" class="btn btn-secondary col-xs-6" (click)="movePageUp()">up</a>
+        <a type="button" class="btn btn-secondary col-xs-6" (click)="movePageDown()">down</a>
       </div>
 
       <div class="form-group">
@@ -42,7 +47,7 @@
 
       <div class="form-group">
         <a type="button" *ngIf="curPage._id" class="btn btn-danger col-xs-2 mr-1 float-xs-left" (click)="deletePage()">Delete</a>
-        <button type="submit" class="btn btn-primary col-xs-2 float-xs-right">Submit</button>
+        <button type="submit" class="btn btn-success col-xs-2 float-xs-right">Submit</button>
       </div>
     </form>
   </app-form-list>

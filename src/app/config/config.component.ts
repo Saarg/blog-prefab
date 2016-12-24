@@ -125,4 +125,28 @@ export class ConfigComponent implements OnInit {
     });
   }
 
+  movePageUp() {
+    let tmp = this.curPage.position;
+    this.curPage.position = this.pages[this.pages.indexOf(this.curPage)].position;
+    this.pages[this.pages.indexOf(this.curPage) - 1].position = tmp
+  }
+
+  movePageDown() {
+    let tmp = this.curPage.position;
+    let page = this.curPage;
+    this.curPage.position = this.pages[this.pages.indexOf(this.curPage) + 1].position;
+
+    //editPage();
+
+    this.curPage = this.pages[this.pages.indexOf(this.curPage) + 1];
+    this.curPage.position = tmp;
+
+    //editPage();
+
+    this.pages[this.pages.indexOf(this.curPage) - 1] = this.curPage;
+    this.pages[this.pages.indexOf(this.curPage)] = page;
+
+    console.log(this.pages);
+  }
+
 }
