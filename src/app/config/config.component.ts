@@ -178,4 +178,40 @@ export class ConfigComponent implements OnInit {
     });
   }
 
+  addInfo(info) {
+    this.infos.push(info);
+  }
+
+  editInfo(info) {
+
+  }
+
+  deleteInfo(info) {
+    this.infos.splice(this.infos.indexOf(info), 1);
+  }
+
+  addPartner(partner) {
+    this.partners.push(partner);
+  }
+
+  editPartner(partner) {
+
+  }
+
+  deletePartner(partner) {
+    this.partners.splice(this.partners.indexOf(partner), 1);
+  }
+
+  addContact(contact) {
+    this.contacts.push(contact);
+  }
+
+  editContact(contact) {
+
+  }
+
+  deleteContact(contact) {
+    this.contacts.splice(this.contacts.indexOf(contact), 1);
+  }
+
 }
