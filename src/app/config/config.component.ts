@@ -23,6 +23,13 @@ export class ConfigComponent implements OnInit {
   public logo;
   public banner;
 
+  public infos = ['Lorem ipsum dolor sit amet.', 'Lorem ipsum dolor sit amet.', 'Lorem ipsum dolor sit amet.'];
+  public newInfo = 'new info';
+  public partners = ['Ford Perfect', 'Marvin'];
+  public newPartner = 'new partner';
+  public contacts = ['Stavro Mueller Beta', 'London', '01 42 03 0425', 'superadresse@gmail.com'];
+  public newContact = 'new contact';
+
   constructor(
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
