@@ -5,10 +5,7 @@
         <h3 class="card-header">Des infos</h3>
       </div>
       <ul class="list-group list-group-flush">
-        <li>Lorem ipsum dolor sit amet.</li>
-        <li>Lorem ipsum dolor sit amet.</li>
-        <li>Lorem ipsum dolor sit amet.</li>
-        <li>Lorem ipsum dolor sit amet.</li>
+        <li *ngFor="let info of infos">{{info}}</li>
       </ul>
     </div>
     <div class="col-sm-6 col-md-4 hidden-xs-down">
@@ -16,8 +13,7 @@
         <h3 class="card-header">Partenaires</h3>
       </div>
       <ul class="list-group list-group-flush">
-        <li>Ford Perfect</li>
-        <li>Marvin</li>
+        <li *ngFor="let partner of partners">{{partner}}</li>
       </ul>
     </div>
     <div class="col-xs-12 col-sm-6 col-md-4">
@@ -25,10 +21,7 @@
         <h3 class="card-header">Contact</h3>
       </div>
       <ul class="list-group list-group-flush">
-        <li>Stavro Mueller Beta</li>
-        <li>London</li>
-        <li>01 42 03 0425</li>
-        <li>superadresse@gmail.com</li>
+        <li *ngFor="let contact of contacts">{{contact}}</li>
       </ul>
     </div>
   </div>

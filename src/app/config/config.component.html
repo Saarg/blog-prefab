@@ -62,11 +62,11 @@
           <li *ngFor="let info of infos; let i = index">
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-danger" type="button" (click)="deleteInfo(info)">X</button>
+                <button class="btn btn-danger" type="button" (click)="deleteInfo(info)">x</button>
               </span>
               <input type="text" class="form-control" [(ngModel)]="infos[i]" name="info">
               <span class="input-group-btn">
-                <button class="btn btn-success" type="button" (click)="editInfo(info)">V</button>
+                <button class="btn btn-success" type="button" (click)="editInfo(info)">v</button>
               </span>
             </div>
           </li>
@@ -75,7 +75,7 @@
         <div class="input-group">
           <input type="text" class="form-control" [(ngModel)]="newInfo" name="newInfo">
           <span class="input-group-btn">
-            <button class="btn btn-success" type="button" (click)="addInfo(newInfo)">V</button>
+            <button class="btn btn-success" type="button" (click)="addInfo(newInfo)">+</button>
           </span>
         </div>
       </div>
@@ -88,11 +88,11 @@
           <li *ngFor="let partner of partners; let i = index">
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-danger" type="button" (click)="deletePartner(partner)">X</button>
+                <button class="btn btn-danger" type="button" (click)="deletePartner(partner)">x</button>
               </span>
               <input type="text" class="form-control" [(ngModel)]="partners[i]" name="partner">
               <span class="input-group-btn">
-                <button class="btn btn-success" type="button" (click)="editPartner(partner)">V</button>
+                <button class="btn btn-success" type="button" (click)="editPartner(partner)">v</button>
               </span>
             </div>
           </li>
@@ -101,7 +101,7 @@
         <div class="input-group">
           <input type="text" class="form-control" [(ngModel)]="newPartner" name="newPartner">
           <span class="input-group-btn">
-            <button class="btn btn-success" type="button" (click)="addPartner(newPartner)">V</button>
+            <button class="btn btn-success" type="button" (click)="addPartner(newPartner)">+</button>
           </span>
         </div>
       </div>
@@ -114,11 +114,11 @@
           <li *ngFor="let contact of contacts; let i = index">
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-danger" type="button" (click)="deleteContact(contact)">X</button>
+                <button class="btn btn-danger" type="button" (click)="deleteContact(contact)">x</button>
               </span>
               <input type="text" class="form-control" [(ngModel)]="contacts[i]" name="contact">
               <span class="input-group-btn">
-                <button class="btn btn-success" type="button" (click)="editContact(contact)">V</button>
+                <button class="btn btn-success" type="button" (click)="editContact(contact)">v</button>
               </span>
             </div>
           </li>
@@ -127,7 +127,7 @@
         <div class="input-group">
           <input type="text" class="form-control" [(ngModel)]="newContact" name="newContact">
           <span class="input-group-btn">
-            <button class="btn btn-success" type="button" (click)="addContact(newContact)">V</button>
+            <button class="btn btn-success" type="button" (click)="addContact(newContact)">+</button>
           </span>
         </div>
       </div>

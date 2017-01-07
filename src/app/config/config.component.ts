@@ -46,6 +46,9 @@ export class ConfigComponent implements OnInit {
     }
 
     this.getPages();
+    this.getInfos();
+    this.getPartners();
+    this.getContact();
   }
 
   logoChange(input) {
@@ -178,40 +181,91 @@ export class ConfigComponent implements OnInit {
     });
   }
 
+  getInfos() {
+    this.configService.getValue('infos').then(res => {
+      if (!res) { return; }
+      this.infos = res.config ? res.config[0].value.split(',') : this.infos;
+    });
+  }
+
   addInfo(info) {
     this.infos.push(info);
+
+    this.saveInfos();
   }
 
   editInfo(info) {
-
+    this.saveInfos();
   }
 
   deleteInfo(info) {
     this.infos.splice(this.infos.indexOf(info), 1);
+
+    this.saveInfos();
+  }
+
+  saveInfos() {
+    this.configService.setValue('infos', this.infos).then(res => {
+      if (!res) { return; }
+    });
+  }
+
+  getPartners() {
+    this.configService.getValue('partners').then(res => {
+      if (!res) { return; }
+      this.partners = res.config ? res.config[0].value.split(',') : this.partners;
+    });
   }
 
   addPartner(partner) {
     this.partners.push(partner);
+
+    this.savePartners();
   }
 
   editPartner(partner) {
-
+    this.savePartners();
   }
 
   deletePartner(partner) {
     this.partners.splice(this.partners.indexOf(partner), 1);
+
+    this.savePartners();
+  }
+
+  savePartners() {
+    this.configService.setValue('partners', this.partners).then(res => {
+      if (!res) { return; }
+    });
+  }
+
+  getContact() {
+    this.configService.getValue('contact').then(res => {
+      if (!res) { return; }
+      this.contacts = res.config ? res.config[0].value.split(',') : this.contacts;
+    });
   }
 
   addContact(contact) {
     this.contacts.push(contact);
+
+    this.saveContacts();
   }
 
   editContact(contact) {
-
+    this.saveContacts();
   }
 
   deleteContact(contact) {
     this.contacts.splice(this.contacts.indexOf(contact), 1);
+
+    this.saveContacts();
+  }
+
+  saveContacts() {
+    this.configService.setValue('contact', this.contacts).then(res => {
+      if (!res) { return; }
+    });
   }
 
 }

@@ -41,5 +41,4 @@ export class ConfigService {
                .then(response => response.json())
                .catch(console.error);
   }
-
 }
