@@ -1,7 +1,7 @@
 # Main TODO list for the 14/01
 - [x] Page orbering in admin
 - [ ] Form to add image description when logged in
-- [ ] Form in admin view to edit footer
+- [x] Form in admin view to edit footer
 - [ ] Multiple sessions
 - [ ] Translate texts and buttons to french
 
