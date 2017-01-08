@@ -59,7 +59,7 @@
       <div class="card">
         <h3 class="card-header">Des infos</h3>
         <ul>
-          <li *ngFor="let info of infos; let i = index">
+          <li *ngFor="let info of infoscpy; let i = index">
             <div class="input-group">
               <span class="input-group-btn">
                 <button class="btn btn-danger" type="button" (click)="deleteInfo(info)">x</button>
@@ -85,7 +85,7 @@
       <div class="card">
         <h3 class="card-header">Partenaires</h3>
         <ul>
-          <li *ngFor="let partner of partners; let i = index">
+          <li *ngFor="let partner of partnerscpy; let i = index">
             <div class="input-group">
               <span class="input-group-btn">
                 <button class="btn btn-danger" type="button" (click)="deletePartner(partner)">x</button>
@@ -111,7 +111,7 @@
       <div class="card">
         <h3 class="card-header">Contact</h3>
         <ul>
-          <li *ngFor="let contact of contacts; let i = index">
+          <li *ngFor="let contact of contactscpy; let i = index">
             <div class="input-group">
               <span class="input-group-btn">
                 <button class="btn btn-danger" type="button" (click)="deleteContact(contact)">x</button>

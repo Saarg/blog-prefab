@@ -23,11 +23,14 @@ export class ConfigComponent implements OnInit {
   public logo;
   public banner;
 
-  public infos = ['Lorem ipsum dolor sit amet.', 'Lorem ipsum dolor sit amet.', 'Lorem ipsum dolor sit amet.'];
+  public infos = [];
+  public infoscpy = [];
   public newInfo = 'new info';
-  public partners = ['Ford Perfect', 'Marvin'];
+  public partners = [];
+  public partnerscpy = [];
   public newPartner = 'new partner';
-  public contacts = ['Stavro Mueller Beta', 'London', '01 42 03 0425', 'superadresse@gmail.com'];
+  public contacts = [];
+  public contactscpy = [];
   public newContact = 'new contact';
 
   constructor(
@@ -184,7 +187,8 @@ export class ConfigComponent implements OnInit {
   getInfos() {
     this.configService.getValue('infos').then(res => {
       if (!res) { return; }
-      this.infos = res.config ? res.config[0].value.split(',') : this.infos;
+      this.infos = res.config ? res.config[0].value : this.infos;
+      this.infoscpy = Array.from(this.infos);
     });
   }
 
@@ -207,13 +211,16 @@ export class ConfigComponent implements OnInit {
   saveInfos() {
     this.configService.setValue('infos', this.infos).then(res => {
       if (!res) { return; }
+      this.infos = res.config ? res.config.value : this.infos;
+      this.infoscpy = Array.from(this.infos);
     });
   }
 
   getPartners() {
     this.configService.getValue('partners').then(res => {
       if (!res) { return; }
-      this.partners = res.config ? res.config[0].value.split(',') : this.partners;
+      this.partners = res.config ? res.config[0].value : this.partners;
+      this.partnerscpy = Array.from(this.partners);
     });
   }
 
@@ -236,13 +243,16 @@ export class ConfigComponent implements OnInit {
   savePartners() {
     this.configService.setValue('partners', this.partners).then(res => {
       if (!res) { return; }
+      this.partners = res.config ? res.config.value : this.partners;
+      this.partnerscpy = Array.from(this.partners);
     });
   }
 
   getContact() {
     this.configService.getValue('contact').then(res => {
       if (!res) { return; }
-      this.contacts = res.config ? res.config[0].value.split(',') : this.contacts;
+      this.contacts = res.config ? res.config[0].value : this.contacts;
+      this.contactscpy = Array.from(this.contacts);
     });
   }
 
@@ -265,6 +275,8 @@ export class ConfigComponent implements OnInit {
   saveContacts() {
     this.configService.setValue('contact', this.contacts).then(res => {
       if (!res) { return; }
+      this.contacts = res.config ? res.config.value : this.contacts;
+      this.contactscpy = Array.from(this.contacts);
     });
   }
 

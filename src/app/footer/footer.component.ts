@@ -27,21 +27,21 @@ export class FooterComponent implements OnInit {
   getInfos() {
     this.configService.getValue('infos').then(res => {
       if (!res) { return; }
-      this.infos = res.config ? res.config[0].value.split(',') : this.infos;
+      this.infos = res.config ? res.config[0].value : this.infos;
     });
   }
 
   getPartners() {
     this.configService.getValue('partners').then(res => {
       if (!res) { return; }
-      this.partners = res.config ? res.config[0].value.split(',') : this.partners;
+      this.partners = res.config ? res.config[0].value : this.partners;
     });
   }
 
   getContact() {
     this.configService.getValue('contact').then(res => {
       if (!res) { return; }
-      this.contacts = res.config ? res.config[0].value.split(',') : this.contacts;
+      this.contacts = res.config ? res.config[0].value : this.contacts;
     });
   }
 
