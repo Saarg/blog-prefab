@@ -65,7 +65,7 @@
                 <button class="btn btn-danger" type="button" (click)="deleteInfo(info)">x</button>
               </span>
               <input type="text" class="form-control" [(ngModel)]="infos[i]" name="info">
-              <span class="input-group-btn">
+              <span class="input-group-btn" *ngIf="infos[i] !== infoscpy[i]">
                 <button class="btn btn-success" type="button" (click)="editInfo(info)">v</button>
               </span>
             </div>
@@ -91,7 +91,7 @@
                 <button class="btn btn-danger" type="button" (click)="deletePartner(partner)">x</button>
               </span>
               <input type="text" class="form-control" [(ngModel)]="partners[i]" name="partner">
-              <span class="input-group-btn">
+              <span class="input-group-btn" *ngIf="partners[i] !== partnerscpy[i]">
                 <button class="btn btn-success" type="button" (click)="editPartner(partner)">v</button>
               </span>
             </div>
@@ -117,7 +117,7 @@
                 <button class="btn btn-danger" type="button" (click)="deleteContact(contact)">x</button>
               </span>
               <input type="text" class="form-control" [(ngModel)]="contacts[i]" name="contact">
-              <span class="input-group-btn">
+              <span class="input-group-btn" *ngIf="contacts[i] !== contactscpy[i]">
                 <button class="btn btn-success" type="button" (click)="editContact(contact)">v</button>
               </span>
             </div>
