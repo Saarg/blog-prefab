@@ -10,7 +10,7 @@ const jwt           = require('jsonwebtoken');
 const User          = require('./models/users');
 
 module.exports = (app) => {
-  //app.use(session({ secret: 'keyboard cat' }));
+  // app.use(session({ secret: 'keyboard cat' }));
 
   // use passport for auth
   app.use(passport.initialize());

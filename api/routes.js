@@ -26,13 +26,14 @@ module.exports = (app, privateRouter, publicRouter) => {
     });
     }
   });
-  
+
   publicRouter.route('/:folder/:media_id/show')
   .get((req, res) => {
     const path = Path.join(__dirname, 'data', req.params.folder, req.params.media_id)
     res.sendFile(path);
   });
 
+  require('./routes/users')(privateRouter, publicRouter);
   require('./routes/configs')(privateRouter, publicRouter);
   require('./routes/pages')(privateRouter, publicRouter);
   require('./routes/activities')(privateRouter, publicRouter);

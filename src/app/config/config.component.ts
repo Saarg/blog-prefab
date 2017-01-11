@@ -14,14 +14,20 @@ import { UserService } from './../../services/user.service';
 export class ConfigComponent implements OnInit {
 
   public token = null;
+
+  public logo;
+  public banner;
+
   public pages = [];
   public pageTypes = ['article', 'activity', 'gallery'];
   private newPage = { name: 'New page', description: '', type: 0, position: -1, inNav: true };
 
   public curPage = { name: 'New page', description: '', type: 0, position: -1, inNav: true };
 
-  public logo;
-  public banner;
+  public users = [];
+  private newUser = { name: 'new user', password: '', accessLevel: 0 };
+
+  public curUser = { name: 'new user', password: '', accessLevel: 0 };
 
   public infos = [];
   public infoscpy = [];
@@ -52,6 +58,7 @@ export class ConfigComponent implements OnInit {
     this.getInfos();
     this.getPartners();
     this.getContact();
+    this.getUsers();
   }
 
   logoChange(input) {
@@ -182,6 +189,20 @@ export class ConfigComponent implements OnInit {
         this.pages[i] = page2;
       }
     });
+  }
+
+  getUsers() {
+    this.userService.getUsers().then(res => {
+      if (!res) { return; }
+      if (res.success) {
+        this.users = res.users;
+        console.log(res.users);
+      }
+    });
+  }
+
+  selectUser(user) {
+    this.curUser = user;
   }
 
   getInfos() {

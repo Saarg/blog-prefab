@@ -52,6 +52,27 @@
     </form>
   </app-form-list>
 
+  <app-form-list title="Users" [newItem]="newUser" [items]="users" (selectedItem)="selectUser($event)">
+    <form class="col-xs-10">
+      <div class="form-group col-xs-10">
+        <input type="text" class="form-control" id="title" [(ngModel)]="curUser.name" name="name">
+      </div>
+
+      <div class="form-group col-xs-2 pr-0">
+        <select class="custom-select" id="accessLevel" [(ngModel)]="curUser.accessLevel" name="accessLevel">
+          <option selected value="0">Contributeur</option>
+          <option value="1">Admin</option>
+          <option value="2">Dev</option>
+        </select>
+      </div>
+
+      <div class="form-group col-xs-6">
+        <input type="text" class="form-control" id="title" [(ngModel)]="curUser.password" name="password">
+      </div>
+      <button type="submit" class="btn btn-success col-xs-6">Submit</button>
+    </form>
+  </app-form-list>
+
   <div class="row card">
     <h2>Footer</h2>
     <hr/>

@@ -31,4 +31,32 @@ export class UserService {
       return 1;
     }
   }
+
+  getUsers(): Promise<any> {
+    return this.httpClient.get('/api/private/users')
+               .toPromise()
+               .then(response => response.json())
+               .catch(console.error);
+  }
+
+  addUsers(user): Promise<any> {
+    return this.httpClient.post('/api/private/users', user)
+               .toPromise()
+               .then(response => response.json())
+               .catch(console.error);
+  }
+
+  editUsers(user): Promise<any> {
+    return this.httpClient.put('/api/private/users', user)
+               .toPromise()
+               .then(response => response.json())
+               .catch(console.error);
+  }
+
+  deleteUsers(email): Promise<any> {
+    return this.httpClient.delete('/api/private/users/' + email)
+               .toPromise()
+               .then(response => response.json())
+               .catch(console.error);
+  }
 }
