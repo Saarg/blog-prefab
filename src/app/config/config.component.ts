@@ -205,6 +205,35 @@ export class ConfigComponent implements OnInit {
     this.curUser = user;
   }
 
+  addUser() {
+    this.userService.addUser(this.curUser).then(res => {
+      if (!res) { return; }
+      if (res.success) {
+        this.users.push(res.user);
+        this.curUser = res.user;
+      }
+    });
+  }
+
+  editUser() {
+    this.userService.editUser(this.curUser).then(res => {
+      if (!res) { return; }
+      if (res.success) {
+        this.users[this.pages.indexOf(this.curUser)] = res.user;
+        this.curUser = res.user;
+      }
+    });
+  }
+
+  deleteUser() {
+    this.userService.deleteUser(this.curUser.name).then(res => {
+      if (!res) { return; }
+      if (res.success) {
+        this.users.splice(this.pages.indexOf(this.curUser), 1);
+      }
+    });
+  }
+
   getInfos() {
     this.configService.getValue('infos').then(res => {
       if (!res) { return; }

@@ -39,22 +39,22 @@ export class UserService {
                .catch(console.error);
   }
 
-  addUsers(user): Promise<any> {
-    return this.httpClient.post('/api/private/users', user)
+  addUser(user): Promise<any> {
+    return this.httpClient.post('/api/private/user', user)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
 
-  editUsers(user): Promise<any> {
-    return this.httpClient.put('/api/private/users', user)
+  editUser(user): Promise<any> {
+    return this.httpClient.put('/api/private/user', user)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);
   }
 
-  deleteUsers(email): Promise<any> {
-    return this.httpClient.delete('/api/private/users/' + email)
+  deleteUser(email): Promise<any> {
+    return this.httpClient.delete('/api/private/user/' + email)
                .toPromise()
                .then(response => response.json())
                .catch(console.error);

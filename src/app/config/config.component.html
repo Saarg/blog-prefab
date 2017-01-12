@@ -53,8 +53,8 @@
   </app-form-list>
 
   <app-form-list title="Users" [newItem]="newUser" [items]="users" (selectedItem)="selectUser($event)">
-    <form class="col-xs-10">
-      <div class="form-group col-xs-10">
+    <form (ngSubmit)="curUser._id ? editUser() : addUser()" class="col-xs-10">
+      <div class="form-group col-xs-5">
         <input type="text" class="form-control" id="title" [(ngModel)]="curUser.name" name="name">
       </div>
 
@@ -66,10 +66,14 @@
         </select>
       </div>
 
-      <div class="form-group col-xs-6">
+      <div class="form-group col-xs-5">
         <input type="text" class="form-control" id="title" [(ngModel)]="curUser.password" name="password">
       </div>
-      <button type="submit" class="btn btn-success col-xs-6">Submit</button>
+
+      <div class="form-group">
+        <a type="button" *ngIf="curUser._id" class="btn btn-danger col-xs-2 mr-1 float-xs-left" (click)="deleteUser()">Delete</a>
+        <button type="submit" class="btn btn-success col-xs-2 float-xs-right">Submit</button>
+      </div>
     </form>
   </app-form-list>
 
