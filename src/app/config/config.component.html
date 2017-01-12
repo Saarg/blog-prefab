@@ -62,17 +62,21 @@
         <select class="custom-select" id="accessLevel" [(ngModel)]="curUser.accessLevel" name="accessLevel">
           <option selected value="0">Contributeur</option>
           <option value="1">Admin</option>
-          <option value="2">Dev</option>
+          <option value="2" *ngIf="user.accessLevel >= 2">Dev</option>
         </select>
       </div>
 
       <div class="form-group col-xs-5">
-        <input type="text" class="form-control" id="title" [(ngModel)]="curUser.password" name="password">
+        <input type="password" class="form-control" id="title" [(ngModel)]="curUser.password" name="password">
       </div>
 
-      <div class="form-group">
+      <div class="form-group" *ngIf="user.accessLevel >= curUser.accessLevel">
         <a type="button" *ngIf="curUser._id" class="btn btn-danger col-xs-2 mr-1 float-xs-left" (click)="deleteUser()">Delete</a>
         <button type="submit" class="btn btn-success col-xs-2 float-xs-right">Submit</button>
+      </div>
+
+      <div *ngIf="user.accessLevel < curUser.accessLevel">
+        <p>{{curUser.name}} a plus d'acces que vous, vous ne pouvez donc pas effectuer d'action</p>
       </div>
     </form>
   </app-form-list>

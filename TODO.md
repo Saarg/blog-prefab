@@ -2,7 +2,7 @@
 - [x] Page orbering in admin
 - [ ] Form to add image description when logged in
 - [x] Form in admin view to edit footer
-- [ ] Multiple sessions
+- [x] Multiple sessions
 - [ ] Translate texts and buttons to french
 
 # Good to have

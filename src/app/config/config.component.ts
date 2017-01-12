@@ -24,6 +24,7 @@ export class ConfigComponent implements OnInit {
 
   public curPage = { name: 'New page', description: '', type: 0, position: -1, inNav: true };
 
+  public user;
   public users = [];
   private newUser = { name: 'new user', password: '', accessLevel: 0 };
 
@@ -50,8 +51,14 @@ export class ConfigComponent implements OnInit {
   ngOnInit() {
     this.token = localStorage ? localStorage.getItem('AuthToken') : null;
 
-    if (!this.userService.verifyToken(this.token)) {
+    this.user = this.userService.verifyToken(this.token);
+    if (!this.user) {
       this.router.navigate(['/login']);
+    }
+
+    console.log(this.user);
+    if (!this.user.accessLevel) {
+      this.router.navigate(['/']);
     }
 
     this.getPages();

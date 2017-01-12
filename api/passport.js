@@ -19,7 +19,7 @@ module.exports = (app) => {
   app.set('TokenSecret', 'Change me, just do it damit!');
 
   passport.use(new LocalStrategy((username, password, done) => {
-    User.findOne({ mail: username }, (err, user) => {
+    User.findOne({ name: username }, (err, user) => {
       if (err) { return done(err); }
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
@@ -34,17 +34,17 @@ module.exports = (app) => {
   ));
 
   passport.serializeUser((user, done) => {
-    done(null, user.mail);
+    done(null, user.name);
   });
 
   passport.deserializeUser((username, done) => {
-    User.findOne({ mail: username }, (err, user) => {
+    User.findOne({ name: username }, (err, user) => {
       done(err, user);
     });
   });
 
   app.post('/api/private/login', passport.authenticate('local'), (req, res) => {
-    var token = jwt.sign({ username: req.user.mail, message: 'why are you reading this hu?' }, app.get('TokenSecret'), {
+    var token = jwt.sign({ name: req.user.name, accessLevel: req.user.accessLevel, message: 'why are you reading this hu?' }, app.get('TokenSecret'), {
       expiresIn: "1d"
     });
 

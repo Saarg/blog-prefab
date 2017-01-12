@@ -26,9 +26,9 @@ export class UserService {
       if (decoded['exp'] < new Date().getTime() / 1000) {
         token = null;
         localStorage.clear();
-        return 0;
+        return null;
       }
-      return 1;
+      return decoded;
     }
   }
 
