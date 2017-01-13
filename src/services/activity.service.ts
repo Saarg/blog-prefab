@@ -56,4 +56,11 @@ export class ActivityService {
                .catch(console.error);
   }
 
+  addSubscriber(id, email): Promise<any> {
+    return this.httpClient.put('/api/public/activity/' + id, { mail: email })
+               .toPromise()
+               .then(response => response.json())
+               .catch(console.error);
+  }
+
 }

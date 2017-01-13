@@ -67,6 +67,34 @@ module.exports = (privateRouter, publicRouter) => {
       }
       res.json({ success: true, activity: activity });
     });
+  })
+
+  .put((req, res) => {
+    Activity.findById(req.params.activity_id, (err, activity) => {
+      if (err) {
+        res.send(err);
+        return;
+      }
+
+      let re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+
+      console.log(req.body.mail);
+      console.log(re.test(req.body.mail));
+
+      if(!re.test(req.body.mail)) {
+        res.json({ success: false, message: 'This doesn\'t look like a valid email!' });
+        return;
+      }
+
+      activity.participants.push(req.body.mail);
+      activity.save((err) => {
+        if (err) {
+          res.json({ success: false, message: err });
+          return;
+        }
+        res.json({ success: true, activity: activity });
+      });
+    });
   });
 
   privateRouter.route('/activity/:activity_id')

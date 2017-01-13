@@ -87,8 +87,13 @@ export class ActivityComponent implements OnInit {
   joinInButtonCB(i) {
     let email = prompt('Please enter your Email');
 
-    if (email != null && email !== '') {
-      this.activities[i].participants.push(email);
+    if (email) {
+      this.activityService.addSubscriber(this.activities[i]._id, email).then(res => {
+        if (!res) { return; }
+        if (!res.activity) { return; }
+
+        this.activities[i] = res.activity;
+      });
     }
   }
 
