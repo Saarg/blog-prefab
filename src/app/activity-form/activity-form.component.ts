@@ -15,6 +15,7 @@ export class ActivityFormComponent implements OnInit {
   @Input() activity;
   @Input() pageId: String;
   @Output() newActivityEvent: EventEmitter<Object> = new EventEmitter<Object>();
+  @Output() deletedActivityEvent: EventEmitter<Object> = new EventEmitter<Object>();
 
   private subscription: Subscription;
 
@@ -47,6 +48,10 @@ export class ActivityFormComponent implements OnInit {
     this.subscription = this.route.params.subscribe((param: any) => {
       this.curId = param['id'];
     });
+
+    if(!this.activity) {
+      this.activity = this.newActivity;
+    }
   }
 
   fileChange(input) {
@@ -62,7 +67,7 @@ export class ActivityFormComponent implements OnInit {
       // Start reading this file
       reader.onload = () => {
         // After the callback fires do:
-        this.newActivity.media = reader.result;
+        this.activity.media = reader.result;
       };
 
       reader.readAsDataURL(file[0]);
@@ -72,10 +77,30 @@ export class ActivityFormComponent implements OnInit {
     }
   }
 
+  editActivity() {
+    this.activityService.editActivity(this.activity).then(res => {
+      console.log(res);
+      if (!res) { return; }
+      if (res.success) {
+        this.newActivityEvent.next(res.activity);
+      }
+    });
+  }
+
+  deleteActivity() {
+    this.activityService.deleteActivity(this.activity).then(res => {
+      console.log(res);
+      if (!res) { return; }
+      if (res.success) {
+        this.deletedActivityEvent.next(this.activity);
+      }
+    });
+  }
+
   submitActivity() {
-    // this.newActivity.text = this.newActivity.text.replace(/\n/g, "<"+"br/>");
+    // this.activity.text = this.activity.text.replace(/\n/g, "<"+"br/>");
     // using dummi pageid for now
-    this.activityService.addActivity(this.newActivity, this.pageId).then(res => {
+    this.activityService.addActivity(this.activity, this.pageId).then(res => {
       console.log(res);
       if (!res) { return; }
       if (res.success) {

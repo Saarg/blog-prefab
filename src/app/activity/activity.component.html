@@ -18,22 +18,28 @@
             {{activity.participants.length}} participants
           </span>
         </div>
-        <button type="button" class="btn btn-info col-xs-4 col-sm-3 col-md-2" (click)="joinInButtonCB(i)">S'inscrire</button>
+        <button type="button" class="btn btn-info col-xs-4 col-sm-3 col-md-2" (click)="joinInButtonCB(i)" *ngIf="!token">S'inscrire</button>
+        <button type="button" class="btn btn-secondary col-xs-4 col-sm-3 col-md-2" (click)="activity.edit = !activity.edit; activity.show = true" *ngIf="token">Editer</button>
 
         <div *ngIf="activity.show" class="col-xs-12">
-          <div *ngIf="activity.mimetype" class="row">
-            <div>
-              <img [ngClass]="{'float-xs-right': e, 'float-xs-left': !e}" class="hidden-xs-down" src={{activity.media}}>
+          <div *ngIf="!activity.edit">
+            <div *ngIf="activity.mimetype">
+              <div>
+                <img [ngClass]="{'float-xs-right': e, 'float-xs-left': !e}" class="hidden-xs-down" src={{activity.media}}>
+              </div>
+            </div>
+            <div class="panel-body activityText">{{activity.text}}</div>
+            <div class="locationDiv">Location : {{activity.location}}</div>
+
+            <div *ngIf="token">
+              <hr/>
+              <div>
+                <span *ngFor="let mail of activity.participants">{{mail}}, </span>
+              </div>
             </div>
           </div>
-          <div class="panel-body activityText">{{activity.text}}</div>
-          <div class="locationDiv">Location : {{activity.location}}</div>
-
-          <div *ngIf="token">
-            <hr/>
-            <div>
-              <span *ngFor="let mail of activity.participants">{{mail}}, </span>
-            </div>
+          <div *ngIf="activity.edit">
+            <app-activity-form [pageId]="curId" [activity]="activity" (newActivityEvent)="editActivity($event, activity)" (deletedActivityEvent)="activities.splice(i, 1)" ></app-activity-form>
           </div>
         </div>
       </div>

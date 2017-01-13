@@ -50,6 +50,10 @@ export class ActivityComponent implements OnInit {
     this.activities.unshift(e);
   }
 
+  editActivity(e, activity) {
+    this.activities[this.activities.indexOf(activity)] = e;
+  }
+
   getActivities() {
     console.log('requesting with offset ' + this.offset);
     this.activityService.getActivitiesByPage(this.curId, this.offset, this.nbActivities).then(res => {

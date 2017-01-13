@@ -4,7 +4,7 @@
 - [x] Form in admin view to edit footer
 - [x] Multiple sessions
 - [ ] Translate texts and buttons to french
-- [ ] Activity edition and registered list
+- [x] Activity edition and registered list
 
 # Good to have
 - [ ] Sticky navbar when page is scrolled down
