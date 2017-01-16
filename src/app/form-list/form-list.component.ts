@@ -8,6 +8,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angu
 export class FormListComponent implements OnInit, OnChanges {
 
   @Input() title: String;
+  @Input() singular: String;
   @Input() newItem: Object;
   @Input() items: Object[];
 
@@ -23,8 +24,14 @@ export class FormListComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.curItem = this.items[0];
-    console.log(this.items);
     this.selectedItem.next(this.curItem);
+
+    if(!this.singular) {
+      this.singular = this.title.toLowerCase();
+      if(this.singular.slice(-1) === 's') {
+        this.singular = this.singular.slice(0, -1);
+      }
+    }
   }
 
   selectItem(item) {

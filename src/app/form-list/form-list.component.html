@@ -4,7 +4,7 @@
   <div class="form-list col-xs-2">
     <ul>
       <li *ngFor="let item of items" (click)="selectItem(item)" [ngClass]="{'active': item === curItem}">{{item.name}}</li>
-      <li (click)="selectItem(newItem)" [ngClass]="{'active': newItem === curItem}">New item</li>
+      <li (click)="selectItem(newItem)" [ngClass]="{'active': newItem === curItem}">new {{singular}}</li>
     </ul>
   </div>
   <ng-content></ng-content>
