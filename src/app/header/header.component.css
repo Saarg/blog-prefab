@@ -2,12 +2,27 @@ header {
   background-color: #DDEBF4;
 }
 
+.navcontainer {
+  height: 54px;
+}
+
+.stick {
+  position: fixed;;
+  z-index: 999;
+  width: 100%;
+  top: 0;
+}
+
 .logos {
   overflow: hidden;
 }
 
+.logo {
+  height: 160px;
+}
+
 img {
-  max-height: 20vh;
+  max-height: 100%;
 }
 
 .navbar {

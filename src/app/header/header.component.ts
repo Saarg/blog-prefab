@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
 
   public logo;
   public banner;
+  public shouldStick = false;
 
   public pages= [];
   public newPage = { name: 'New page', description: '', type: 0, position: -1, inNav: true };
@@ -31,6 +32,14 @@ export class HeaderComponent implements OnInit {
     this.token = localStorage ? localStorage.getItem('AuthToken') : null;
 
     this.token = this.userService.verifyToken(this.token) ? this.token : null;
+
+    window.addEventListener('scroll', (e) => {
+      if (window.pageYOffset > 160) {
+        this.shouldStick = true;
+      } else {
+        this.shouldStick = false;
+      }
+    });
 
     this.getLogos();
     this.getPages();
