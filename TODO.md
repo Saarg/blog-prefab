@@ -7,7 +7,7 @@
 - [x] Activity edition and registered list
 
 # Good to have
-- [ ] Sticky navbar when page is scrolled down
+- [x] Sticky navbar when page is scrolled down
 - [ ] Session managment in admin view
 - [ ] Hide page option to allow page to exist but not be in the navbar
 - [ ] Article pages side menu

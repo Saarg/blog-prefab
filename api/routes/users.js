@@ -3,6 +3,7 @@
 // v1.0 first draft
 
 const User = require('./../models/users');
+const crypto = require('crypto');
 
 module.exports = (privateRouter, publicRouter) => {
   privateRouter.route('/users')
@@ -43,7 +44,7 @@ module.exports = (privateRouter, publicRouter) => {
   .post((req, res) => {
     let user = new User();
     user.name = req.body.name;
-    user.password = req.body.password;
+    user.password = crypto.createHash('md5').update(req.body.password).digest("hex");
     user.accessLevel = req.body.accessLevel;
 
     user.save((err, user) => {
@@ -59,7 +60,7 @@ module.exports = (privateRouter, publicRouter) => {
     User.find({ name: req.body.name }, (err, user) => {
       if (err) res.send(err);
       user.name = req.body.name;
-      user.password = req.body.password;
+      user.password = crypto.createHash('md5').update(req.body.password).digest("hex");
       user.accessLevel = req.body.accessLevel;
 
       user.save((err, user) => {

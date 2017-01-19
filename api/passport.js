@@ -8,6 +8,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const jwt           = require('jsonwebtoken');
 
 const User          = require('./models/users');
+const crypto        = require('crypto');
 
 module.exports = (app) => {
   // app.use(session({ secret: 'keyboard cat' }));
@@ -24,7 +25,7 @@ module.exports = (app) => {
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      if (password !== user.password) {
+      if (crypto.createHash('md5').update(password).digest("hex") !== user.password) {
         return done(null, false, { message: 'Incorrect password.' });
       }
 
