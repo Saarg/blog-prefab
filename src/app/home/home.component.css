@@ -7,7 +7,38 @@ img{
 }
 
 h2{
+  font-size: 1.8rem;
+  font-weight: 900;
+  overflow: hidden;
+  text-align: center;
+  text-transform: uppercase;
   color: #323E55;
+}
+
+h2::after, h2::before {
+  position: relative;
+
+  display: inline-block;
+
+  width: 50%;
+  height: 1px;
+
+  content: '';
+  vertical-align: middle;
+
+  background-color: #444;
+}
+
+h2::before {
+  right: .5em;
+
+  margin-left: -50%;
+}
+
+h2::after {
+  left: .5em;
+
+  margin-right: -50%;
 }
 
 .rightImg{
