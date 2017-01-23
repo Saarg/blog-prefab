@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.user).then(res => {
       if (typeof(Storage) === 'function') {
         localStorage.setItem('AuthToken', res.token);
-        this.router.navigate(['/admin']);
+        this.router.navigateByUrl('/admin');
       } else {
         console.log('no html5 localstorage support please use a recent browser');
       }
