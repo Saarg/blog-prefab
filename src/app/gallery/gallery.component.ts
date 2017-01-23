@@ -119,6 +119,12 @@ export class GalleryComponent implements OnInit {
     };
   }
 
+  editMedia(media) {
+    this.mediaService.editMedia(media).then(res => {
+      if (!res) { return; }
+    });
+  }
+
   deleteMedia(media) {
     this.mediaService.deleteMedia(media).then(res => {
       if (!res) { return; }

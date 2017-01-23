@@ -19,12 +19,16 @@
     <button *ngIf="gimmeMoreShow" type="button" class="btn btn-info btnGimmeMore" (click)="showMoreMedias()">Load me more !</button>
 
 
-    <app-popup *ngIf="popupMedia != null" class=popup [popupTitle]="'Closer Look'" [popupWidth]="8" (onClose)="onDisplayMediaClose()">
-      <img src="/api/public/media/{{popupMedia.media}}/show">
-      <div *ngIf="token" class="mediaDeleteButtonContainer">
-        <button class="btn btn-danger deleteButton" (click)="deleteMedia(popupMedia)">Delete</button>
-      </div>
+    <app-popup *ngIf="popupMedia != null" class=popup [popupTitle]="popupMedia.description ? popupMedia.description : 'Closer Look'" [popupWidth]="8" (onClose)="onDisplayMediaClose()">
+      <div class="row">
+        <img src="/api/public/media/{{popupMedia.media}}/show" [ngClass]="{'col-md-10': token, 'col-md-12': !token}">
+        <div *ngIf="token" class="col-md-2">
+          <textarea class="form-control" id="text" rows="10" [(ngModel)]="popupMedia.description" name="description"></textarea>
+          <button class="btn btn-success" (click)="editMedia(popupMedia)">Valider</button>
 
+          <button class="btn btn-danger" (click)="deleteMedia(popupMedia)">Supprimer</button>
+        </div>
+      </div>
     </app-popup>
 
   </div>

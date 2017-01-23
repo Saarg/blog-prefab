@@ -75,8 +75,8 @@ module.exports = (privateRouter, publicRouter) => {
       media.name = req.body.name ? req.body.name : undefined;
       media.description = req.body.description ? req.body.description : undefined;
       media.page = req.body.page ? req.body.page : media.page;
-      media.mimetype = req.body.media.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
-      media.media = req.body.media ? req.body.media : media.media; // TODO need to handle file upload for images
+      // media.mimetype = req.body.media.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
+      // media.media = req.body.media ? req.body.media : media.media; // TODO need to handle file upload for images
       media.position = typeof req.body.position === 'number' ? req.body.position : undefined;
       media.updated = Date.now();
 
