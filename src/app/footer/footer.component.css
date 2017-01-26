@@ -5,3 +5,7 @@ footer {
 footer .card-header {
   background-color: #DDEBF4;
 }
+
+.mentions {
+  text-align: center;
+}
