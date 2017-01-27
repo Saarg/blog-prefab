@@ -3,8 +3,8 @@
     <h1 *ngIf="pageInfo">{{pageInfo.name}}</h1>
 
     <div class=popupContainer  *ngIf="token">
-      <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">add media(s)</button>
-      <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'import media'" [popupWidth]="5" (onClose)="formPopupOnClose()">
+      <button type="button" class="btn btn-info btn-lg" (click)="showFormPopup()">Ajouter de(s) image(s)</button>
+      <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'Ajout d\'image(s)'" [popupWidth]="5" (onClose)="formPopupOnClose()">
         <app-media-form (newMediaEvent)="newMedia($event)" ></app-media-form>
       </app-popup>
     </div>
@@ -16,10 +16,10 @@
     </div>
 
 
-    <button *ngIf="gimmeMoreShow" type="button" class="btn btn-info btnGimmeMore" (click)="showMoreMedias()">Load me more !</button>
+    <button *ngIf="gimmeMoreShow" type="button" class="btn btn-info btnGimmeMore" (click)="showMoreMedias()">Charger plus d'images!</button>
 
 
-    <app-popup *ngIf="popupMedia != null" class=popup [popupTitle]="popupMedia.description ? popupMedia.description : 'Closer Look'" [popupWidth]="8" (onClose)="onDisplayMediaClose()">
+    <app-popup *ngIf="popupMedia != null" class=popup [popupTitle]="popupMedia.description ? popupMedia.description : 'Zoom'" [popupWidth]="8" (onClose)="onDisplayMediaClose()">
       <div class="row">
         <img src="/api/public/media/{{popupMedia.media}}/show" [ngClass]="{'col-md-10': token, 'col-md-12': !token}">
         <div *ngIf="token" class="col-md-2">

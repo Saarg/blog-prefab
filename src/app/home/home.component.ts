@@ -70,7 +70,6 @@ export class HomeComponent implements OnInit {
 
   getPageInfos() {
     this.pageService.getPage(this.curId).then(res => {
-      console.log(res.success);
       if (!res.success) {
         this.pageService.getHomePage().then(res => {
           if (!res) { return; }
@@ -123,7 +122,6 @@ export class HomeComponent implements OnInit {
     for (let i = 0; i < this.articleCount / this.nbArticles; i++) {
       list.push(i * this.nbArticles);
     }
-    console.log(list.length);
     return list;
   }
 

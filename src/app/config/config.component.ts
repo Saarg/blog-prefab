@@ -20,25 +20,25 @@ export class ConfigComponent implements OnInit {
 
   public pages = [];
   public pageTypes = ['article', 'activity', 'gallery'];
-  private newPage = { name: 'New page', description: '', type: 0, position: -1, inNav: true };
+  private newPage = { name: 'Nouvelle page', description: '', type: 0, position: -1, inNav: true };
 
-  public curPage = { name: 'New page', description: '', type: 0, position: -1, inNav: true };
+  public curPage = { name: 'Nouvelle page', description: '', type: 0, position: -1, inNav: true };
 
   public user;
   public users = [];
-  private newUser = { name: 'new user', password: '', accessLevel: 0 };
+  private newUser = { name: 'Nouveau utilisateur', password: '', accessLevel: 0 };
 
-  public curUser = { name: 'new user', password: '', accessLevel: 0 };
+  public curUser = { name: 'Nouveau utilisateur', password: '', accessLevel: 0 };
 
   public infos = [];
   public infoscpy = [];
-  public newInfo = 'new info';
+  public newInfo = 'nouvelle info';
   public partners = [];
   public partnerscpy = [];
-  public newPartner = 'new partner';
+  public newPartner = 'nouveau partenaire';
   public contacts = [];
   public contactscpy = [];
-  public newContact = 'new contact';
+  public newContact = 'nouvelle ligne de contact';
 
   constructor(
     private router: Router,

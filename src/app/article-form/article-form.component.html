@@ -10,7 +10,7 @@
   <div class="row">
     <div class="form-group col-xs-4">
       <select class="custom-select" id="mimetype" [(ngModel)]="article.mimetype" name="mimetype">
-        <option selected value="">Select media</option>
+        <option selected value="">Choisir média</option>
         <option value="image">image</option>
         <option value="youtube">youtube</option>
       </select>
@@ -19,7 +19,7 @@
     <div class="form-group col-xs-5" *ngIf="article.mimetype === 'image' && (!article.media || !article.newArticle)">
       <label class="custom-file">
         <input type="file" id="file" class="custom-file-input" (change)="fileChange(input)" #input>
-        <span class="custom-file-control">Click here to choose image</span>
+        <span class="custom-file-control">Cliquez ici pour choisir l'image</span>
       </label>
     </div>
 
@@ -32,8 +32,8 @@
     </div>
 
     <div class="form-group col-xs-12">
-      <input (click)="deleteArticle()" *ngIf="!article.newArticle" class="btn btn-danger col-xs-2 mr-1 float-xs-left" value="Delete">
-      <button type="submit" class="btn btn-primary col-xs-2 mr-1 float-xs-right">{{article.newArticle ? 'Submit' : 'Edit'}}</button>
+      <input (click)="deleteArticle()" *ngIf="!article.newArticle" class="btn btn-danger col-xs-2 mr-1 float-xs-left" value="Supprimer">
+      <button type="submit" class="btn btn-primary col-xs-2 mr-1 float-xs-right">{{article.newArticle ? 'Valider' : 'Editer'}}</button>
     </div>
   </div>
 </form>

@@ -8,7 +8,7 @@
       <img *ngIf="logo" [attr.src]='logo' class="img-thumbnail rounded mx-auto d-block" alt=""/>
       <label class="custom-file" [ngClass]="{'col-xs-10': logo, 'col-xs-12': !logo}">
         <input type="file" id="file" class="custom-file-input" (change)="logoChange(logoInput)" #logoInput>
-        <span class="custom-file-control">Click to choose logo</span>
+        <span class="custom-file-control">Cliquez ici pour choisir le logo</span>
       </label>
       <a type="button" *ngIf="logo" class="btn btn-success col-xs-2" (click)="editConfig('logo', logo)">V</a>
     </div>
@@ -16,9 +16,9 @@
       <img *ngIf="banner" [attr.src]='banner' class="img-thumbnail rounded mx-auto d-block" alt=""/>
       <label class="custom-file"  [ngClass]="{'col-xs-10': banner, 'col-xs-12': !banner}">
         <input type="file" id="file" class="custom-file-input" (change)="bannerChange(bannerInput)" #bannerInput>
-        <span class="custom-file-control">Click here to choose banner</span>
+        <span class="custom-file-control">Cliquez ici pour choisir la banniere</span>
       </label>
-      <a type="button" *ngIf="banner" class="btn btn-success col-xs-2" (click)="editConfig('banner', banner)">Submit</a>
+      <a type="button" *ngIf="banner" class="btn btn-success col-xs-2" (click)="editConfig('banner', banner)">Valider</a>
     </div>
     <a type="button" class="btn btn-danger col-xs-2" (click)="editConfig('logo', null); editConfig('banner', null)">Supprimer les logos</a>
   </div>
@@ -31,14 +31,14 @@
       <div class="form-group col-xs-2 pr-0" *ngIf="!curPage._id">
         <select class="custom-select" id="mimetype" [(ngModel)]="curPage.type" name="type">
           <option selected value="0">Blog type</option>
-          <option value="1">Activity type</option>
-          <option value="2">Gallery type</option>
+          <option value="1">Activityé type</option>
+          <option value="2">Gallerie type</option>
         </select>
       </div>
 
       <div class="form-group col-xs-2" *ngIf="curPage._id">
-        <a type="button" class="btn btn-secondary col-xs-6" (click)="movePageUp()">up</a>
-        <a type="button" class="btn btn-secondary col-xs-6" (click)="movePageDown()">down</a>
+        <a type="button" class="btn btn-secondary col-xs-6" (click)="movePageUp()">haut</a>
+        <a type="button" class="btn btn-secondary col-xs-6" (click)="movePageDown()">bas</a>
       </div>
 
       <div class="form-group">
@@ -46,8 +46,8 @@
       </div>
 
       <div class="form-group">
-        <a type="button" *ngIf="curPage._id" class="btn btn-danger col-xs-2 mr-1 float-xs-left" (click)="deletePage()">Delete</a>
-        <button type="submit" class="btn btn-success col-xs-2 float-xs-right">Submit</button>
+        <a type="button" *ngIf="curPage._id" class="btn btn-danger col-xs-2 mr-1 float-xs-left" (click)="deletePage()">Supprimer</a>
+        <button type="submit" class="btn btn-success col-xs-2 float-xs-right">Valider</button>
       </div>
     </form>
   </app-form-list>
@@ -71,8 +71,8 @@
       </div>
 
       <div class="form-group" *ngIf="user.accessLevel >= curUser.accessLevel">
-        <a type="button" *ngIf="curUser._id" class="btn btn-danger col-xs-2 mr-1 float-xs-left" (click)="deleteUser()">Delete</a>
-        <button type="submit" class="btn btn-success col-xs-2 float-xs-right">Submit</button>
+        <a type="button" *ngIf="curUser._id" class="btn btn-danger col-xs-2 mr-1 float-xs-left" (click)="deleteUser()">Supprimer</a>
+        <button type="submit" class="btn btn-success col-xs-2 float-xs-right">Valider</button>
       </div>
 
       <div *ngIf="user.accessLevel < curUser.accessLevel">

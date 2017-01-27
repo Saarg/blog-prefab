@@ -22,9 +22,9 @@ export class ActivityFormComponent implements OnInit {
   public token = null;
 
   public newActivity = {
-    title: 'Enter your title here',
-    text: 'Enter a short description here',
-    location: 'Event\'s place',
+    title: 'Tapez le nom ici',
+    text: 'Tapez la description de l\'activité ici',
+    location: 'Tapez le lieu de rendez vous',
     participants : [],
     page: 0,
     position: -1,

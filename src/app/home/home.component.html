@@ -8,9 +8,9 @@
 
   <!-- Admin form -->
   <div class=popupContainer  *ngIf="token">
-    <button type="button" class="btn btn-info btn-lg buttonForm" (click)="showFormPopup()">add article</button>
+    <button type="button" class="btn btn-info btn-lg buttonForm" (click)="showFormPopup()">Ajouter un article</button>
 
-    <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'Add new Article'" [popupWidth]="5" (onClose)="formPopupOnClose()">
+    <app-popup *ngIf="displayFormPopup" class=popup [popupTitle]="'Ajouter un article'" [popupWidth]="5" (onClose)="formPopupOnClose()">
       <div>
         <app-article-form [pageId]="curId" (newArticleEvent)="newArticle($event) || formPopupOnClose()"></app-article-form>
       </div>
@@ -39,9 +39,9 @@
                 {{article.text}}
           </p>
           <div class="articleFooter">
-            <span *ngIf="article.created===article.updated"> Created : {{getPrettyDate(article.created)}}</span>
+            <span *ngIf="article.created===article.updated"> Créé: {{getPrettyDate(article.created)}}</span>
             <br>
-            <span *ngIf="article.created!==article.updated"> Last Update : {{getPrettyDate(article.updated)}}</span>
+            <span *ngIf="article.created!==article.updated"> Dernière mise a jour: {{getPrettyDate(article.updated)}}</span>
           </div>
         </div>
       </div>
