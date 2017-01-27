@@ -23,10 +23,9 @@
       <div class="row">
         <img src="/api/public/media/{{popupMedia.media}}/show" [ngClass]="{'col-md-10': token, 'col-md-12': !token}">
         <div *ngIf="token" class="col-md-2">
-          <textarea class="form-control" id="text" rows="10" [(ngModel)]="popupMedia.description" name="description"></textarea>
-          <button class="btn btn-success" (click)="editMedia(popupMedia)">Valider</button>
-
-          <button class="btn btn-danger" (click)="deleteMedia(popupMedia)">Supprimer</button>
+          <button class="btn btn-danger col-xs-12" (click)="deleteMedia(popupMedia)">Supprimer</button>
+          <textarea class="form-control col-xs-12" id="text" rows="10" [(ngModel)]="popupMedia.description" name="description"></textarea>
+          <button class="btn btn-success col-xs-12" (click)="editMedia(popupMedia)">Valider</button>
         </div>
       </div>
     </app-popup>
