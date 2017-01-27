@@ -2,7 +2,7 @@
   <h1>Admin</h1>
 
   <div class="card row">
-    <h2>Header</h2>
+    <h2>Haut de page</h2>
     <hr/>
     <div class="col-md-3">
       <img *ngIf="logo" [attr.src]='logo' class="img-thumbnail rounded mx-auto d-block" alt=""/>
@@ -52,7 +52,7 @@
     </form>
   </app-form-list>
 
-  <app-form-list title="Users" [newItem]="newUser" [items]="users" (selectedItem)="selectUser($event)">
+  <app-form-list title="Utilisateurs" [newItem]="newUser" [items]="users" (selectedItem)="selectUser($event)">
     <form (ngSubmit)="curUser._id ? editUser() : addUser()" class="col-xs-10">
       <div class="form-group col-xs-5">
         <input type="text" class="form-control" id="title" [(ngModel)]="curUser.name" name="name">
@@ -82,7 +82,7 @@
   </app-form-list>
 
   <div class="row card">
-    <h2>Footer</h2>
+    <h2>Pied de page</h2>
     <hr/>
     <div class="col-md-4">
       <div class="card">

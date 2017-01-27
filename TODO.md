@@ -3,14 +3,18 @@
 - [x] Form to add image description when logged in
 - [x] Form in admin view to edit footer
 - [x] Multiple sessions
-- [ ] Translate texts and buttons to french
+- [x] Translate texts and buttons to french
 - [x] Activity edition and registered list
+- [ ] Verifier/Implementer un feedback sur chaque actions
+- [ ] Netoyer les logs présent dans les scripts
+- [ ] Empecher le footer de monter plut haut que le bas
 
 # Good to have
 - [x] Sticky navbar when page is scrolled down
 - [x] Session managment in admin view
 - [ ] Hide page option to allow page to exist but not be in the navbar
 - [ ] Article pages side menu
+- [ ] Refaire le style du footer
 
 # Start Thinking about it
 - [ ] Page style from admin page
