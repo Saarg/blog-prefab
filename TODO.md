@@ -8,13 +8,14 @@
 - [ ] Verifier/Implementer un feedback sur chaque actions
 - [ ] Netoyer les logs présent dans les scripts
 - [ ] Empecher le footer de monter plut haut que le bas
+- [ ] Lien ver les partenaires
 
 # Good to have
 - [x] Sticky navbar when page is scrolled down
 - [x] Session managment in admin view
 - [ ] Hide page option to allow page to exist but not be in the navbar
 - [ ] Article pages side menu
-- [ ] Refaire le style du footer
+- [x] Refaire le style du footer
 
 # Start Thinking about it
 - [ ] Page style from admin page

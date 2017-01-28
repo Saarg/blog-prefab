@@ -9,3 +9,25 @@ footer .card-header {
 .mentions {
   text-align: center;
 }
+.mentions a {
+  color: #373a5c;
+}
+
+.mentions a:hover {
+  color: #474a4c;
+}
+
+.card-footer {
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.card-block {
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  padding-top: 0.75rem;
+  padding-bottom: 1.25rem;
+}
