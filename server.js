@@ -1,10 +1,12 @@
 'use strict'
 
 const express       = require('express');
+const connect       = require('connect')
 const path          = require('path');
 const favicon       = require('serve-favicon');
 const cookieParser  = require('cookie-parser');
 const bodyParser    = require('body-parser');
+const vhost         = require('vhost');
 
 const morgan        = require('morgan');
 
@@ -18,6 +20,7 @@ if ( DOCKER_DB ) {
 }
 
 const port = process.env.PORT || 8080;
+const domain = process.env.DOMAIN || 'localhost';
 
 // connect to the db
 mongoose.connect(MONGO_DB);
@@ -46,8 +49,10 @@ app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname,'dist/index.html'));
 });
 
-app.listen(port, function () {
-  console.log('Magic happens on port ' + port + '!');
+const main = connect();
+main.use(vhost(domain, app));
+main.listen(port, function () {
+  console.log('Magic happens on ' + domain + ':' + port + '!');
 });
 
 module.exports = app;

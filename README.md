@@ -17,6 +17,10 @@ Run `ng generate component component-name` to generate a new component. You can 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
 ## production
+ENV_VAR:
+  MONGO_DB: default mongodb://localhost:27017/blog-prefab
+  PORT: default 8080
+  domain: default localhost
 
 ### With Docker
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
@@ -24,7 +28,7 @@ Run `docker-compose up -d` to start BlogPrefab with docker.
 
 ### Without docker
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-Run `node server.js` to start a prod server. you can set env var `MONGO_DB` to choose a different mongo url and `PORT` to change the port.
+Run `node server.js` to start a prod server. you can set env var `MONGO_DB` to choose a different mongo url, `PORT` to change the port and `DOMAIN` to chose domain.
 
 ## Running unit tests
 
