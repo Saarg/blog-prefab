@@ -1,20 +1,45 @@
-<div class="row">
-  <form (ngSubmit)="login()" class="card col-xs-12 col-md-6 offset-md-3" *ngIf="!token">
-      <div class="form-group">
-          <label for="example-search-input" class="col-form-label">Nom:</label>
-          <div>
-            <input class="form-control" type="text" [(ngModel)]="user.username" name="username" id="username">
-          </div>
+<div class="row pt-10 pb-10">
+  <div class="login" *ngIf="!token">
+    <h1>Connexion</h1>
+
+    <form (ngSubmit)="login()" class="card col-xs-12 col-sm-6 offset-sm-3 col-md-4 offset-md-4">
+        <div class="form-group">
+            <label for="example-search-input" class="col-form-label">Nom:</label>
+            <div>
+              <input class="form-control" type="text" [(ngModel)]="user.username" name="username" id="username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="example-search-input" class="col-form-label">Mot de passe:</label>
+            <div>
+              <input class="form-control" type="password" [(ngModel)]="user.password" name="username" id="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary col-xs-12" value="Connexion"/>
+        </div>
+    </form>
+  </div>
+
+  <div class="logged" *ngIf="token">
+    <h1>Mon compte</h1>
+
+    <button (click)="logout()" class="btn btn-danger col-xs-12 col-sm-6 offset-sm-3 col-md-4 offset-md-4">Deconnexion</button>
+
+    <form (ngSubmit)="editUser()" class="card col-xs-12 col-sm-6 offset-sm-3 col-md-4 offset-md-4">
+      <div class="form-group col-xs-12">
+        <label for="example-search-input" class="col-form-label">Nom:</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="user.name" name="name">
       </div>
-      <div class="form-group">
-          <label for="example-search-input" class="col-form-label">Mot de passe:</label>
-          <div>
-            <input class="form-control" type="password" [(ngModel)]="user.password" name="username" id="password">
-          </div>
+
+      <div class="form-group col-xs-12">
+        <label for="example-search-input" class="col-form-label">Mot de passe:</label>
+        <input type="password" class="form-control" id="title" [(ngModel)]="user.password" name="password">
       </div>
+
       <div class="form-group">
-          <input type="submit" class="btn btn-primary col-xs-12" value="Connexion"/>
+        <button type="submit" class="btn btn-success col-xs-12">Modifier</button>
       </div>
-  </form>
-  <button (click)="logout()" class="btn btn-danger col-xs-12 col-md-6 offset-md-3" *ngIf="token">Deconnexion</button>
+    </form>
+  </div>
 </div>

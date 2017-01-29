@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.token = localStorage ? localStorage.getItem('AuthToken') : null;
+
+    this.user = this.userService.verifyToken(this.token) || this.user;
   }
 
   login() {
@@ -38,4 +40,12 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  editUser() {
+    this.userService.editUser(this.user).then(res => {
+      if (!res) { return; }
+      if (res.success) {
+        this.user = res.user;
+      }
+    });
+  }
 }

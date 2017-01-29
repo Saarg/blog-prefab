@@ -45,7 +45,7 @@ module.exports = (app) => {
   });
 
   app.post('/api/private/login', passport.authenticate('local'), (req, res) => {
-    var token = jwt.sign({ name: req.user.name, accessLevel: req.user.accessLevel, message: 'why are you reading this hu?' }, app.get('TokenSecret'), {
+    var token = jwt.sign({ _id: req.user._id, name: req.user.name, accessLevel: req.user.accessLevel, message: 'why are you reading this hu?' }, app.get('TokenSecret'), {
       expiresIn: "1d"
     });
 

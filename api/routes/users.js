@@ -57,7 +57,7 @@ module.exports = (privateRouter, publicRouter) => {
   })
 
   .put((req, res) => {
-    User.find({ name: req.body.name }, (err, user) => {
+    User.findById(req.body._id, (err, user) => {
       if (err) res.send(err);
       user.name = req.body.name;
       user.password = crypto.createHash('md5').update(req.body.password).digest("hex");
