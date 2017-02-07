@@ -12,6 +12,10 @@ export class HttpClient {
     headers.append('x-access-token', `${this.token}`);
   }
 
+  updateToken(){
+    this.token = localStorage ? localStorage.getItem('AuthToken') : null;
+  }
+
   get(url) {
     let headers = new Headers();
     this.createAuthorizationHeader(headers);

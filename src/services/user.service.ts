@@ -18,6 +18,8 @@ export class UserService {
   }
 
   verifyToken(token) {
+    this.httpClient.updateToken();
+
     if (token) {
       const base64Url = token.split('.')[1];
       const base64 = base64Url.replace('-', '+').replace('_', '/');
