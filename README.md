@@ -22,19 +22,10 @@ ENV_VAR:
   PORT: default 8080
   domain: default localhost
 
-### With Docker
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-Run `docker-compose up -d` to start BlogPrefab with docker.
 
-### Without docker
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+You only need server.js, package.json, dist/* and api/* on your production server.
+
+Install the node modules with npm install
+
 Run `node server.js` to start a prod server. you can set env var `MONGO_DB` to choose a different mongo url, `PORT` to change the port and `DOMAIN` to chose domain.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
